@@ -1,32 +1,22 @@
-# Task Forge
+# Getting Started with Task Forge
 
-This project was generated using Angular v20.1.1.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Development server
+# Project Struture
 
-To start a local development server, run:
+App() - Dashboard() -Header,Tasklist,Footer() -Task Detail Modal() [Build this much before anything else.]
 
-```bash
-ng serve
-```
+# Feature Built
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-# Git command for repo initials
-- git init               // initialize an empty Git repository
-- git add .              // add all files at once [git add <filename>]
-- git commit -m "Your commit message"  // the staged changes in your repository's history
-
-- git branch -M main
-- git remote add origin https://github.com/ritshkr1/task-forge.git
-- git push -u origin main
+- Task CRUD (Create, Read, Update, Delete)
+- Persist tasks in localStorage
+- Task list page (dashboard) [1] inside this Task List and Header and Footer
+- Task detail modal/page
+- Add/Edit Task form with validation
+- Status, priority, due date, and search filters
+- Sort tasks (by priority or due date)
+- Responsive layout (mobile-first)
+- State management with Context + useReducer (localStorage persistence)
+- Nice UI (using Tailwind or Material UI)
+- Undo delete (toast with undo)
+- README + demo GIF/screenshots
