@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import TableView from "./TaskTableView";
+import TaskModal from "../components/Dialog/TaskModal"
 
 function SectionHeader({ title, actions }) {
   return (
@@ -30,75 +32,48 @@ function Card({ children, style }) {
   );
 }
 
-function PlaceholderBadge({ text, color = "#ef4444" }) {
-  return (
-    <span style={{
-      display: "inline-block",
-      padding: "2px 8px",
-      borderRadius: 9999,
-      background: color,
-      color: "#fff",
-      fontSize: 12
-    }}>{text}</span>
-  );
-}
+
 
 function Dashboard() {
   const [view, setView] = useState('table');
+  const [tasks, setTask] = useState([]);
+  const [isModelOpen,setIsModelOpen] = useState(false)
 
   function onClickChangeView(nextView){
     setView(nextView);
   }
+  function handleNewTask(task){
+    setTask((curr) => [...curr,task]);
+  }
   return (
     <div className="Dashboard grid-gap-16">
+      <TaskModal isOpen={isModelOpen} handleModel={() => setIsModelOpen((curr) => !curr)} handleNewTask={handleNewTask}/>
       <SectionHeader
         title="Dashboard"
         actions={(
           <>
+          <button className="btn btn-accent" onClick={() => setIsModelOpen((curr) => !curr)}>New Task</button>
             <button style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #e5e7eb", background: "#fff" }}>🔍</button>
           </>
         )}
       />
 
       {/* Views Switcher - UI only */}
-      {<Card>
+      {/* {<Card>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           <button className={`btn-chip ${view === 'table'  ? "btn-chip--active" : ""}`} onClick={() => onClickChangeView('table')}>Table</button>
           <button className={`btn-chip ${view === 'kanban' ? "btn-chip--active" : ""}`} onClick={() => onClickChangeView('kanban')}>Kanban</button>
           <button className={`btn-chip ${view === 'list' ? "btn-chip--active" : ""}`} onClick={() => onClickChangeView('list')}>List</button>
         </div>
-      </Card>}
+      </Card>} */}
 
       {/* Table View - UI skeleton */}
       {view === 'table' &&<Card>
-        <div style={{ overflowX: "auto" }}>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Status</th>
-                <th>Priority</th>
-                <th>Due</th>
-                <th>Assignee</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Array.from({ length: 3 }).map((_, idx) => (
-                <tr key={idx} style={{ borderBottom: "1px solid var(--color-border)" }}>
-                  <td>Sample task {idx + 1}</td>
-                  <td><PlaceholderBadge text="Todo" color="#6b7280" /></td>
-                  <td><PlaceholderBadge text="Medium" color="var(--color-accent)" /></td>
-                  <td>2025-10-31</td>
-                  <td>Alex</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <TableView tasks={tasks}/>
       </Card>}
 
       {/* Kanban View - UI skeleton */}
-      {view === 'kanban' &&<div className="kanban">
+      {/* {view === 'kanban' &&<div className="kanban">
         <Card className="kanban__lane">
           <h3 style={{ marginTop: 0 }}>Todo</h3>
           <div style={{ display: "grid", gap: 8 }}>
@@ -132,10 +107,10 @@ function Dashboard() {
             ))}
           </div>
         </Card>
-      </div>}
+      </div>} */}
 
       {/* List View - UI skeleton */}
-      {view === 'list' && <Card>
+      {/* {view === 'list' && <Card>
         <div style={{ display: "grid", gap: 8 }}>
           {Array.from({ length: 4 }).map((_, idx) => (
             <div key={idx} className="list-item">
@@ -150,7 +125,7 @@ function Dashboard() {
             </div>
           ))}
         </div>
-      </Card>}
+      </Card>} */}
     </div>
   );
 }

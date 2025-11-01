@@ -1,8 +1,8 @@
-import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import Dashboard from "../../pages/Dashboard";
 
-function Layout({ children }) {
+function Layout() {
   return (
     <div style={{
       height: "100svh",
@@ -12,7 +12,7 @@ function Layout({ children }) {
     }}>
       <Header />
       <main style={{ flex: 1, padding: "16px", overflowY: "auto", minHeight: 0 }}>
-        {children}
+        <Dashboard />
       </main>
       <Footer />
     </div>
