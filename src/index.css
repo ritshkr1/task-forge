@@ -29,6 +29,8 @@ footer {
 
 header {
   top: 0;
+  display:flex;
+  justify-content:space-between;
 }
 
 footer {
@@ -154,15 +156,15 @@ main::-webkit-scrollbar-thumb {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
-.task-form label {
+ label {
   font-size: 0.9rem;
   font-weight: 500;
   color: #374151;
 }
 
-.task-form input[type="text"],
-.task-form input[type="date"],
-.task-form select {
+ input[type="text"],
+ input[type="date"],
+ select {
   padding: 0.6rem 0.8rem;
   border: 1px solid #d1d5db;
   border-radius: 6px;
@@ -172,8 +174,8 @@ main::-webkit-scrollbar-thumb {
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.task-form input:focus,
-.task-form select:focus {
+ input:focus,
+ select:focus {
   border-color: #2563eb;
   background: #ffffff;
   outline: none;
@@ -181,7 +183,7 @@ main::-webkit-scrollbar-thumb {
 }
 
 /* make date input look consistent */
-.task-form input[type="date"] {
+ input[type="date"] {
   color-scheme: light;
 }
 
@@ -195,7 +197,7 @@ main::-webkit-scrollbar-thumb {
 
 
 /* === Buttons for Task Form === */
-.task-form button {
+button {
   background-color: #2563eb;
   width: 100px;
   color: #ffffff;
@@ -209,15 +211,15 @@ main::-webkit-scrollbar-thumb {
   justify-self: start;
 }
 
-.task-form button:hover {
+button:not(:disabled):hover {
   background-color: #1e40af;
 }
 
-.task-form button:active {
+button:active {
   transform: scale(0.97);
 }
 
-.task-form button:disabled {
+button:disabled {
   background-color: #93c5fd;
   cursor: not-allowed;
 }
@@ -230,17 +232,22 @@ main::-webkit-scrollbar-thumb {
   margin-top: 0.5rem;
 }
 
-.task-form .btn-secondary {
+.btn-secondary {
   background-color: #f3f4f6;
   color: #1f2937;
   border: 1px solid #d1d5db;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
+.btn-secondary:disabled {
+  background-color: #d0d0d0a3;
+  cursor: not-allowed;
+}
 
-.task-form .btn-secondary:hover {
+.btn-secondary:not(:disabled):hover {
   background-color: #e5e7eb;
   border-color: #cbd5e1;
 }
+ 
 
 /* === Form Action Buttons Layout === */
  .edit-actions {
@@ -249,27 +256,31 @@ main::-webkit-scrollbar-thumb {
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
-  .edit-actions button {
-  background-color: #eb2525;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.6rem;
-  font-weight: 600;
+ 
+
+
+/* Filter Inputs */
+.table-head-wrapper {
+  align-items: center;
+}
+
+.filter-icon {
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  justify-self: start;
+  transition: border-top-color 0.2s ease;
+  margin-top: 2px;
 }
 
- .edit-actions .btn-secondary {
-  background-color: #f3f4f6;
-  color: #1f2937;
-  border: 1px solid #d1d5db;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+.table-head-filter {
+  display:block;
+  margin-top: 6px;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 50%;
+  transition: all 0.2s ease;
 }
 
- .edit-actions .btn-secondary:hover {
-  background-color: #e5e7eb;
-  border-color: #cbd5e1;
+.table-head-filter:focus {
+  border-color: #af661e;
+  outline: none;
 }

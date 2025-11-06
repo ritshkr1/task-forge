@@ -28,21 +28,48 @@ const initialTasks = [
     },
   ];
 function Layout() {
-const [tasks,setTasks] = useState([...initialTasks])
+const [tasks,setTasks] = useState([...initialTasks]);
+const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
+const [selectedTask, setSelectedTask] = useState(null);
 function handleNewTasks(newTask){
-    setTasks((tasks) => [...tasks,newTask])
+  if(selectedTask){
+    if(newTask){
+      setTasks(tasks.map((task) => {
+      if(task.id === selectedTask.id){
+        return newTask
+      }else{
+        return task
+      }
+    }));
+    }
+    
+  }else{
+    if(newTask){
+      setTasks((tasks) => [...tasks,newTask]);
+    }
+  }
+  setSelectedTask(null)
+  setIsNewTaskOpen(false);
 }
 function handleEditInAddTask(id){
-    console.log(id)
+    const selectedTask = tasks.filter((task) => task.id === id);
+    setSelectedTask(selectedTask[0]);
+    setIsNewTaskOpen(true);
+    console.log(selectedTask);
 }
 function handleDeleteTask(id){
     setTasks((tasks) => tasks.filter((task) => task.id !== id))
 }
   return (
  <>
- <header>Task Forge</header>
- <AddTask handleNewTask={handleNewTasks}/>
- <TaskTableList tasks={tasks} editTask={handleEditInAddTask} deleteTask={handleDeleteTask}/>
+ <header>
+  <span>
+    Task Forge
+    </span>
+  <button onClick={() => setIsNewTaskOpen((curr) => !curr)} disabled={isNewTaskOpen ? true : false}>{isNewTaskOpen ? "Close" : "Add Task"}</button>
+ </header>
+ {isNewTaskOpen && <AddTask handleNewTask={handleNewTasks} selectedTask={selectedTask}/>}
+ <TaskTableList tasks={tasks} editTask={handleEditInAddTask} deleteTask={handleDeleteTask} selectedTask={selectedTask}/>
  <footer>© 2025 Task Forge created by Ritesh in React</footer></>
   );
 }

@@ -1,6 +1,6 @@
 import {useState} from "react";
-function AddTask({handleNewTask}) {
-    const [task,setTask] = useState({
+function AddTask({handleNewTask,selectedTask}) {
+    const [task,setTask] = useState(selectedTask ? selectedTask :{
         id: crypto.randomUUID(),
       title: "",
       description: "",
@@ -24,6 +24,9 @@ function AddTask({handleNewTask}) {
       deadline: "",
         })
     }
+    function onCancel(){
+        handleNewTask(null);
+    }
     return <form className="task-form" onSubmit={onSubmitForm}>
         <label>Title</label>
         <input type="text" value={task.title} onChange={(e)=> updateTask(e.target.value,'title')}/>
@@ -45,7 +48,7 @@ function AddTask({handleNewTask}) {
         <input type="date"  value={task.deadline} onChange={(e)=> updateTask(e.target.value,'deadline')}/>
         <div class="form-actions">
             <button type="submit">Save</button>
-            <button type="button" class="btn-secondary">Cancel</button>
+            <button type="button" class="btn-secondary" onClick={onCancel}>Cancel</button>
         </div>
 
     </form>
