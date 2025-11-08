@@ -8,6 +8,10 @@ function AddTask({handleNewTask,selectedTask}) {
       priority: "Low",
       deadline: "",
     });
+
+    // if(selectedTask){
+    //     setTask(selectedTask);
+    // }
     function updateTask(value,field){
         setTask((task) => ({...task,[field]:value}))
         // [field]), which is known as a computed property and without this create key with 'field'

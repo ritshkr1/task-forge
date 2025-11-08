@@ -1,286 +1,639 @@
-/* === Layout Skeleton === */
+:root {
+  /* Primary Color Palette */
+  --primary-50: #eff6ff;
+  --primary-100: #dbeafe;
+  --primary-200: #bfdbfe;
+  --primary-300: #93c5fd;
+  --primary-400: #60a5fa;
+  --primary-500: #2563eb;
+  --primary-600: #1e40af;
+  --primary-700: #1e3a8a;
+  --primary-800: #1e293b;
+  
+  /* Accent */
+  --accent-100: #feecd6;
+  --accent-200: #fed7aa;
+  --accent-300: #fb923c;
+  --accent-400: #f59e42;
+  --accent-500: #d97706;
+
+  /* Success/Error/Warning */
+  --success-100: #dcfce7;
+  --success-500: #22c55e;
+  --error-100: #fee2e2;
+  --error-500: #dc2626;
+  --warning-100: #fef9c3;
+  --warning-500: #eab308;
+
+  /* Neutral Palette */
+  --neutral-0: #fff;
+  --neutral-50: #f8f9fb;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+  --neutral-400: #9ca3af;
+  --neutral-500: #6b7280;
+  --neutral-700: #374151;
+  --neutral-900: #111827;
+
+  /* Shadows / misc */
+  --shadow: 0 4px 12px rgba(37, 99, 235, 0.05);
+  --shadow-strong: 0 8px 24px rgba(16, 24, 40, 0.08);
+}
+
+/* === Mobile-first Layout Skeleton === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--neutral-50);
+  color: var(--neutral-900);
+  overflow: hidden; /* keep body fixed, main will scroll */
 }
 
 body {
-  background-color: #f8f9fb;
-  color: #1f2937;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+  overflow:auto;
 }
 
-/* Header + Footer */
+/* Sticky header & footer baseline */
 header,
 footer {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 1rem 2rem;
+  background-color: var(--neutral-0);
+  border-bottom: 1px solid var(--neutral-200);
+  padding: 0.8rem 1rem;
   text-align: center;
   font-weight: 600;
   position: sticky;
-  z-index: 10;
+  z-index: 20;
+  transition: background 0.3s cubic-bezier(.88,.38,.59,.99), border-color 0.2s;
 }
 
 header {
   top: 0;
-  display:flex;
-  justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 footer {
-  border-top: 1px solid #e5e7eb;
-  border-bottom: none;
   bottom: 0;
+  border-top: 1px solid var(--neutral-200);
+  border-bottom: none;
 }
 
-/* Scrollable Body */
+/* Main scroll region (touch-friendly) */
 main {
-  flex: 1;
+  flex: 1 1 auto;
   overflow-y: auto;
-  padding: 2rem;
+  overflow-x:hidden;
+  padding: 1rem;
+  transition: background 0.3s cubic-bezier(.4,0,.2,1);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* === Task Table Styling === */
 .table-container {
-  background: #ffffff;
+  background: var(--neutral-0);
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  box-shadow: var(--shadow);
+  overflow-y: auto; /* hides overflow for desktop table; mobile will alter */
+  overflow-x:hidden;
+  margin-top: 1rem;
+  transition: box-shadow 0.3s, transform 0.12s;
+  max-height: calc(100vh - 220px);
+  display: block; /* ensure scroll container behavior */
+  -webkit-overflow-scrolling: touch;
 }
 
+/* Make table container scroll vertically if very tall */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--neutral-300);
+  border-radius: 10px;
+}
+
+/* Table base */
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: auto;
 }
 
+/* Table Head */
 thead {
-  background-color: #f3f4f6;
+  background-color: var(--neutral-100);
   font-weight: 600;
   text-align: left;
+  transition: background 0.3s;
 }
 
+/* cells */
 th,
 td {
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--neutral-200);
+  transition: background 0.2s, color 0.2s;
+  vertical-align: middle;
+  word-break: break-word;
 }
 
 tbody tr:hover {
-  background-color: #f9fafb;
+  background-color: var(--primary-50);
   transition: background 0.2s ease-in-out;
 }
 
-/* Priority / Status Indicators */
+/* Priority / Status Indicators (preserve original classes) */
 .priority-high {
-  color: #dc2626;
+  color: var(--error-500);
   font-weight: 600;
+  transition: color 0.28s;
 }
 
 .priority-medium {
-  color: #d97706;
+  color: var(--accent-500);
   font-weight: 500;
 }
 
 .priority-low {
-  color: #16a34a;
+  color: var(--success-500);
   font-weight: 500;
 }
 
 .status-todo {
-  background: #fee2e2;
-  color: #991b1b;
+  background: var(--error-100);
+  color: var(--error-500);
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   font-size: 0.85rem;
+  transition: background 0.28s;
 }
 
 .status-inprogress {
-  background: #fef9c3;
-  color: #92400e;
+  background: var(--warning-100);
+  color: var(--accent-500);
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   font-size: 0.85rem;
 }
 
 .status-done {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--success-100);
+  color: var(--success-500);
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   font-size: 0.85rem;
 }
 
-/* Subtle Fade Scrollbar */
+/* Fade Scrollbar (main) */
 main::-webkit-scrollbar {
   width: 8px;
 }
 main::-webkit-scrollbar-track {
-  background: #f3f4f6;
+  background: var(--neutral-100);
 }
 main::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
+  background-color: var(--neutral-300);
   border-radius: 10px;
+  transition: background 0.3s;
 }
-
-/* Responsive touch */
-@media (max-width: 768px) {
-  th,
-  td {
-    padding: 0.75rem;
-    font-size: 0.9rem;
-  }
-
-  header,
-  footer {
-    padding: 0.8rem 1rem;
-  }
-}
-
 
 /* === Compact Task Form === */
 .task-form {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-200);
   border-radius: 10px;
-  padding: 1rem 1.5rem;
+  padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem 1.2rem;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.03);
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s, transform 0.12s;
 }
 
- label {
+label {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #374151;
+  color: var(--neutral-700);
 }
 
- input[type="text"],
- input[type="date"],
- select {
+input[type="text"],
+input[type="date"],
+select {
   padding: 0.6rem 0.8rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--neutral-300);
   border-radius: 6px;
   font-size: 0.9rem;
-  color: #111827;
-  background: #f9fafb;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  color: var(--neutral-900);
+  background: var(--neutral-50);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.12s;
 }
 
- input:focus,
- select:focus {
-  border-color: #2563eb;
-  background: #ffffff;
+input:focus,
+select:focus {
+  border-color: var(--primary-500);
+  background: var(--neutral-0);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.06);
 }
 
 /* make date input look consistent */
- input[type="date"] {
+input[type="date"] {
   color-scheme: light;
 }
 
-/* mobile handling */
-@media (max-width: 768px) {
-  .task-form {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
-}
-
-
-/* === Buttons for Task Form === */
+/* Buttons: Mobile-first */
 button {
-  background-color: #2563eb;
-  width: 100px;
-  color: #ffffff;
+  background-color: var(--primary-500);
+  color: var(--neutral-0);
   border: none;
   border-radius: 6px;
   padding: 0.6rem 1.2rem;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.18s, transform 0.12s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
   justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 button:not(:disabled):hover {
-  background-color: #1e40af;
+  background-color: var(--primary-600);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.10);
 }
 
 button:active {
-  transform: scale(0.97);
+  transform: translateY(1px) scale(0.99);
+  background-color: var(--primary-700);
 }
 
 button:disabled {
-  background-color: #93c5fd;
+  background-color: var(--primary-300);
   cursor: not-allowed;
+  opacity: 0.85;
 }
 
-/* === Form Action Buttons Layout === */
-.task-form .form-actions {
+/* Secondary Button */
+.btn-secondary {
+  background-color: var(--neutral-100);
+  color: var(--neutral-900);
+  border: 1px solid var(--neutral-300);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.btn-secondary:disabled {
+  background-color: var(--neutral-200);
+  cursor: not-allowed;
+}
+.btn-secondary:not(:disabled):hover {
+  background-color: var(--neutral-200);
+  border-color: var(--neutral-400);
+}
+
+/* Action Buttons - maintain layout */
+.task-form .form-actions,
+.edit-actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
   margin-top: 0.5rem;
+  z-index: 5;
 }
-
-.btn-secondary {
-  background-color: #f3f4f6;
-  color: #1f2937;
-  border: 1px solid #d1d5db;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-.btn-secondary:disabled {
-  background-color: #d0d0d0a3;
-  cursor: not-allowed;
-}
-
-.btn-secondary:not(:disabled):hover {
-  background-color: #e5e7eb;
-  border-color: #cbd5e1;
-}
- 
-
-/* === Form Action Buttons Layout === */
- .edit-actions {
-  display: flex;
-  justify-content: flex-start;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
- 
-
 
 /* Filter Inputs */
 .table-head-wrapper {
   align-items: center;
+  display: inline-block;
 }
 
 .filter-icon {
   cursor: pointer;
-  transition: border-top-color 0.2s ease;
+  transition: border-top-color 0.2s;
   margin-top: 2px;
 }
 
 .table-head-filter {
-  display:block;
+  display: block;
   margin-top: 6px;
   padding: 4px 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--neutral-300);
   border-radius: 4px;
-  width: 50%;
-  transition: all 0.2s ease;
+  width: 85%;
+  background: var(--neutral-0);
+  transition: all 0.17s;
 }
 
 .table-head-filter:focus {
-  border-color: #af661e;
+  border-color: var(--accent-500);
   outline: none;
+}
+
+/* Sort Button */
+.sort-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--neutral-900);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.18s;
+}
+
+.sort-button .sort-arrow {
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+
+.sort-button.asc .sort-arrow {
+  transform: rotate(0deg);
+  color: var(--primary-400);
+}
+
+.sort-button.desc .sort-arrow {
+  transform: rotate(180deg);
+  color: var(--primary-400);
+}
+
+/* === Scroll & clickable fixes === */
+/* Ensure main scrolls and table container allows internal scroll if long */
+html, body {
+  -webkit-text-size-adjust: 100%;
+}
+
+main {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* table container: prefer vertical scroll, allow horizontal scroll on tiny widths */
+.table-container {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* Prevent interaction being blocked by overlapping elements */
+tbody tr {
+  position: relative;
+  z-index: 1;
+}
+
+/* Action buttons inside table cells: large enough for touch */
+td button {
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0.35rem 0.45rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* make action buttons visually distinct */
+td .btn-edit {
+  background: transparent;
+  color: var(--primary-600);
+  border: 1px solid transparent;
+}
+td .btn-delete {
+  background: transparent;
+  color: var(--error-500);
+  border: 1px solid transparent;
+}
+
+td .btn-edit:hover { background: rgba(37,99,235,0.06); }
+td .btn-delete:hover { background: rgba(220,38,38,0.06); }
+
+/* === Responsive for Tablets & Web === */
+@media (min-width: 769px) {
+  th,
+  td {
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+  }
+  header,
+  footer {
+    padding: 1rem 2rem;
+  }
+  main {
+    padding: 2rem;
+  }
+  .task-form {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 1rem 1.5rem;
+  }
+  .table-head-filter {
+    width: 50%;
+  }
+
+  /* table looks like table on wider screens */
+  table { display: table; }
+  thead { display: table-header-group; }
+  tbody { display: table-row-group; }
+  tr { display: table-row; }
+  th, td { display: table-cell; }
+}
+
+/* Extra Large Screens */
+@media (min-width: 1200px) {
+  .table-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1150px;
+  }
+}
+
+/* === Enhanced Responsiveness & Small-Screen Tweaks === */
+/* Small devices (up to 480px) */
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .task-form {
+    grid-template-columns: 1fr;
+    padding: 0.8rem;
+    gap: 0.6rem;
+  }
+
+  .table-container {
+    border-radius: 8px;
+    margin-top: 0.6rem;
+    box-shadow: none;
+    background: transparent;
+    max-height: none;
+    overflow: visible;
+  }
+
+  th,
+  td {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+    word-break: break-word;
+  }
+
+  .table-head-filter {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.72rem;
+    font-size: 0.85rem;
+    justify-content: center;
+  }
+
+  .form-actions,
+  .edit-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Convert table into stacked cards for small screens */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead { display: none; }
+
+  tbody tr {
+    background: var(--neutral-0);
+    margin-bottom: 0.9rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 0.8rem;
+    border: 1px solid var(--neutral-100);
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border: none;
+  }
+
+  /* require data-label attributes on td for mobile - no class changes */
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--neutral-700);
+    flex-basis: 55%;
+    text-align: left;
+    padding-right: 0.6rem;
+  }
+
+  /* make edit/delete icons visible and easy to tap */
+  td button {
+    min-width: 40px;
+    min-height: 36px;
+    padding: 0.35rem 0.45rem;
+    font-size: 0.9rem;
+  }
+
+  .edit-actions,
+  .form-actions {
+    gap: 0.4rem;
+    justify-content: flex-end;
+  }
+
+  /* compact input and labels */
+  input[type="text"],
+  input[type="date"],
+  select {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.86rem;
+  }
+
+  label {
+    font-size: 0.84rem;
+  }
+}
+
+/* Medium devices (481px–768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  header {
+    padding: 0.8rem 1.2rem;
+  }
+
+  th,
+  td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .task-form {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .table-head-filter {
+    width: 70%;
+  }
+
+  .table-container {
+    max-height: calc(100vh - 180px);
+  }
+}
+
+/* Larger tablets (769px–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .table-container {
+    margin: 1rem;
+    max-height: calc(100vh - 200px);
+  }
+
+  .task-form {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  th,
+  td {
+    font-size: 0.95rem;
+  }
+}
+
+/* XL screens: increase white space balance */
+@media (min-width: 1440px) {
+  body {
+    font-size: 1.02rem;
+  }
+
+  .table-container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .task-form {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem auto;
+  }
+}
+
+/* small utility helpers (kept minimal) */
+.hidden-mobile { display: none; }
+@media (min-width: 481px) {
+  .hidden-mobile { display: initial; }
 }
