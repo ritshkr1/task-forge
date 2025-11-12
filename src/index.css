@@ -84,6 +84,13 @@ header {
   align-items: center;
   gap: 0.6rem;
 }
+.navbar-container{
+  display: flex;
+  justify-content: end;
+  gap:20px;
+  background: #2564eb70;
+  padding:10px 8px
+}
 
 footer {
   bottom: 0;
@@ -634,6 +641,92 @@ td .btn-delete:hover { background: rgba(220,38,38,0.06); }
 
 /* small utility helpers (kept minimal) */
 .hidden-mobile { display: none; }
+
 @media (min-width: 481px) {
   .hidden-mobile { display: initial; }
+}
+
+/* Kanban container */
+.kanban-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+/* Column styling */
+.kanban-column {
+  min-width: 250px;
+  background: var(--neutral-50);
+  border-radius: 12px;
+  padding: 0.8rem;
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.kanban-column h3 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--neutral-900);
+}
+
+/* Kanban cards */
+.kanban-card {
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-200);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-strong);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kanban-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* Task title */
+.task-title {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--neutral-700);
+}
+
+/* Priority badges */
+.priority {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.priority-high { background: var(--error-100); color: var(--error-500); }
+.priority-medium { background: var(--accent-100); color: var(--accent-500); }
+.priority-low { background: var(--success-100); color: var(--success-500); }
+
+/* Column status colors */
+.todo h3 { color: var(--error-500); }
+.inprogress h3 { color: var(--warning-500); }
+.done h3 { color: var(--success-500); }
+
+/* Scrollbar styling for container */
+.kanban-container::-webkit-scrollbar {
+  height: 8px;
+}
+.kanban-container::-webkit-scrollbar-thumb {
+  background-color: var(--neutral-300);
+  border-radius: 10px;
+}
+
+/* Responsive: stack columns on mobile */
+@media (max-width: 480px) {
+  .kanban-container {
+    flex-direction: column;
+  }
 }
