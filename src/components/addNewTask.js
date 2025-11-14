@@ -49,7 +49,7 @@ function AddTask({handleNewTask,selectedTask}) {
             <option value="Low">Low</option>
         </select>
         <label>Deadline</label>
-        <input type="date"  value={task.deadline} onChange={(e)=> updateTask(e.target.value,'deadline')}/>
+        <input className="date-input" type="date"  value={task.deadline} onChange={(e)=> updateTask(e.target.value,'deadline')}/>
         <div class="form-actions">
             <button type="submit">Save</button>
             <button type="button" class="btn-secondary" onClick={onCancel}>Cancel</button>

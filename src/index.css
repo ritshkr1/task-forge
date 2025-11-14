@@ -1,407 +1,248 @@
+/* ===========================
+   Dark Theme (D3) - Full Refactor
+   Mobile-first, class names unchanged
+   =========================== */
+
+/* ---------------------------
+   Palette / Tokens
+   --------------------------- */
 :root {
-  /* Primary Color Palette */
-  --primary-50: #eff6ff;
-  --primary-100: #dbeafe;
-  --primary-200: #bfdbfe;
-  --primary-300: #93c5fd;
-  --primary-400: #60a5fa;
-  --primary-500: #2563eb;
-  --primary-600: #1e40af;
-  --primary-700: #1e3a8a;
-  --primary-800: #1e293b;
-  
-  /* Accent */
-  --accent-100: #feecd6;
-  --accent-200: #fed7aa;
-  --accent-300: #fb923c;
-  --accent-400: #f59e42;
-  --accent-500: #d97706;
+  /* Core dark backgrounds */
+  --bg-primary: #0a0f1c;
+  /* page background */
+  --bg-secondary: #111827;
+  /* section backgrounds / headers */
+  --bg-tertiary: #1f2937;
+  /* card borders / tertiary surfaces */
+  --card-bg: #1a2333;
+  /* primary card background */
 
-  /* Success/Error/Warning */
-  --success-100: #dcfce7;
-  --success-500: #22c55e;
-  --error-100: #fee2e2;
-  --error-500: #dc2626;
-  --warning-100: #fef9c3;
-  --warning-500: #eab308;
+  /* Borders & lines */
+  --border-color: #2b3546;
+  --border-light: #3b4658;
 
-  /* Neutral Palette */
-  --neutral-0: #fff;
-  --neutral-50: #f8f9fb;
-  --neutral-100: #f3f4f6;
-  --neutral-200: #e5e7eb;
-  --neutral-300: #d1d5db;
-  --neutral-400: #9ca3af;
-  --neutral-500: #6b7280;
-  --neutral-700: #374151;
-  --neutral-900: #111827;
+  /* Text */
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --muted-weak: #4b5563;
 
-  /* Shadows / misc */
-  --shadow: 0 4px 12px rgba(37, 99, 235, 0.05);
-  --shadow-strong: 0 8px 24px rgba(16, 24, 40, 0.08);
+  /* Accent (cyan) */
+  --accent: #22d3ee;
+  --accent-dark: #0e7490;
+  --accent-light: #67e8f9;
+
+  /* Semantic */
+  --success-100: #052e16;
+  /* subtle bg for success on dark */
+  --success-500: #10b981;
+  --error-100: #2b1212;
+  --error-500: #ef4444;
+  --warning-100: #2b2209;
+  --warning-500: #f59e0b;
+
+  /* Neutral tokens for components */
+  --neutral-0: #0b1220;
+  /* card interior fallback */
+  --neutral-50: #0f1724;
+  /* light surface */
+  --neutral-100: #111827;
+  /* table header, input bg */
+  --neutral-200: #172033;
+  --neutral-300: #223044;
+  --neutral-400: #2b3546;
+  --neutral-500: #374151;
+  --neutral-700: #9ca3af;
+  --neutral-900: #e5e7eb;
+
+  /* Shadows */
+  --shadow: 0 6px 18px rgba(2, 6, 23, 0.45);
+  --shadow-soft: 0 3px 10px rgba(2, 6, 23, 0.32);
+
+  /* Radii & spacing */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --spacing-xs: 0.4rem;
+  --spacing-sm: 0.6rem;
+  --spacing-md: 1rem;
+  --header-h: 56px;
 }
 
-/* === Mobile-first Layout Skeleton === */
+/* ---------------------------
+   Global reset & base styles
+   --------------------------- */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", "Segoe UI", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0
 }
 
-html, body {
-  height: 100%;
-  background-color: var(--neutral-50);
-  color: var(--neutral-900);
-  overflow: hidden; /* keep body fixed, main will scroll */
+html,
+body {
+  height: 100%
 }
 
 body {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  overflow:auto;
+  min-height: 100vh;
+  overflow: auto;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Sticky header & footer baseline */
+/* Reduce motion for users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important
+  }
+}
+
+/* Focus styles (accessible) */
+:focus {
+  outline: none
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(34, 211, 238, 0.12);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* subtle baseline transition for background/text */
+* {
+  transition: background 0.14s ease, color 0.12s ease, box-shadow 0.12s ease
+}
+
+/* ---------------------------
+   Header / Navbar / Footer
+   --------------------------- */
 header,
 footer {
-  background-color: var(--neutral-0);
-  border-bottom: 1px solid var(--neutral-200);
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.6), rgba(13, 15, 28, 0.6));
+  border-bottom: 1px solid var(--border-color);
   padding: 0.8rem 1rem;
-  text-align: center;
   font-weight: 600;
   position: sticky;
   z-index: 20;
-  transition: background 0.3s cubic-bezier(.88,.38,.59,.99), border-color 0.2s;
+  backdrop-filter: blur(6px);
 }
 
 header {
   top: 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 0.6rem;
-}
-.navbar-container{
-  display: flex;
-  justify-content: end;
-  gap:20px;
-  background: #2564eb70;
-  padding:10px 8px
+  justify-content: space-between;
+  gap: 0.6rem
 }
 
 footer {
   bottom: 0;
-  border-top: 1px solid var(--neutral-200);
+  border-top: 1px solid var(--border-color);
   border-bottom: none;
+  background: linear-gradient(0deg, rgba(13, 15, 28, 0.6), rgba(17, 24, 39, 0.6));
 }
 
-/* Main scroll region (touch-friendly) */
+/* ---------------------------
+   Main scroll region
+   --------------------------- */
 main {
   flex: 1 1 auto;
   overflow-y: auto;
-  overflow-x:hidden;
+  overflow-x: hidden;
   padding: 1rem;
-  transition: background 0.3s cubic-bezier(.4,0,.2,1);
   -webkit-overflow-scrolling: touch;
 }
 
-/* === Task Table Styling === */
-.table-container {
-  background: var(--neutral-0);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  overflow-y: auto; /* hides overflow for desktop table; mobile will alter */
-  overflow-x:hidden;
-  margin-top: 1rem;
-  transition: box-shadow 0.3s, transform 0.12s;
-  max-height: calc(100vh - 220px);
-  display: block; /* ensure scroll container behavior */
-  -webkit-overflow-scrolling: touch;
+/* Scrollbar styling for dark UI */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px
 }
 
-/* Make table container scroll vertically if very tall */
-.table-container::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
+::-webkit-scrollbar-track {
+  background: transparent
 }
-.table-container::-webkit-scrollbar-thumb {
-  background: var(--neutral-300);
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--border-color), var(--neutral-300));
   border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-/* Table base */
+/* ---------------------------
+   Table container & table base
+   --------------------------- */
+.table-container {
+  background: linear-gradient(180deg, var(--card-bg), rgba(17, 24, 39, 0.6));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  overflow: auto;
+  margin-top: 1rem;
+  max-height: calc(100vh - 220px);
+  display: block;
+  border: 1px solid var(--border-color);
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+/* table basic */
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: auto;
+  table-layout: auto
 }
 
-/* Table Head */
 thead {
-  background-color: var(--neutral-100);
-  font-weight: 600;
-  text-align: left;
-  transition: background 0.3s;
+  background: var(--neutral-100);
+  color: var(--text-primary);
+  font-weight: 700;
+  text-align: left
 }
 
-/* cells */
+table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 th,
 td {
   padding: 0.75rem;
-  border-bottom: 1px solid var(--neutral-200);
-  transition: background 0.2s, color 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   vertical-align: middle;
   word-break: break-word;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+tbody tr {
+  background: transparent
 }
 
 tbody tr:hover {
-  background-color: var(--primary-50);
-  transition: background 0.2s ease-in-out;
+  background: linear-gradient(90deg, rgba(34, 50, 78, 0.18), rgba(17, 24, 39, 0.08))
 }
 
-/* Priority / Status Indicators (preserve original classes) */
-.priority-high {
-  color: var(--error-500);
-  font-weight: 600;
-  transition: color 0.28s;
+/* cell spacing on dark: subtle divider */
+th {
+  border-bottom: 1px solid var(--border-color)
 }
 
-.priority-medium {
-  color: var(--accent-500);
-  font-weight: 500;
+td {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.02)
 }
 
-.priority-low {
-  color: var(--success-500);
-  font-weight: 500;
-}
-
-.status-todo {
-  background: var(--error-100);
-  color: var(--error-500);
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  transition: background 0.28s;
-}
-
-.status-inprogress {
-  background: var(--warning-100);
-  color: var(--accent-500);
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-}
-
-.status-done {
-  background: var(--success-100);
-  color: var(--success-500);
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-}
-
-/* Fade Scrollbar (main) */
-main::-webkit-scrollbar {
-  width: 8px;
-}
-main::-webkit-scrollbar-track {
-  background: var(--neutral-100);
-}
-main::-webkit-scrollbar-thumb {
-  background-color: var(--neutral-300);
-  border-radius: 10px;
-  transition: background 0.3s;
-}
-
-/* === Compact Task Form === */
-.task-form {
-  background: var(--neutral-0);
-  border: 1px solid var(--neutral-200);
-  border-radius: 10px;
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem 1.2rem;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.03);
-  margin-bottom: 1rem;
-  transition: box-shadow 0.3s, transform 0.12s;
-}
-
-label {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--neutral-700);
-}
-
-input[type="text"],
-input[type="date"],
-select {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid var(--neutral-300);
-  border-radius: 6px;
-  font-size: 0.9rem;
-  color: var(--neutral-900);
-  background: var(--neutral-50);
-  transition: border-color 0.2s, background 0.2s, box-shadow 0.12s;
-}
-
-input:focus,
-select:focus {
-  border-color: var(--primary-500);
-  background: var(--neutral-0);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.06);
-}
-
-/* make date input look consistent */
-input[type="date"] {
-  color-scheme: light;
-}
-
-/* Buttons: Mobile-first */
-button {
-  background-color: var(--primary-500);
-  color: var(--neutral-0);
-  border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.18s, transform 0.12s, box-shadow 0.18s;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
-  justify-self: start;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-button:not(:disabled):hover {
-  background-color: var(--primary-600);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.10);
-}
-
-button:active {
-  transform: translateY(1px) scale(0.99);
-  background-color: var(--primary-700);
-}
-
-button:disabled {
-  background-color: var(--primary-300);
-  cursor: not-allowed;
-  opacity: 0.85;
-}
-
-/* Secondary Button */
-.btn-secondary {
-  background-color: var(--neutral-100);
-  color: var(--neutral-900);
-  border: 1px solid var(--neutral-300);
-  transition: background-color 0.2s, border-color 0.2s;
-}
-.btn-secondary:disabled {
-  background-color: var(--neutral-200);
-  cursor: not-allowed;
-}
-.btn-secondary:not(:disabled):hover {
-  background-color: var(--neutral-200);
-  border-color: var(--neutral-400);
-}
-
-/* Action Buttons - maintain layout */
-.task-form .form-actions,
-.edit-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-  z-index: 5;
-}
-
-/* Filter Inputs */
-.table-head-wrapper {
-  align-items: center;
-  display: inline-block;
-}
-
-.filter-icon {
-  cursor: pointer;
-  transition: border-top-color 0.2s;
-  margin-top: 2px;
-}
-
-.table-head-filter {
-  display: block;
-  margin-top: 6px;
-  padding: 4px 6px;
-  border: 1px solid var(--neutral-300);
-  border-radius: 4px;
-  width: 85%;
-  background: var(--neutral-0);
-  transition: all 0.17s;
-}
-
-.table-head-filter:focus {
-  border-color: var(--accent-500);
-  outline: none;
-}
-
-/* Sort Button */
-.sort-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--neutral-900);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: color 0.18s;
-}
-
-.sort-button .sort-arrow {
-  font-size: 12px;
-  transition: transform 0.2s;
-}
-
-.sort-button.asc .sort-arrow {
-  transform: rotate(0deg);
-  color: var(--primary-400);
-}
-
-.sort-button.desc .sort-arrow {
-  transform: rotate(180deg);
-  color: var(--primary-400);
-}
-
-/* === Scroll & clickable fixes === */
-/* Ensure main scrolls and table container allows internal scroll if long */
-html, body {
-  -webkit-text-size-adjust: 100%;
-}
-
-main {
-  -webkit-overflow-scrolling: touch;
-}
-
-/* table container: prefer vertical scroll, allow horizontal scroll on tiny widths */
-.table-container {
-  overflow-x: auto;
-  overflow-y: auto;
-}
-
-/* Prevent interaction being blocked by overlapping elements */
-tbody tr {
-  position: relative;
-  z-index: 1;
-}
-
-/* Action buttons inside table cells: large enough for touch */
+/* Action buttons inside cells */
 td button {
   min-width: 36px;
   min-height: 36px;
@@ -410,323 +251,560 @@ td button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--accent-light);
 }
 
-/* make action buttons visually distinct */
 td .btn-edit {
-  background: transparent;
-  color: var(--primary-600);
-  border: 1px solid transparent;
+  color: var(--accent);
+  border-color: transparent
 }
+
 td .btn-delete {
-  background: transparent;
-  color: var(--error-500);
-  border: 1px solid transparent;
+  color: var(--error-500)
 }
 
-td .btn-edit:hover { background: rgba(37,99,235,0.06); }
-td .btn-delete:hover { background: rgba(220,38,38,0.06); }
-
-/* === Responsive for Tablets & Web === */
-@media (min-width: 769px) {
-  th,
-  td {
-    padding: 1rem 1.2rem;
-    font-size: 1rem;
-  }
-  header,
-  footer {
-    padding: 1rem 2rem;
-  }
-  main {
-    padding: 2rem;
-  }
-  .task-form {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    padding: 1rem 1.5rem;
-  }
-  .table-head-filter {
-    width: 50%;
-  }
-
-  /* table looks like table on wider screens */
-  table { display: table; }
-  thead { display: table-header-group; }
-  tbody { display: table-row-group; }
-  tr { display: table-row; }
-  th, td { display: table-cell; }
+td .btn-edit:hover {
+  background: rgba(34, 211, 238, 0.06)
 }
 
-/* Extra Large Screens */
-@media (min-width: 1200px) {
-  .table-container {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1150px;
-  }
+td .btn-delete:hover {
+  background: rgba(239, 68, 68, 0.06)
 }
 
-/* === Enhanced Responsiveness & Small-Screen Tweaks === */
-/* Small devices (up to 480px) */
-@media (max-width: 480px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
+/* Mobile: stack table as cards */
+@media (max-width:480px) {
 
-  .task-form {
-    grid-template-columns: 1fr;
-    padding: 0.8rem;
-    gap: 0.6rem;
-  }
-
-  .table-container {
-    border-radius: 8px;
-    margin-top: 0.6rem;
-    box-shadow: none;
-    background: transparent;
-    max-height: none;
-    overflow: visible;
-  }
-
-  th,
-  td {
-    padding: 0.6rem;
-    font-size: 0.85rem;
-    word-break: break-word;
-  }
-
-  .table-head-filter {
-    width: 100%;
-  }
-
-  button {
-    width: 100%;
-    padding: 0.72rem;
-    font-size: 0.85rem;
-    justify-content: center;
-  }
-
-  .form-actions,
-  .edit-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  /* Convert table into stacked cards for small screens */
   table,
   thead,
   tbody,
   th,
   td,
   tr {
-    display: block;
+    display: block
   }
 
-  thead { display: none; }
+  thead {
+    display: none
+  }
 
   tbody tr {
-    background: var(--neutral-0);
+    background: var(--card-bg);
     margin-bottom: 0.9rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
     padding: 0.8rem;
-    border: 1px solid var(--neutral-100);
+    border: 1px solid var(--border-light)
   }
 
   td {
     display: flex;
     justify-content: space-between;
     padding: 0.4rem 0;
-    border: none;
+    border: none
   }
 
-  /* require data-label attributes on td for mobile - no class changes */
   td::before {
     content: attr(data-label);
     font-weight: 600;
-    color: var(--neutral-700);
+    color: var(--text-secondary);
     flex-basis: 55%;
     text-align: left;
     padding-right: 0.6rem;
   }
 
-  /* make edit/delete icons visible and easy to tap */
-  td button {
-    min-width: 40px;
-    min-height: 36px;
-    padding: 0.35rem 0.45rem;
-    font-size: 0.9rem;
-  }
-
-  .edit-actions,
-  .form-actions {
-    gap: 0.4rem;
-    justify-content: flex-end;
-  }
-
-  /* compact input and labels */
-  input[type="text"],
-  input[type="date"],
-  select {
-    padding: 0.45rem 0.6rem;
-    font-size: 0.86rem;
-  }
-
-  label {
-    font-size: 0.84rem;
-  }
-}
-
-/* Medium devices (481px–768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-  header {
-    padding: 0.8rem 1.2rem;
-  }
-
   th,
   td {
-    padding: 0.8rem;
-    font-size: 0.9rem;
-  }
-
-  .task-form {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .table-head-filter {
-    width: 70%;
-  }
-
-  .table-container {
-    max-height: calc(100vh - 180px);
+    font-size: 0.86rem
   }
 }
 
-/* Larger tablets (769px–1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .table-container {
-    margin: 1rem;
-    max-height: calc(100vh - 200px);
-  }
-
-  .task-form {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-
-  th,
-  td {
-    font-size: 0.95rem;
-  }
+/* ---------------------------
+   Task form
+   --------------------------- */
+.task-form {
+  background: linear-gradient(180deg, var(--card-bg), rgba(17, 24, 39, 0.45));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: center;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1rem;
 }
 
-/* XL screens: increase white space balance */
-@media (min-width: 1440px) {
-  body {
-    font-size: 1.02rem;
-  }
-
-  .table-container {
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .task-form {
-    max-width: 1200px;
-    margin: 0 auto 1.5rem auto;
-  }
+label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary)
 }
 
-/* small utility helpers (kept minimal) */
-.hidden-mobile { display: none; }
-
-@media (min-width: 481px) {
-  .hidden-mobile { display: initial; }
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--neutral-100);
+  transition: border-color 0.14s, box-shadow 0.12s;
+  -webkit-appearance: none;
 }
 
-/* Kanban container */
-.kanban-container {
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  background: rgba(34, 211, 238, 0.02);
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.06);
+  outline: none;
+}
+
+input[type="date"] {
+  color-scheme: dark
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 6px 18px rgba(6, 12, 20, 0.45);
+  justify-self: start;
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(6, 12, 20, 0.55)
+}
+
+button:active {
+  transform: translateY(0)
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none
+}
+
+/* Secondary button */
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.04)
+}
+
+.btn-secondary:not(:disabled):hover {
+  background: rgba(34, 211, 238, 0.03);
+  border-color: rgba(34, 211, 238, 0.06)
+}
+
+/* Action containers */
+.task-form .form-actions,
+.edit-actions {
   display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  z-index: 5
+}
+
+/* ---------------------------
+   Filters & sort
+   --------------------------- */
+.table-head-wrapper {
+  align-items: center;
+  display: inline-block
+}
+
+.filter-icon {
+  cursor: pointer;
+  margin-top: 2px
+}
+
+.table-head-filter {
+  display: block;
+  margin-top: 6px;
+  padding: 6px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  width: 85%;
+  background: var(--neutral-100);
+  color: var(--text-primary);
+  transition: all 0.14s;
+}
+
+.table-head-filter:focus {
+  border-color: var(--accent);
+  outline: none
+}
+
+.sort-button {
+  background: none;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sort-button .sort-arrow {
+  font-size: 12px;
+  transition: transform 0.16s
+}
+
+.sort-button.asc .sort-arrow {
+  transform: rotate(0deg);
+  color: var(--accent)
+}
+
+.sort-button.desc .sort-arrow {
+  transform: rotate(180deg);
+  color: var(--accent)
+}
+
+/* ---------------------------
+   Priority & status visuals
+   --------------------------- */
+.priority-high {
+  color: var(--error-500);
+  font-weight: 700
+}
+
+.priority-medium {
+  color: var(--warning-500);
+  font-weight: 600
+}
+
+.priority-low {
+  color: var(--success-500);
+  font-weight: 600
+}
+
+/* status pills - adapted to dark bg */
+.status-todo {
+  background: rgba(59, 130, 246, 0.12);
+  color: #bfe6ff;
+  padding: 0.28rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(34, 211, 238, 0.06)
+}
+
+.status-inprogress {
+  background: rgba(245, 158, 11, 0.12);
+  color: #ffd9a8;
+  padding: 0.28rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(245, 158, 11, 0.06)
+}
+
+.status-done {
+  background: rgba(16, 185, 129, 0.08);
+  color: #bff6dd;
+  padding: 0.28rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(16, 185, 129, 0.04)
+}
+
+/* priority badges for kanban/cards */
+.priority {
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700
+}
+
+.priority-high {
+  background: rgba(239, 68, 68, 0.06);
+  color: var(--error-500)
+}
+
+.priority-medium {
+  background: rgba(245, 158, 11, 0.06);
+  color: var(--warning-500)
+}
+
+.priority-low {
+  background: rgba(16, 185, 129, 0.06);
+  color: var(--success-500)
+}
+
+/* ---------------------------
+   Kanban layout
+   --------------------------- */
+.kanban-container {
+  display: block;
   gap: 1rem;
   overflow-x: auto;
   padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Column styling */
 .kanban-column {
   min-width: 250px;
-  background: var(--neutral-50);
+  background: linear-gradient(180deg, var(--neutral-100), rgba(17, 24, 39, 0.28));
   border-radius: 12px;
   padding: 0.8rem;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-soft);
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  border: 1px solid var(--border-color)
 }
 
 .kanban-column h3 {
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--neutral-900);
+  color: var(--text-primary)
 }
 
-/* Kanban cards */
 .kanban-card {
-  background: var(--neutral-0);
-  border: 1px solid var(--neutral-200);
+  background: linear-gradient(180deg, var(--card-bg), rgba(17, 24, 39, 0.45));
+  border: 1px solid var(--border-light);
   border-radius: 8px;
   padding: 0.6rem 0.8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: var(--shadow-strong);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.14s, box-shadow 0.14s;
 }
 
 .kanban-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(2, 6, 23, 0.55)
 }
 
-/* Task title */
-.task-title {
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: var(--neutral-700);
+.todo h3 {
+  color: var(--error-500)
 }
 
-/* Priority badges */
-.priority {
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
+.inprogress h3 {
+  color: var(--warning-500)
 }
 
-.priority-high { background: var(--error-100); color: var(--error-500); }
-.priority-medium { background: var(--accent-100); color: var(--accent-500); }
-.priority-low { background: var(--success-100); color: var(--success-500); }
-
-/* Column status colors */
-.todo h3 { color: var(--error-500); }
-.inprogress h3 { color: var(--warning-500); }
-.done h3 { color: var(--success-500); }
-
-/* Scrollbar styling for container */
-.kanban-container::-webkit-scrollbar {
-  height: 8px;
-}
-.kanban-container::-webkit-scrollbar-thumb {
-  background-color: var(--neutral-300);
-  border-radius: 10px;
+.done h3 {
+  color: var(--success-500)
 }
 
-/* Responsive: stack columns on mobile */
-@media (max-width: 480px) {
-  .kanban-container {
-    flex-direction: column;
+/* ---------------------------
+   Utilities & small helpers
+   --------------------------- */
+.hidden-mobile {
+  display: none
+}
+
+@media (min-width:481px) {
+  .hidden-mobile {
+    display: initial
   }
+}
+
+tbody tr {
+  position: relative;
+  z-index: 1
+}
+
+/* ---------------------------
+   Responsive: Tablet 481px - 1024px
+   --------------------------- */
+@media (min-width:481px) and (max-width:1024px) {
+
+  th,
+  td {
+    padding: 0.8rem;
+    font-size: 0.95rem
+  }
+
+  header,
+  footer {
+    padding: 0.8rem 1.2rem
+  }
+
+  .task-form {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))
+  }
+
+  .table-head-filter {
+    width: 70%
+  }
+
+  .table-container {
+    max-height: calc(100vh - 180px)
+  }
+
+  .kanban-column {
+    min-width: 300px
+  }
+}
+
+/* ---------------------------
+   Desktop / Laptop: 1025px+
+   --------------------------- */
+@media (min-width:1025px) {
+
+  th,
+  td {
+    padding: 1rem 1.2rem;
+    font-size: 1rem
+  }
+
+  header,
+  footer {
+    padding: 1rem 2rem
+  }
+
+  main {
+    padding: 2rem
+  }
+
+  .task-form {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 1rem 1.5rem
+  }
+
+  table {
+    display: table
+  }
+
+  thead {
+    display: table-header-group
+  }
+
+  tbody {
+    display: table-row-group
+  }
+
+  tr {
+    display: table-row
+  }
+
+  th,
+  td {
+    display: table-cell
+  }
+
+  .table-container {
+    max-width: 1150px;
+    margin: 0 auto;
+    max-height: calc(100vh - 220px)
+  }
+  .kanban-container {
+  display: flex;
+}
+  .kanban-container {
+    gap: 1.25rem;
+    padding-bottom: 1rem
+  }
+
+  .kanban-column {
+    min-width: 400px
+  }
+}
+
+/* ---------------------------
+   XL polish: 1440px+
+   --------------------------- */
+@media (min-width:1440px) {
+  body {
+    font-size: 1.02rem
+  }
+
+  .table-container {
+    max-width: 1400px
+  }
+
+  .task-form {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem
+  }
+}
+
+/* ---------------------------
+   Tiny tweaks to ensure contrast and legibility
+   --------------------------- */
+/* stronger labels and subtle caps */
+label {
+  letter-spacing: 0.2px
+}
+
+th {
+  letter-spacing: 0.3px;
+  text-transform: none
+}
+
+/* ensure visually-hidden for screen reader helpers (if used) */
+.sr-only {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap
+}
+
+/* end of dark stylesheet */
+
+
+/* Select wrapper */
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 14px;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Hover + focus states */
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.25);
+}
+
+select:hover {
+  border-color: var(--accent);
+}
+
+/* Dropdown arrow fix */
+select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path d='M5.5 7l4.5 4.5L14.5 7'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+}
+
+/* Options styling (browser-limited but still good) */
+select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 8px;
 }

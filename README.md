@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 1. **Task CRUD** – Add, edit, delete, view tasks. [Done]
 2. **LocalStorage Persistence** – Tasks remain after refresh.
-3. **Task List / Board View** – Show tasks in columns (Todo, In Progress, Done).[In-progress]
+3. **Task List / Board View** – Show tasks in columns (Todo, In Progress, Done).[Done]
 4. **Add/Edit Task Form** – With basic validation (title, due date, priority).
 
 ---

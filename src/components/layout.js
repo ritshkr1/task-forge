@@ -68,18 +68,23 @@ function Layout({initialTasks}) {
     });
     handleUpdateTasks(sorted);
   };
+  const navBarButtonStyle = {
+    background:'transparent',
+    color:'#ffffff42',
+    border:'none',
+    marginLeft:'5px',
+  }
   return (
     <>
       <header>
         <span>
           Task Forge
+          {tabName === 'Table' ?<button style={navBarButtonStyle} onClick={() => setTabName((curr) => curr = "Board")} disabled={isNewTaskOpen ? true : false}>Board View</button>:
+        <button style={navBarButtonStyle} onClick={() => setTabName((curr) => curr = "Table")} disabled={isNewTaskOpen ? true : false}>Table View</button>}
         </span>
         <button onClick={() => setIsNewTaskOpen((curr) => !curr)} disabled={isNewTaskOpen ? true : false}>{isNewTaskOpen ? "Close" : "Add Task"}</button>
       </header>
-      <div className="navbar-container">
-        <button onClick={() => setTabName((curr) => curr = "Board")} disabled={isNewTaskOpen ? true : false}>Board View</button>
-        <button onClick={() => setTabName((curr) => curr = "Table")} disabled={isNewTaskOpen ? true : false}>Table View</button>
-      </div >
+     
       {isNewTaskOpen && <AddTask handleNewTask={handleNewTasks} selectedTask={selectedTask} />}
       {tabName === 'Table' ?<TaskTableList>
         <THead>
