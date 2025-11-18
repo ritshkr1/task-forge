@@ -11,7 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 1. **Task CRUD** – Add, edit, delete, view tasks. [Done]
 2. **LocalStorage Persistence** – Tasks remain after refresh.
 3. **Task List / Board View** – Show tasks in columns (Todo, In Progress, Done).[Done]
-4. **Add/Edit Task Form** – With basic validation (title, due date, priority).
+4. **Add/Edit Task Form** – With basic validation (title, due date, priority).[In-progress]
 
 ---
 
@@ -28,7 +28,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 9. **Context + useReducer State Management** – Manage tasks, boards, filters globally.
 10. **Undo Delete** – Show toast/snackbar with undo option.
-11. **Drag-and-Drop Tasks Between Columns** – Move tasks Todo → In Progress → Done.
+11. **Drag-and-Drop Tasks Between Columns** – Move tasks Todo → In Progress → Done.[Done]
 12. **Task Comments / Activity Feed** – Add small comment history per task.
 13. **Overdue Highlight / Reminder** – Visual cue for overdue tasks.
 
