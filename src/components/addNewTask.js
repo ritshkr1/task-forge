@@ -4,7 +4,7 @@ function AddTask({handleNewTask,selectedTask}) {
         id: crypto.randomUUID(),
       title: "",
       description: "",
-      status: "Created",
+      status: "To-Do",
       priority: "Low",
       deadline: "",
     });
@@ -23,7 +23,7 @@ function AddTask({handleNewTask,selectedTask}) {
             id: crypto.randomUUID(),
       title: "",
       description: "",
-      status: "Created",
+      status: "To-Do",
       priority: "Low",
       deadline: "",
         })
@@ -38,8 +38,8 @@ function AddTask({handleNewTask,selectedTask}) {
         <input type="text" value={task.description} onChange={(e)=> updateTask(e.target.value,'description')}/>
         <label>Status</label>
         <select value={task.status} onChange={(e)=> updateTask(e.target.value,'status')}>
-            <option value="Created">Created</option>
-            <option value="In-progress">In-progress</option>
+            <option value="To-Do">To-Do</option>
+            <option value="In-Progress">In-progress</option>
             <option value="Done">Done</option>
         </select>
         <label>Priority</label>

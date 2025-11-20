@@ -18,8 +18,8 @@ function Layout({initialTasks}) {
   const optionStatus = ['In-progress', 'Done', 'Created'];
   const optionPriority = ['Medium', 'Low', 'High'];
   function handleUpdateTasks(tasks) {
-    setTasks((t) => t = [...tasks]);
-    setFilterTasks((f) => f = [...tasks]);
+    setTasks((t) => [...tasks]);
+    setFilterTasks((f) => [...tasks]);
   }
   function handleFilterTask(value, field) {
     const lowerCaseValue = value.toLowerCase();
@@ -52,7 +52,7 @@ function Layout({initialTasks}) {
   }
   function handleEditInAddTask(id) {
     const selectedTask = tasks.filter((task) => task.id === id);
-    setSelectedTask(selectedTask[0]);
+    setSelectedTask((curr) => curr = selectedTask[0]);
     setIsNewTaskOpen(true);
     console.log(selectedTask);
   }
@@ -85,7 +85,7 @@ function Layout({initialTasks}) {
         <button onClick={() => setIsNewTaskOpen((curr) => !curr)} disabled={isNewTaskOpen ? true : false}>{isNewTaskOpen ? "Close" : "Add Task"}</button>
       </header>
      
-      {isNewTaskOpen && <AddTask handleNewTask={handleNewTasks} selectedTask={selectedTask} />}
+      {isNewTaskOpen && <AddTask handleNewTask={handleNewTasks} selectedTask={selectedTask} key={selectedTask ? selectedTask.id:'new'}/>}
       {tabName === 'Table' ?<TaskTableList>
         <THead>
           <th>
@@ -115,7 +115,7 @@ function Layout({initialTasks}) {
           <th>Action</th>
         </THead>
         <TBody tasks={filterTasks} editTask={handleEditInAddTask} deleteTask={handleDeleteTask} />
-      </TaskTableList>:<BoardView tasks={filterTasks} updateTasks={handleUpdateTasks}/>}
+      </TaskTableList>:<BoardView tasks={filterTasks} updateTasks={handleUpdateTasks} editTask={handleEditInAddTask}/>}
       <footer>© 2025 Task Forge created by Ritesh in React</footer></>
   );
 }

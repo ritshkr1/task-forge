@@ -6,11 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ---
 
-## Working on Currently:
+## Working on Currently: 20 Nov
 * Edit a task inline or open it in a modal for full details.
 * Highlight the target column while dragging to show exactly where the task will drop.[Done]
 * Show live task counts in each column header.[Done]
-* Add new tasks quickly using a simple input at the bottom of each column.
+* Add new tasks quickly using a simple input at the bottom of each column.[Done]
 
 ## Core Features (Easy / Foundation)**
 
