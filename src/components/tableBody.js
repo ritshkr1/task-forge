@@ -1,3 +1,4 @@
+import PriorityLabel from "./priorityLabel";
 function TableBody({tasks,editTask,deleteTask}){
     return <tbody>
           {tasks.map((task) => (
@@ -10,7 +11,7 @@ function TableBody({tasks,editTask,deleteTask}){
                 </span>
               </td>
               <td >
-                {task.priority}
+                <PriorityLabel priority={task.priority}/>
               </td>
               <td>{task.deadline}</td>
               <td>

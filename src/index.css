@@ -582,17 +582,52 @@ button:disabled {
   color: var(--text-primary)
 }
 
+.kanban-column-dropzone{
+  border: 2px dashed var(--accent);
+  background: rgba(34, 211, 238, 0.08);
+  border-radius: 10px;
+  transition: background 0.18s ease, border-color 0.18s ease;
+ 
+}
+
+.kanban-column-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: var(--text-muted);
+  backdrop-filter: blur(4px);
+}
+
+
 .kanban-card {
   background: linear-gradient(180deg, var(--card-bg), rgba(17, 24, 39, 0.45));
   border: 1px solid var(--border-light);
   border-radius: 8px;
   padding: 0.6rem 0.8rem;
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow-soft);
   transition: transform 0.14s, box-shadow 0.14s;
 }
+
+.kanban-card-description {
+  display: block;
+  margin-top: 4px;
+  width: 100%;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-muted);
+  word-break: break-word;
+}
+
 
 .kanban-card:hover {
   transform: translateY(-4px);

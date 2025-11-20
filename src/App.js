@@ -1,4 +1,4 @@
-import Layout from "./components/layout";
+import Layout from "./pages/layout";
 const initialTasks = [
   { id: 1, title: "Design homepage", description: "Create responsive layout and hero section", status: "To-Do", priority: "High", deadline: "2025-11-08" },
   { id: 2, title: "Setup local storage", description: "Implement persistence for task data", status: "In-Progress", priority: "Medium", deadline: "2025-11-10" },

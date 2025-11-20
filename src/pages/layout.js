@@ -1,11 +1,11 @@
-import AddTask from "./addNewTask"
+import AddTask from "../components/addNewTask"
 import TaskTableList from "./tableviewList";
 import { useState } from "react";
-import TBody from "./tableBody";
-import THead from './tableHead';
-import FilterInputTH from './FiltersInputs';
-import FilterSelectTH from './FilterSelects';
-import SortButton from './Sortbutton';
+import TBody from "../components/tableBody";
+import THead from '../components/tableHead';
+import FilterInputTH from '../components/FiltersInputs';
+import FilterSelectTH from '../components/FilterSelects';
+import SortButton from '../components/Sortbutton';
 import BoardView from "./kanbanView";
 
 
