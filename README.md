@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Working on Currently: 20 Nov
 * Edit a task inline or open it in a modal for full details.
 * Highlight the target column while dragging to show exactly where the task will drop.[Done]
-* Show live task counts in each column header.[Done]
+* Show live task counts in each column header.[Done] Fixed again as added quick to add tasks[Done]
 * Add new tasks quickly using a simple input at the bottom of each column.[Done]
 
 ## Core Features (Easy / Foundation)**
@@ -58,3 +58,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * Drag-and-drop & undo functionality
 * Analytics & dark mode
 * Mobile-first responsive design
+
+
+
+# VS CODE Shortcuts mostly used by me:
+
+switch between explorer and code: ctrl + shift + e
+swtich tabs : ctrl + page up and page down
+close file : ctrl + f4

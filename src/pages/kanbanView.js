@@ -3,7 +3,7 @@ import PriorityLabel from "../components/priorityLabel";
 import AweFontIcons from "../components/fontawesome";
 export default function KanbanView({ tasks, updateTasks, editTask }) {
   const tabNames = ["To-Do", "In-Progress", "Done"];
-  const [createNewTask,setCreateNewTask] = useState("");
+  const [createNewTask, setCreateNewTask] = useState("");
   const [dropZone, setDropZone] = useState("");
   const [taskId, setTaskId] = useState(null);
   function handleDropData(tabTitle) {
@@ -17,8 +17,8 @@ export default function KanbanView({ tasks, updateTasks, editTask }) {
     updateTasks(updatedTasks);
     setDropZone("")
   }
-  function kanbanStyleNewTask(task){
-    const updatedTasks = [...tasks,task];
+  function kanbanStyleNewTask(task) {
+    const updatedTasks = [...tasks, task];
     updateTasks(updatedTasks);
     setCreateNewTask((c) => "");
   }
@@ -31,10 +31,10 @@ export default function KanbanView({ tasks, updateTasks, editTask }) {
         <KanbanColumn key={tabName} tabTitle={tabName} handleDropData={handleDropData} dropZone={dropZone} setDropZone={setDropZone}>
 
           {tasks.filter((task) => task.status === tabName).map((task) => <KanbanCard priority={task.priority} key={task.id} id={task.id} updateId={handleUpdateTaskId} description={task.description} editTask={editTask}>{task.title}</KanbanCard>)}
-           {createNewTask === tabName && <AddKanbanTask key={`${tabName} newtask`} tabName={tabName} addNewTask={kanbanStyleNewTask}/>}
-           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <button style={{ maxWidth: '50px', background: '#1f2937' }} onClick={e => setCreateNewTask((c) => tabName)}><AweFontIcons iconName={"plus"} /></button>
-    </div>
+          {createNewTask === tabName && <AddKanbanTask key={`${tabName} newtask`} tabName={tabName} addNewTask={kanbanStyleNewTask} />}
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <button style={{ maxWidth: '50px', background: '#1f2937' }} onClick={e => setCreateNewTask((c) => tabName)}><AweFontIcons iconName={"plus"} /></button>
+          </div>
         </KanbanColumn>
       ))}
     </div>
@@ -69,7 +69,7 @@ function KanbanColumn({ children, tabTitle, handleDropData, dropZone, setDropZon
     onDragOver={e => { e.preventDefault(); console.log('onDragOver', classStyleName); }}
     onDrop={handleDropEvent}>
     <h3>{titleName}
-      <div className="kanban-column-count">{children.length}</div>
+      <div className="kanban-column-count">{children[0].length}</div>
     </h3>
     {children}
   </div>
@@ -94,21 +94,21 @@ function KanbanCard({ children, priority, description, id, updateId, editTask })
   </div>
 }
 
-function AddKanbanTask({tabName,addNewTask}){
-  const newDate = new Date().toLocaleDateString('en-GB'); 
-  const [newTask,setnewTask] = useState({
-    title:'',
-    status:tabName,
+function AddKanbanTask({ tabName, addNewTask }) {
+  const newDate = new Date().toLocaleDateString('en-GB');
+  const [newTask, setnewTask] = useState({
+    title: '',
+    status: tabName,
     description: "",
-    priority:'Low',
+    priority: 'Low',
     id: crypto.randomUUID(),
     deadline: newDate,
   })
 
-  function updateTitle(value){
-    setnewTask((c) => ({...c,['title']:value}))
+  function updateTitle(value) {
+    setnewTask((c) => ({ ...c, ['title']: value }))
   }
-  return <form onSubmit={(e) => {e.preventDefault(); addNewTask(newTask)}}>
-    <input style={{maxWidth:'370px',width:'100%'}} type="text" value={newTask.title} onChange={e => updateTitle(e.target.value)}/>
-    </form>
+  return <form onSubmit={(e) => { e.preventDefault(); addNewTask(newTask) }}>
+    <input style={{ maxWidth: '370px', width: '100%' }} type="text" value={newTask.title} onChange={e => updateTitle(e.target.value)} />
+  </form>
 }
