@@ -1,4 +1,5 @@
 import PriorityLabel from "./priorityLabel";
+import StatusLabel from "./statusLabel";
 function TableBody({tasks,editTask,deleteTask}){
     return <tbody>
           {tasks.map((task) => (
@@ -7,7 +8,7 @@ function TableBody({tasks,editTask,deleteTask}){
               <td>{task.description}</td>
               <td>
                 <span >
-                  {task.status}
+                  <StatusLabel status={task.status} />
                 </span>
               </td>
               <td >
@@ -16,8 +17,8 @@ function TableBody({tasks,editTask,deleteTask}){
               <td>{task.deadline}</td>
               <td>
                 <div class="edit-actions">
-                  <button type="submit" style={{ width: '80px', fontWeight: '600' }}  onClick={() => editTask(task.id)}>Edit</button>
-                  <button type="button" style={{ width: '80px', fontWeight: '600' }} class="btn-secondary" onClick={() => deleteTask(task.id)} >Delete</button>
+                  <button type="submit" style={{ width: '100px', fontWeight: '600' }} onClick={() => editTask(task.id)}>Edit</button>
+                  <button type="button" style={{ width: '100px', fontWeight: '600' }} class="btn-secondary" onClick={() => deleteTask(task.id)} >Delete</button>
                 </div>
               </td>
             </tr>

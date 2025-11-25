@@ -866,7 +866,7 @@ select option {
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   width: 90%;
-  max-width: 480px;
+  max-width: 650px;
   padding: 0;
   box-shadow: var(--shadow);
   animation: modalSlideUp 0.25s ease;
@@ -960,4 +960,149 @@ select option {
 .btn-secondary:hover {
   border-color: var(--accent);
   color: var(--accent-light);
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+/* Label */
+.modal-field label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--content);
+  min-width: 190px;
+}
+
+/* Input */
+.modal-field input,
+.modal-field textarea,
+.modal-field select {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  background: var(--neutral-200);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  color: var(--content);
+}
+
+/* Desktop: side-by-side layout */
+@media (min-width: 600px) {
+  .modal-field {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.view-modal-content {
+  width: 800px;
+  max-width: 95%;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  color: var(--content);
+}
+
+/* Left column */
+.vm-left {
+  flex: 1;
+}
+
+.vm-title {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.vm-section h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: var(--content-light);
+}
+
+.vm-text {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Right sidebar */
+.vm-right {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Card UI */
+.vm-card {
+  background: var(--neutral-200);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+}
+
+.vm-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--neutral-300);
+}
+
+.vm-detail-row:last-child {
+  border-bottom: none;
+}
+
+.vm-label {
+  font-size: 0.85rem;
+  color: var(--content-light);
+}
+
+.vm-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.vm-highlight {
+  background: #ffd00033;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .view-modal-content {
+    flex-direction: column;
+  }
+
+  .vm-right {
+    width: 100%;
+  }
+}
+
+.status {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* Exact matches for your statuses */
+.status-to-do {
+  background: #3854ff28;
+  color: #6d84ff;
+}
+
+.status-in-progress {
+  background: #f7a6002a;
+  color: #f7b93f;
+}
+
+.status-done {
+  background: #29a86b33;
+  color: #29a86b;
 }

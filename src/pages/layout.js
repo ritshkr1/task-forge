@@ -13,7 +13,7 @@ function Layout({initialTasks}) {
   const [tabName, setTabName] = useState("Board");
   const [tasks, setTasks] = useState([...initialTasks]);
   const [filterTasks, setFilterTasks] = useState([...tasks])
-  const [isNewTaskOpen, setIsNewTaskOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState('');
   const [selectedTask, setSelectedTask] = useState(null);
   const optionStatus = ['In-progress', 'Done', 'Created'];
   const optionPriority = ['Medium', 'Low', 'High'];
@@ -48,13 +48,24 @@ function Layout({initialTasks}) {
     }
     handleUpdateTasks(newTaskArr);
     setSelectedTask(null)
-    setIsNewTaskOpen(false);
+    setIsModalOpen('');
   }
   function handleEditInAddTask(id) {
     const selectedTask = tasks.filter((task) => task.id === id);
     setSelectedTask((curr) => curr = selectedTask[0]);
-    setIsNewTaskOpen(true);
-    console.log(selectedTask);
+    setIsModalOpen('edit');
+  }
+
+  function handleKanbanEditMode(id) {
+    const selectedTask = tasks.filter((task) => task.id === id);
+    setSelectedTask((curr) => curr = selectedTask[0]);
+    setIsModalOpen('edit');
+  }
+
+  function handleEditTaskKanban(id) {
+    const selectedTask = tasks.filter((task) => task.id === id);
+    setSelectedTask((curr) => curr = selectedTask[0]);
+    setIsModalOpen('view');
   }
   function handleDeleteTask(id) {
     const deleteTasksArr = tasks.filter((task) => task.id !== id)
@@ -79,13 +90,13 @@ function Layout({initialTasks}) {
       <header>
         <span>
           Task Forge
-          {tabName === 'Table' ?<button style={navBarButtonStyle} onClick={() => setTabName((curr) => curr = "Board")} disabled={isNewTaskOpen ? true : false}>Board View</button>:
-        <button style={navBarButtonStyle} onClick={() => setTabName((curr) => curr = "Table")} disabled={isNewTaskOpen ? true : false}>Table View</button>}
+          {tabName === 'Table' ? <button style={navBarButtonStyle} onClick={() => setTabName((curr) => curr = "Board")} disabled={isModalOpen ? true : false}>Board View</button> :
+            <button style={navBarButtonStyle} onClick={() => setTabName((curr) => curr = "Table")} disabled={isModalOpen ? true : false}>Table View</button>}
         </span>
-        <button onClick={() => setIsNewTaskOpen((curr) => !curr)} disabled={isNewTaskOpen ? true : false}>{isNewTaskOpen ? "Close" : "Add Task"}</button>
+        <button onClick={() => setIsModalOpen((curr) => curr = 'edit')} disabled={isModalOpen ? true : false}>{isModalOpen ? "Close" : "Add Task"}</button>
       </header>
      
-      {isNewTaskOpen && <AddTask handleNewTask={handleNewTasks} selectedTask={selectedTask} key={selectedTask ? selectedTask.id:'new'}/>}
+      {isModalOpen && <AddTask handleNewTask={handleNewTasks} handleKanbanEdit={handleKanbanEditMode} selectedTask={selectedTask} key={selectedTask ? selectedTask.id : 'new'} mode={isModalOpen === 'view' ? 'view' : 'edit'} />}
       {tabName === 'Table' ?<TaskTableList>
         <THead>
           <th>
@@ -115,7 +126,7 @@ function Layout({initialTasks}) {
           <th>Action</th>
         </THead>
         <TBody tasks={filterTasks} editTask={handleEditInAddTask} deleteTask={handleDeleteTask} />
-      </TaskTableList>:<BoardView tasks={filterTasks} updateTasks={handleUpdateTasks} editTask={handleEditInAddTask}/>}
+      </TaskTableList> : <BoardView tasks={filterTasks} updateTasks={handleUpdateTasks} editTask={handleEditTaskKanban} />}
       <footer>© 2025 Task Forge created by Ritesh in React</footer></>
   );
 }

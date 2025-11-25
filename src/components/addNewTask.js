@@ -1,5 +1,8 @@
 import {useState} from "react";
-function AddTask({handleNewTask,selectedTask}) {
+import AddTaskModal from './modal.js'
+import PriorityLabel from "./priorityLabel.js";
+import StatusLabel from "./statusLabel.js";
+function AddTask({ handleNewTask, selectedTask, mode = 'edit', handleKanbanEdit }) {
     const [task,setTask] = useState(selectedTask ? selectedTask :{
         id: crypto.randomUUID(),
       title: "",
@@ -17,7 +20,7 @@ function AddTask({handleNewTask,selectedTask}) {
         // [field]), which is known as a computed property and without this create key with 'field'
     }
     function onSubmitForm(e) {
-        e.preventDefault();
+        // e.preventDefault();
         handleNewTask(task);
         setTask({
             id: crypto.randomUUID(),
@@ -28,34 +31,77 @@ function AddTask({handleNewTask,selectedTask}) {
       deadline: "",
         })
     }
+    function handleEditKanban() {
+        handleKanbanEdit(selectedTask.id);
+    }
     function onCancel(){
         handleNewTask(null);
     }
-    return <form className="task-form" onSubmit={onSubmitForm}>
-        <label>Title</label>
-        <input type="text" value={task.title} onChange={(e)=> updateTask(e.target.value,'title')}/>
-        <label>Description</label>
-        <input type="text" value={task.description} onChange={(e)=> updateTask(e.target.value,'description')}/>
-        <label>Status</label>
-        <select value={task.status} onChange={(e)=> updateTask(e.target.value,'status')}>
-            <option value="To-Do">To-Do</option>
-            <option value="In-Progress">In-progress</option>
-            <option value="Done">Done</option>
-        </select>
-        <label>Priority</label>
-        <select value={task.priority} onChange={(e)=> updateTask(e.target.value,'priority')}>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-        </select>
-        <label>Deadline</label>
-        <input className="date-input" type="date"  value={task.deadline} onChange={(e)=> updateTask(e.target.value,'deadline')}/>
-        <div class="form-actions">
-            <button type="submit">Save</button>
-            <button type="button" class="btn-secondary" onClick={onCancel}>Cancel</button>
-        </div>
+    return mode === 'edit' ? (
+        <AddTaskModal open={true} onClose={onCancel} primaryText={'Save'} title={'Task Modal'} onPrimary={onSubmitForm}>
+            <div className='modal-field'><label>Title</label>
+                <input type="text" value={task.title} onChange={(e) => updateTask(e.target.value, 'title')} /></div>
+            <div className='modal-field'><label>Description</label>
+                <input type="text" value={task.description} onChange={(e) => updateTask(e.target.value, 'description')} /></div>
+            <div className='modal-field'><label>Status</label>
+                <select value={task.status} onChange={(e) => updateTask(e.target.value, 'status')}>
+                    <option value="To-Do">To-Do</option>
+                    <option value="In-Progress">In-progress</option>
+                    <option value="Done">Done</option>
+                </select></div>
+            <div className='modal-field'><label>Priority</label>
+                <select value={task.priority} onChange={(e) => updateTask(e.target.value, 'priority')}>
+                    <option value="High" >High</option>
+                    <option value="Medium" >Medium</option>
+                    <option value="Low" >Low</option>
+                </select></div>
+            <div className='modal-field'><label>Deadline</label>
+                <input className="date-input" type="date" value={task.deadline} onChange={(e) => updateTask(e.target.value, 'deadline')} /></div>
+        </AddTaskModal>
+    ) : (
+        <AddTaskModal open={true} onClose={onCancel} title={'View Task'} primaryText="Edit" onPrimary={handleEditKanban} secondaryText="Close">
+            <div class="view-modal">
+                <div class="view-modal-content">
 
-    </form>
+                    {/* LEFT COLUMN */}
+                    <div class="vm-left">
+                        <h2 class="vm-title">{task.title}</h2>
+
+                        <div class="vm-section">
+                            <h3>Description</h3>
+                            <p class="vm-text">{task.description}</p>
+                        </div>
+                    </div>
+
+                    {/* RIGHT SIDEBAR */}
+                    <div class="vm-right">
+
+                        <div class="vm-card">
+                            <div class="vm-detail-row">
+                                <span class="vm-label">Status</span>
+                                <span class="vm-value">
+                                    <StatusLabel status={task.status} /></span>
+                            </div>
+
+                            <div class="vm-detail-row">
+                                <span class="vm-label">Priority</span>
+                                <span class="vm-value">
+                                    <PriorityLabel priority={task.priority} />
+                                </span>
+                            </div>
+
+                            <div class="vm-detail-row">
+                                <span class="vm-label">Due Date</span>
+                                <span class="vm-value vm-highlight">{task.deadline}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </AddTaskModal>
+    );
 
 }
 export default AddTask;

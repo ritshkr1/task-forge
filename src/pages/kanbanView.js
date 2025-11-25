@@ -106,7 +106,7 @@ function AddKanbanTask({ tabName, addNewTask }) {
   })
 
   function updateTitle(value) {
-    setnewTask((c) => ({ ...c, ['title']: value }))
+    setnewTask((c) => ({ ...c, title: value }))
   }
   return <form onSubmit={(e) => { e.preventDefault(); addNewTask(newTask) }}>
     <input style={{ maxWidth: '370px', width: '100%' }} type="text" value={newTask.title} onChange={e => updateTitle(e.target.value)} />
