@@ -11,10 +11,18 @@ import BoardView from "./kanbanView";
 
 function Layout({initialTasks}) {
   const [tabName, setTabName] = useState("Board");
+  const [sortConfig, setSortConfig] = useState([
+    { key: 'Title', direction: '' },
+    { key: 'Description', direction: '' },
+    { key: 'Status', direction: 'asc' },
+    { key: 'Priority', direction: '' },
+    { key: 'Deadline', direction: 'desc' }
+  ]);
   const [tasks, setTasks] = useState([...initialTasks]);
   const [filterTasks, setFilterTasks] = useState([...tasks])
   const [isModalOpen, setIsModalOpen] = useState('');
   const [selectedTask, setSelectedTask] = useState(null);
+
   const optionStatus = ['In-progress', 'Done', 'Created'];
   const optionPriority = ['Medium', 'Low', 'High'];
   function handleUpdateTasks(tasks) {
@@ -72,11 +80,21 @@ function Layout({initialTasks}) {
     handleUpdateTasks(deleteTasksArr);
   }
   function handleSort(direction, key) {
+    const sortNextDirection = direction === 'asc' ? 'desc' : 'asc';
+    const lowerCaseKey = key.toLowerCase()
     const sorted = [...filterTasks].sort((a, b) => {
-      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
-      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+      if (a[lowerCaseKey] < b[lowerCaseKey]) return sortNextDirection === "asc" ? -1 : 1;
+      if (a[lowerCaseKey] > b[lowerCaseKey]) return sortNextDirection === "asc" ? 1 : -1;
       return 0;
     });
+    const updatedSortConfig = sortConfig.map((config) => {
+      if (config.key === key) {
+        return { key, direction: sortNextDirection }
+      } else {
+        return { key: config.key, direction: '' }
+      }
+    })
+    setSortConfig((c) => updatedSortConfig);
     handleUpdateTasks(sorted);
   };
   const navBarButtonStyle = {
@@ -99,29 +117,17 @@ function Layout({initialTasks}) {
       {isModalOpen && <AddTask handleNewTask={handleNewTasks} handleKanbanEdit={handleKanbanEditMode} selectedTask={selectedTask} key={selectedTask ? selectedTask.id : 'new'} mode={isModalOpen === 'view' ? 'view' : 'edit'} />}
       {tabName === 'Table' ?<TaskTableList>
         <THead>
-          <th>
-            <FilterInputTH onInputFilter={(v) => handleFilterTask(v, 'title')}>
-              <SortButton onSort={(dir) => handleSort(dir, 'title')}>
-                Title
-              </SortButton>
-            </FilterInputTH>
+          {sortConfig.map((sort) => <th>
+            {(sort.key === 'Title' || sort.key === 'Description' || sort.key === 'Deadline') && <FilterInputTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())}>
+              <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
+            </FilterInputTH>}
+
+            {(sort.key === 'Status' || sort.key === 'Priority') && <FilterSelectTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} optionArr={sort.key === 'Priority' ? optionPriority : optionStatus}>
+              <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
+            </FilterSelectTH>}
           </th>
-          <th>
-            <FilterInputTH onInputFilter={(v) => handleFilterTask(v, 'description')}><SortButton onSort={(dir) => handleSort(dir, 'description')}>
-              Description
-            </SortButton></FilterInputTH>
-          </th>
-          <th><FilterSelectTH onInputFilter={(v) => handleFilterTask(v, 'status')} optionArr={optionStatus}><SortButton onSort={(dir) => handleSort(dir, 'status')}>
-            Status
-          </SortButton></FilterSelectTH></th>
-          <th style={{width:'150px'}}>
-            <SortButton onSort={(dir) => handleSort(dir, 'priority')}>
-            Priority
-          </SortButton><FilterSelectTH onInputFilter={(v) => handleFilterTask(v, 'priority')} optionArr={optionPriority}></FilterSelectTH></th>
-          <th><FilterInputTH onInputFilter={(v) => handleFilterTask(v, 'deadline')}><SortButton onSort={(dir) => handleSort(dir, 'deadline')}>
-            Deadline
-          </SortButton></FilterInputTH>
-          </th>
+          )}
+
 
           <th>Action</th>
         </THead>
