@@ -14,16 +14,17 @@ function Layout({initialTasks}) {
   const [sortConfig, setSortConfig] = useState([
     { key: 'Title', direction: '' },
     { key: 'Description', direction: '' },
-    { key: 'Status', direction: 'asc' },
+    { key: 'Status', direction: '' },
     { key: 'Priority', direction: '' },
-    { key: 'Deadline', direction: 'desc' }
+    { key: 'Deadline', direction: '' }
   ]);
+  const [showFilter, setShowFilter] = useState('');
   const [tasks, setTasks] = useState([...initialTasks]);
   const [filterTasks, setFilterTasks] = useState([...tasks])
   const [isModalOpen, setIsModalOpen] = useState('');
   const [selectedTask, setSelectedTask] = useState(null);
 
-  const optionStatus = ['In-progress', 'Done', 'Created'];
+  const optionStatus = ['In-progress', 'Done', 'To-Do'];
   const optionPriority = ['Medium', 'Low', 'High'];
   function handleUpdateTasks(tasks) {
     setTasks((t) => [...tasks]);
@@ -33,6 +34,7 @@ function Layout({initialTasks}) {
     const lowerCaseValue = value.toLowerCase();
     const filtered = tasks.filter((task) => task[field].toLowerCase().includes(lowerCaseValue))
     setFilterTasks([...filtered]);
+    setShowFilter(field);
 
   }
 
@@ -57,6 +59,13 @@ function Layout({initialTasks}) {
     handleUpdateTasks(newTaskArr);
     setSelectedTask(null)
     setIsModalOpen('');
+  }
+  function handleShowFilter(value) {
+    let nextShowFilter = ""
+    if (value !== showFilter) {
+      nextShowFilter = value;
+    }
+    setShowFilter(c => nextShowFilter)
   }
   function handleEditInAddTask(id) {
     const selectedTask = tasks.filter((task) => task.id === id);
@@ -118,11 +127,11 @@ function Layout({initialTasks}) {
       {tabName === 'Table' ?<TaskTableList>
         <THead>
           {sortConfig.map((sort) => <th>
-            {(sort.key === 'Title' || sort.key === 'Description' || sort.key === 'Deadline') && <FilterInputTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())}>
+            {(sort.key === 'Title' || sort.key === 'Description' || sort.key === 'Deadline') && <FilterInputTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())}>
               <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
             </FilterInputTH>}
 
-            {(sort.key === 'Status' || sort.key === 'Priority') && <FilterSelectTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} optionArr={sort.key === 'Priority' ? optionPriority : optionStatus}>
+            {(sort.key === 'Status' || sort.key === 'Priority') && <FilterSelectTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} optionArr={sort.key === 'Priority' ? optionPriority : optionStatus} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()}>
               <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
             </FilterSelectTH>}
           </th>
