@@ -1,6 +1,6 @@
 # Getting Started with Task Forge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 # Project Struture
 
@@ -66,3 +66,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 switch between explorer and code: ctrl + shift + e
 swtich tabs : ctrl + page up and page down
 close file : ctrl + f4
+
+
+
+components ==> charts-line,bar, forms - date-picker,label,select,multiselect,tables - basic table,common - gridshap, componentcard,themetoggle,breadcrumb
+
+layout => header,footer,sidebar,backdrop,layout
+
+pages => auth, dashboards, tables
