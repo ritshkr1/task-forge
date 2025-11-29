@@ -19,7 +19,12 @@ function Layout({initialTasks}) {
     { key: 'Deadline', direction: '' }
   ]);
   const [showFilter, setShowFilter] = useState('');
-  const [tasks, setTasks] = useState([...initialTasks]);
+  // const [tasks, setTasks] = useState([...initialTasks]);
+  const [tasks, setTasks] = useState(() => {
+    const localStorageTasks = localStorage.getItem('tasks')
+    const parsedTasks = JSON.parse(localStorageTasks);
+    return parsedTasks ? parsedTasks : initialTasks
+  })
   const [filterTasks, setFilterTasks] = useState([...tasks])
   const [isModalOpen, setIsModalOpen] = useState('');
   const [selectedTask, setSelectedTask] = useState(null);
@@ -29,6 +34,8 @@ function Layout({initialTasks}) {
   function handleUpdateTasks(tasks) {
     setTasks((t) => [...tasks]);
     setFilterTasks((f) => [...tasks]);
+    const tasksStringData = JSON.stringify(tasks)
+    localStorage.setItem('tasks', tasksStringData);
   }
   function handleFilterTask(value, field) {
     const lowerCaseValue = value.toLowerCase();
