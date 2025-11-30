@@ -1,4 +1,8 @@
 import { useEffect } from "react";
+<<<<<<< HEAD
+=======
+import PropTypes from 'prop-types';
+>>>>>>> origin/main
 
 function Modal({
     open,
@@ -70,6 +74,7 @@ function Modal({
     );
 }
 
+<<<<<<< HEAD
 // Modal.prototype = {
 //     open: PropTypes.bool.isRequired,
 //     onClose: PropTypes.func.isRequired,
@@ -79,5 +84,16 @@ function Modal({
 //     onSecondary: PropTypes.func,
 //     children: PropTypes.node,
 // }
+=======
+Modal.prototype = {
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    primaryText: PropTypes.string,
+    secondaryText: PropTypes.string,
+    onPrimary: PropTypes.func,
+    onSecondary: PropTypes.func,
+    children: PropTypes.node,
+}
+>>>>>>> origin/main
 
 export default Modal;

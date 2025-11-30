@@ -123,24 +123,24 @@ function Layout({ initialTasks }) {
             <Header tabName={tabName} setTabName={(tab) => setTabName((curr) => tab)} modalopen={isModalOpen} setModalOpen={(arg) => setIsModalOpen(arg)} />
             <Main>
                 {isModalOpen && <TaskModal handleNewTask={handleNewTasks} handleKanbanEdit={handleKanbanEditMode} selectedTask={selectedTask} key={selectedTask ? selectedTask.id : 'new'} mode={isModalOpen === 'view' ? 'view' : 'add'} />}
-            {tabName === 'Table' ? <TaskTableList>
-                <THead>
-                    {sortConfig.map((sort) => <th>
-                        {(sort.key === 'Title' || sort.key === 'Description' || sort.key === 'Deadline') && <FilterInputTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())}>
-                            <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
-                        </FilterInputTH>}
+                {tabName === 'Table' ? <TaskTableList>
+                    <THead>
+                        {sortConfig.map((sort) => <th>
+                            {(sort.key === 'Title' || sort.key === 'Description' || sort.key === 'Deadline') && <FilterInputTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())}>
+                                <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
+                            </FilterInputTH>}
 
-                        {(sort.key === 'Status' || sort.key === 'Priority') && <FilterSelectTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} optionArr={sort.key === 'Priority' ? optionPriority : optionStatus} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()}>
-                            <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
-                        </FilterSelectTH>}
-                    </th>
-                    )}
+                            {(sort.key === 'Status' || sort.key === 'Priority') && <FilterSelectTH onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} optionArr={sort.key === 'Priority' ? optionPriority : optionStatus} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()}>
+                                <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
+                            </FilterSelectTH>}
+                        </th>
+                        )}
 
 
-                    <th>Action</th>
-                </THead>
-                <TBody tasks={filterTasks} editTask={handleEditInAddTask} deleteTask={handleDeleteTask} />
-            </TaskTableList> : <BoardView tasks={filterTasks} updateTasks={handleUpdateTasks} editTask={handleEditTaskKanban} />}
+                        <th>Action</th>
+                    </THead>
+                    <TBody tasks={filterTasks} editTask={handleEditInAddTask} deleteTask={handleDeleteTask} />
+                </TaskTableList> : <BoardView tasks={filterTasks} updateTasks={handleUpdateTasks} editTask={handleEditTaskKanban} />}
             </Main>
 
 
