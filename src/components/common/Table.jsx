@@ -5,7 +5,7 @@ import SortButton from "./SortComponent";
 import FilterInput from "./FilterInput";
 import FilterSelect from "./FilterSelect";
 import { optionPriority, optionStatus } from '../../data'
-export default function Table({ tasks, updateTasks, setModalOpen, setSelectedTask }) {
+export default function Table({ tasks, updateTasks, onFilter, onSort, setModalOpen, setSelectedTask }) {
     const [tableHeadItems, setTableHeadItems] = useState([
         { key: 'Title', direction: '' },
         { key: 'Description', direction: '' },
@@ -16,8 +16,8 @@ export default function Table({ tasks, updateTasks, setModalOpen, setSelectedTas
     const [showFilter, setShowFilter] = useState('');
     function handleFilterTask(value, field) {
         const lowerCaseValue = value.toLowerCase();
-        const filtered = tasks.filter((task) => task[field].toLowerCase().includes(lowerCaseValue))
-        updateTasks([...filtered]);
+        const applyFilter = { value: lowerCaseValue, field }
+        onFilter(applyFilter);
         setShowFilter(field);
 
     }
@@ -30,23 +30,19 @@ export default function Table({ tasks, updateTasks, setModalOpen, setSelectedTas
         setShowFilter(c => nextShowFilter)
     }
 
-    function handleSort(direction, key) {
+    function handleTableSort(direction, key) {
         const sortNextDirection = direction === 'asc' ? 'desc' : 'asc';
-        const lowerCaseKey = key.toLowerCase()
-        const sorted = [...filterTasks].sort((a, b) => {
-            if (a[lowerCaseKey] < b[lowerCaseKey]) return sortNextDirection === "asc" ? -1 : 1;
-            if (a[lowerCaseKey] > b[lowerCaseKey]) return sortNextDirection === "asc" ? 1 : -1;
-            return 0;
-        });
+        const activeSort = { key: key.toLowerCase(), direction: sortNextDirection };
         const updatedTableHeadItems = tableHeadItems.map((config) => {
             if (config.key === key) {
                 return { key, direction: sortNextDirection }
             } else {
                 return { key: config.key, direction: '' }
             }
-        })
+        });
+
         setTableHeadItems((c) => updatedTableHeadItems);
-        updateTasks(sorted);
+        onSort(activeSort);
     };
 
     function handleEditTask(id) {
@@ -64,11 +60,11 @@ export default function Table({ tasks, updateTasks, setModalOpen, setSelectedTas
             <TableHead>
                 {tableHeadItems.map((sort) => <th>
                     {(sort.key === 'Title' || sort.key === 'Description' || sort.key === 'Deadline') && <FilterInput onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())}>
-                        <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
+                        <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleTableSort(sort.direction, sort.key)} />
                     </FilterInput>}
 
                     {(sort.key === 'Status' || sort.key === 'Priority') && <FilterSelect onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} optionArr={sort.key === 'Priority' ? optionPriority : optionStatus} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()}>
-                        <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleSort(sort.direction, sort.key)} />
+                        <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleTableSort(sort.direction, sort.key)} />
                     </FilterSelect>}
                 </th>
                 )}

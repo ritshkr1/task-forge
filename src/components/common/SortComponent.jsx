@@ -1,13 +1,7 @@
 export default function SortButton({ title, onSort, direction }) {
-
-    const handleSort = () => {
-        onSort();
-    };
-
-    return (
-        <button
+    return <button
             className={`sort-button ${direction || ""}`}
-            onClick={handleSort}
+     onClick={onSort}
             type="button"
         >
             {title}
@@ -15,5 +9,5 @@ export default function SortButton({ title, onSort, direction }) {
                 ▲
             </span>}
         </button>
-    );
+
 }
