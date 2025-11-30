@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from './common/Modal.jsx'
-import PriorityLabel from "./priorityLabel.js";
-import StatusLabel from "./statusLabel.js";
+import PriorityLabel from "./common/PriorityLabel.jsx";
+import StatusLabel from "./common/StatusLabel.jsx";
 function TaskFormModal({ handleNewTask, selectedTask, mode = 'add', handleKanbanEdit }) {
     const [task, setTask] = useState(selectedTask ? selectedTask : {
         id: crypto.randomUUID(),

@@ -21,6 +21,8 @@ export const TASKS_DATA = [
     { id: 20, title: "Refactor code", description: "Clean up redundant logic and components", status: "Done", priority: "Low", deadline: "2025-11-11" }
 ];
 
+export const optionStatus = ['In-progress', 'Done', 'To-Do'];
+export const optionPriority = ['Medium', 'Low', 'High'];
 
 // 2. DEFAULT EXPORT: Recommended when you have one main thing to export from the file.
 // A file can only have one default export.
