@@ -7,7 +7,7 @@ function FiltersSelect({ children, onInputFilter, optionArr, show, setFilterShow
         onInputFilter(value);
     }
     return <div className="table-head-wrapper">
-        <span className="table-head-title">{children}</span>
+        <span>{children}</span>
         <span
             className="filter-icon"
             onClick={setFilterShow}

@@ -23,8 +23,8 @@ function Layout({ initialTasks }) {
 
 
     function handleUpdateTasks(tasks) {
-        setMasterTaskList((t) => [...tasks]);
-        setFilterTaskList((f) => [...tasks]);
+        setMasterTaskList((t) => t = [...tasks]);
+        setFilterTaskList((f) => f = [...tasks]);
         const tasksStringData = JSON.stringify(tasks)
         localStorage.setItem('tasks', tasksStringData);
     }
@@ -44,7 +44,7 @@ function Layout({ initialTasks }) {
         if (selectedTask) {
             if (newTask) {
                 newTaskArr = masterTaskList.map((task) => {
-                    if (task.id === selectedTask.id) {
+                    if (task.id === newTask.id) {
                         return newTask
                     } else {
                         return task

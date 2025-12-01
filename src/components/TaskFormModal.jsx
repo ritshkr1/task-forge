@@ -2,6 +2,10 @@ import { useState } from "react";
 import Modal from './common/Modal.jsx'
 import PriorityLabel from "./common/PriorityLabel.jsx";
 import StatusLabel from "./common/StatusLabel.jsx";
+import InputField from "./common/InputField.jsx";
+import SelectField from "./common/SelectField.jsx";
+import DateField from "./common/DateField.jsx";
+import { optionPriority, optionStatus } from "../data.js";
 function TaskFormModal({ handleNewTask, selectedTask, mode = 'add', handleKanbanEdit }) {
     const [task, setTask] = useState(selectedTask ? selectedTask : {
         id: crypto.randomUUID(),
@@ -16,11 +20,11 @@ function TaskFormModal({ handleNewTask, selectedTask, mode = 'add', handleKanban
     //     setTask(selectedTask);
     // }
     function updateTask(value, field) {
-        setTask((task) => ({ ...task, [field]: value }))
+        setTask((task) => task = { ...task, [field]: value })
+
         // [field]), which is known as a computed property and without this create key with 'field'
     }
     function onSubmitForm(e) {
-        // e.preventDefault();
         handleNewTask(task);
         setTask({
             id: crypto.randomUUID(),
@@ -82,24 +86,14 @@ function TaskFormModal({ handleNewTask, selectedTask, mode = 'add', handleKanban
         </Modal>
     ) : (
         <Modal open={true} onClose={onCancel} primaryText={'Save'} title={'Task Modal'} onPrimary={onSubmitForm}>
-            <div className='modal-field'><label>Title</label>
-                <input type="text" value={task.title} onChange={(e) => updateTask(e.target.value, 'title')} /></div>
-            <div className='modal-field'><label>Description</label>
-                <input type="text" value={task.description} onChange={(e) => updateTask(e.target.value, 'description')} /></div>
-            <div className='modal-field'><label>Status</label>
-                <select value={task.status} onChange={(e) => updateTask(e.target.value, 'status')}>
-                    <option value="To-Do">To-Do</option>
-                    <option value="In-Progress">In-progress</option>
-                    <option value="Done">Done</option>
-                </select></div>
-            <div className='modal-field'><label>Priority</label>
-                <select value={task.priority} onChange={(e) => updateTask(e.target.value, 'priority')}>
-                    <option value="High" >High</option>
-                    <option value="Medium" >Medium</option>
-                    <option value="Low" >Low</option>
-                </select></div>
-            <div className='modal-field'><label>Deadline</label>
-                <input className="date-input" type="date" value={task.deadline} onChange={(e) => updateTask(e.target.value, 'deadline')} /></div>
+                <InputField input={task.title} setInput={(v) => updateTask(v, 'title')} placeholder={'Title...'} label={'Title'} />
+                <InputField input={task.description} setInput={(v) => updateTask(v, 'description')} placeholder={'Description...'} label={'Description'} />
+
+                <SelectField label={'Status'} input={task.status} setInput={(v) => updateTask(v, 'status')} optionItems={optionStatus} />
+
+                <SelectField label={'Priority'} input={task.priority} setInput={(v) => updateTask(v, 'priority')} optionItems={optionPriority} />
+
+                <DateField label={'Deadline'} input={task.deadline} setInput={(v) => updateTask(v, 'deadline')} placeholder={'DeadLine...'} />
         </Modal>
     );
 
