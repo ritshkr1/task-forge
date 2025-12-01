@@ -1,10 +1,10 @@
 import { useState } from "react";
-import PriorityLabel from "./PriorityLabel";
-import StatusLabel from "./StatusLabel";
-import SortButton from "./SortComponent";
-import FilterInput from "./FilterInput";
-import FilterSelect from "./FilterSelect";
-import { optionPriority, optionStatus } from '../../data'
+import PriorityLabel from "./common/PriorityLabel";
+import StatusLabel from "./common/StatusLabel";
+import SortButton from "./common/SortComponent";
+import FilterInput from "./common/FilterInput";
+import FilterSelect from "./common/FilterSelect";
+import { optionPriority, optionStatus } from '../data'
 export default function Table({ tasks, updateTasks, onFilter, onSort, setModalOpen, setSelectedTask }) {
     const [tableHeadItems, setTableHeadItems] = useState([
         { key: 'Title', direction: '' },

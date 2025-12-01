@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PriorityLabel from "./PriorityLabel";
-import AweFontIcons from './IconComponent';
+import PriorityLabel from "./common/PriorityLabel";
+import AweFontIcons from './common/IconComponent';
 export default function KanbanView({ tasks, updateTasks, editTask }) {
     const tabNames = ["To-Do", "In-Progress", "Done"];
     const [createNewTask, setCreateNewTask] = useState("");

@@ -4,13 +4,14 @@ import Header from './Header';
 import Footer from "./Footer";
 import Main from "./Main";
 import TaskModal from '../components/TaskFormModal'
-import Table from "../components/common/Table";
-import Board from '../components/common/Kanban';
+import Table from "../components/Table";
+import Board from '../components/Kanban';
 import { applyFilters, handleSort } from "../utils/FilterUtils";
+import Dashboard from "../components/Dashboard";
 
 
 function Layout({ initialTasks }) {
-    const [tabName, setTabName] = useState("Table");    
+    const [tabName, setTabName] = useState("Dashboard");    
     // const [tasks, setTasks] = useState([...initialTasks]);
     const [masterTaskList, setMasterTaskList] = useState(() => {
         const localStorageTasks = localStorage.getItem('tasks')
@@ -82,11 +83,13 @@ function Layout({ initialTasks }) {
             <Header tabName={tabName} setTabName={(tab) => setTabName((curr) => tab)} modalopen={isModalOpen} setModalOpen={(arg) => setIsModalOpen(arg)} />
             <Main>
                 {isModalOpen && <TaskModal handleNewTask={handleNewTasks} handleKanbanEdit={handleKanbanEditMode} selectedTask={selectedTask} key={selectedTask ? selectedTask.id : 'new'} mode={isModalOpen === 'view' ? 'view' : 'add'} />}
-                {tabName === 'Table' ? <Table tasks={filterTaskList} onFilter={handleFilterTasks} updateTasks={handleUpdateTasks} setModalOpen={(value) => setIsModalOpen(c => value)} setSelectedTask={(arr) => setSelectedTask(c => arr)} onSort={handleSortTasks} /> : <Board tasks={filterTaskList} updateTasks={handleUpdateTasks} editTask={handleEditTaskKanban} />
+                {tabName === 'Table' && <Table tasks={filterTaskList} onFilter={handleFilterTasks} updateTasks={handleUpdateTasks} setModalOpen={(value) => setIsModalOpen(c => value)} setSelectedTask={(arr) => setSelectedTask(c => arr)} onSort={handleSortTasks} />}
+                {tabName === 'Board' && <Board tasks={filterTaskList} updateTasks={handleUpdateTasks} editTask={handleEditTaskKanban} />
+                }
+                {tabName === 'Dashboard' && <Dashboard />
                 }
 
             </Main>
-
 
             <Footer />
         </>
