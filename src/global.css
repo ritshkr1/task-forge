@@ -1,91 +1,53 @@
 /* =========================================
    GLOBAL STYLESHEET (Jira Dark Theme)
+                                                                 =========================================*/
+                                                                 /* =========================================
+                                                               2. GLOBAL RESET & BASE STYLES
    ========================================= */
 
-/* 1. VARIABLES & TOKENS (Refined Jira Dark Palette) */
-:root {
-  /* --- Core Backgrounds --- */
-  --bg-primary: #1d2125;
-    /* App Background / Sidebar */
-    --bg-secondary: #161a1d;
-    /* Canvas / Main Content */
-    --bg-tertiary: #22272b;
-    /* Headers / Cards */
-    --neutral-100: #293038;
-    /* Kanban column background / Modal header/footer */
-    --neutral-200: #1d2125;
-    /* Modal input background */
-    --neutral-300: #39424a;
-    /* Modal input border */
-
-  /* --- Surfaces / Cards --- */
-  --card-bg: #22272b;
-    --card-bg-hover: #2c333a;
-    /* --- Borders --- */
-    --border-color: #39424a;
-    /* Structure borders */
-    --border-light: #454f59;
-    /* Input borders */
-
-  /* --- Text --- */
-  --text-primary: #dcdfe4;
-    /* High contrast text (Headings, Active items) */
-    --text-secondary: #8c9bab;
-    /* Secondary text (Descriptions, Metadata) */
-    --text-muted: #626f86;
-    /* Muted text (Placeholder, Disabled) */
-    /* --- Accents --- */
-    --accent: #579dff;
-    /* Primary Action Blue (Links, Focus, Primary buttons) */
-    --accent-light: #8c9bab;
-    /* Used for modal close hover, adjusted from original */
-    --accent-dark: #0c66e4;
-    /* Button hover */
-    --accent-focus-ring: rgba(87, 157, 255, 0.4);
-    /* Focus ring color with transparency */
-    /* --- Semantic / Status Colors --- */
-    --success-500: #4bce97;
-    /* Green Text for done status */
-    --error-500: #ff7452;
-    /* Red Text for high priority/todo status (Jira Red) */
-    --warning-500: #ffc400;
-    /* Yellow Text for in progress/medium priority (Jira Yellow) */
-
-  --success-bg: #1c3329;
-  /* Green Background */
-    --success-text: #4bce97;
-    /* Green Text */
-    --error-bg: #3f1515;
-    /* Red Background */
-    --error-text: #f87171;
-    /* Red Text (Using a softer red for general error text) */
-    --warning-bg: #33240e;
-    /* Yellow/Orange Background */
-    --warning-text: #f5cd47;
-    /* Yellow/Orange Text */
-    --info-bg: #102445;
-    /* Blue Background */
-    --info-text: #579dff;
-    /* Blue Text (Same as accent) */
-    --todo-bg: #2c333a;
-    /* Neutral Background */
-    --todo-text: #9fadbc;
-    /* Neutral Text */
-    --content: var(--text-primary);
-    --content-light: var(--text-secondary);
-    --shadow: var(--shadow-soft);
-    /* --- Dimensions --- */
-    --header-height: 56px;
-    --radius: 3px;
-    --radius-sm: 4px;
-    --radius-lg: 8px;
-    --shadow-soft: 0 2px 4px rgba(0, 0, 0, 0.2);
-    --shadow-deep: 0 8px 16px rgba(0, 0, 0, 0.4);
+/* Theme toggle button */
+.theme-toggle-btn {
+  /* Fixed position relative to the viewport */
+  position: fixed;
+  /* Adjust these values to place it in the bottom right corner */
+  bottom: 20px;
+  right: 20px;
+  /* Ensure it stays above other content */
+  z-index: 1000;
+  /* Custom Styles (see next section) */
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  /* Makes it a circle */
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  /* Subtle shadow */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  /* Define a fixed size */
+  height: 50px;
+  font-size: 20px;
+  /* Size for the icon */
 }
 
-/* =========================================
-   2. GLOBAL RESET & BASE STYLES
-   ========================================= */
+/* Hover state for user feedback */
+.theme-toggle-btn:hover {
+  background-color: var(--accent);
+  transform: scale(1.05);
+  /* Slightly enlarge on hover */
+}
+
+/* Focus state for accessibility */
+.theme-toggle-btn:focus {
+  outline: 2px solid var(---success-500);
+  /* Green outline */
+  outline-offset: 2px;
+}
 
 /* Reset Margins and Padding */
 * {

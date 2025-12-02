@@ -1,26 +1,26 @@
 # Getting Started with Task Forge
 
+Task Forge = mini-Jira, built right: feature-based React app, Redux Toolkit (RTK) for state, React Router, DnD engine, clear storage adapter (local first, backend-friendly), full accessibility, testing, CI/CD, deployable to Vercel. Build *reusable primitives* and you’ll reuse them forever.
+
+---
+
 This project was bootstrapped with [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-# Project Struture
+<!-- # Project Struture
 
----
+--- -->
 
-## Working on Currently: 20 Nov
-* Edit a task inline or open it in a modal for full details.
-* Highlight the target column while dragging to show exactly where the task will drop.[Done]
-* Show live task counts in each column header.[Done] Fixed again as added quick to add tasks[Done]
-* Add new tasks quickly using a simple input at the bottom of each column.[Done]
 
-## Core Features (Easy / Foundation)**
+## Features**
 
-1. **Task CRUD** – Add, edit, delete, view tasks. [Done]
+### What's Done ?
+1. **Task CRUD** – Add, edit, delete, view tasks.
 2. **LocalStorage Persistence** – Tasks remain after refresh.
-3. **Task List / Board View** – Show tasks in columns (Todo, In Progress, Done).[Done]
-4. **Add/Edit Task Form** – With basic validation (title, due date, priority).[In-progress]
+3. **Task List / Board View** – Show tasks in columns (Todo, In Progress, Done).
+4. **Add/Edit Task Form** – With basic validation (title, due date, priority).
 
 ---
-
+### What's In-Progress ?
 ## Task Interaction (Medium)**
 
 5. **Task Detail Modal/Page** – Click task to see full details, editable.
@@ -61,16 +61,8 @@ This project was bootstrapped with [@vitejs/plugin-react-swc](https://github.com
 
 
 
-# VS CODE Shortcuts mostly used by me:
+<!-- # VS CODE Shortcuts mostly used by me:
 
 switch between explorer and code: ctrl + shift + e
 swtich tabs : ctrl + page up and page down
-close file : ctrl + f4
-
-
-
-components ==> charts-line,bar, forms - date-picker,label,select,multiselect,tables - basic table,common - gridshap, componentcard,themetoggle,breadcrumb
-
-layout => header,footer,sidebar,backdrop,layout
-
-pages => auth, dashboards, tables
+close file : ctrl + f4 -->

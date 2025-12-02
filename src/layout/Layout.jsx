@@ -88,7 +88,6 @@ function Layout({ initialTasks }) {
                 }
                 {tabName === 'Dashboard' && <Dashboard />
                 }
-
             </Main>
 
             <Footer />
