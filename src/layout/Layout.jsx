@@ -80,7 +80,7 @@ function Layout({ initialTasks }) {
 
     return (
         <>
-            <Header tabName={tabName} setTabName={(tab) => setTabName((curr) => tab)} modalopen={isModalOpen} setModalOpen={(arg) => setIsModalOpen(arg)} />
+            <Header tabName={tabName} setTabName={(tab) => setTabName((curr) => tab)} setModalOpen={(arg) => setIsModalOpen(arg)} />
             <Main>
                 {isModalOpen && <TaskModal handleNewTask={handleNewTasks} handleKanbanEdit={handleKanbanEditMode} selectedTask={selectedTask} key={selectedTask ? selectedTask.id : 'new'} mode={isModalOpen === 'view' ? 'view' : 'add'} />}
                 {tabName === 'Table' && <TasksList tasks={filterTaskList} onFilter={handleFilterTasks} updateTasks={handleUpdateTasks} setModalOpen={(value) => setIsModalOpen(c => value)} setSelectedTask={(arr) => setSelectedTask(c => arr)} onSort={handleSortTasks} />}
