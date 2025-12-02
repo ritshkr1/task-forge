@@ -1,4 +1,4 @@
-export default function Header({ tabName, setTabName, modalOpen, setModalOpen }) {
+export default function Header({ tabName, setTabName, setModalOpen }) {
 
     const navBarButtonStyle = {
         background: 'transparent',
@@ -12,25 +12,25 @@ export default function Header({ tabName, setTabName, modalOpen, setModalOpen })
             <button
                 className={tabName === 'Dashboard' ? 'tab-button-active' : 'tab-button'}
                 onClick={() => setTabName("Dashboard")}
-                disabled={modalOpen ? true : false}
+                
             >
                 Dashboard
             </button>
             <button
                 className={tabName === 'Board' ? 'tab-button-active' : 'tab-button'}
                 onClick={() => setTabName("Board")}
-                disabled={modalOpen ? true : false}
+                
             >
                 Board
             </button>
             <button
                 className={tabName === 'Table' ? 'tab-button-active' : 'tab-button'}
                 onClick={() => setTabName("Table")}
-                disabled={modalOpen ? true : false}
+                
             >
                 Table
             </button>
         </span>
-        <button onClick={() => setModalOpen('add')} disabled={modalOpen ? true : false}>{modalOpen ? "Close" : "Add Task"}</button>
+        <button onClick={() => setModalOpen('add')} >Add Task</button>
     </header>
 }
