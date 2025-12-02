@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from "./Footer";
 import Main from "./Main";
 import TaskModal from '../components/TaskFormModal'
-import Table from "../components/Table";
+import TasksList from "../components/TasksTable";
 import Board from '../components/Kanban';
 import { applyFilters, handleSort } from "../utils/FilterUtils";
 import Dashboard from "../components/Dashboard";
@@ -83,7 +83,7 @@ function Layout({ initialTasks }) {
             <Header tabName={tabName} setTabName={(tab) => setTabName((curr) => tab)} modalopen={isModalOpen} setModalOpen={(arg) => setIsModalOpen(arg)} />
             <Main>
                 {isModalOpen && <TaskModal handleNewTask={handleNewTasks} handleKanbanEdit={handleKanbanEditMode} selectedTask={selectedTask} key={selectedTask ? selectedTask.id : 'new'} mode={isModalOpen === 'view' ? 'view' : 'add'} />}
-                {tabName === 'Table' && <Table tasks={filterTaskList} onFilter={handleFilterTasks} updateTasks={handleUpdateTasks} setModalOpen={(value) => setIsModalOpen(c => value)} setSelectedTask={(arr) => setSelectedTask(c => arr)} onSort={handleSortTasks} />}
+                {tabName === 'Table' && <TasksList tasks={filterTaskList} onFilter={handleFilterTasks} updateTasks={handleUpdateTasks} setModalOpen={(value) => setIsModalOpen(c => value)} setSelectedTask={(arr) => setSelectedTask(c => arr)} onSort={handleSortTasks} />}
                 {tabName === 'Board' && <Board tasks={filterTaskList} updateTasks={handleUpdateTasks} editTask={handleEditTaskKanban} />
                 }
                 {tabName === 'Dashboard' && <Dashboard />

@@ -1,54 +1,3 @@
-/* =========================================
-   GLOBAL STYLESHEET (Jira Dark Theme)
-                                                                 =========================================*/
-                                                                 /* =========================================
-                                                               2. GLOBAL RESET & BASE STYLES
-   ========================================= */
-
-/* Theme toggle button */
-.theme-toggle-btn {
-  /* Fixed position relative to the viewport */
-  position: fixed;
-  /* Adjust these values to place it in the bottom right corner */
-  bottom: 20px;
-  right: 20px;
-  /* Ensure it stays above other content */
-  z-index: 1000;
-  /* Custom Styles (see next section) */
-  background-color: var(--bg-primary) !important;
-  color: var(--text-primary);
-  border: none;
-  padding: 10px 15px;
-  border-radius: 50%;
-  /* Makes it a circle */
-  cursor: pointer;
-  box-shadow: var(--shadow-soft);
-  /* Subtle shadow */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  /* Define a fixed size */
-  height: 50px;
-  font-size: 20px;
-  /* Size for the icon */
-}
-
-/* Hover state for user feedback */
-.theme-toggle-btn:hover {
-  background-color: var(--accent);
-  transform: scale(1.05);
-  /* Slightly enlarge on hover */
-}
-
-/* Focus state for accessibility */
-.theme-toggle-btn:focus {
-  outline: 2px solid var(---success-500);
-  /* Green outline */
-  outline-offset: 2px;
-}
-
 /* Reset Margins and Padding */
 * {
   box-sizing: border-box;
@@ -65,8 +14,9 @@
 html,
 body {
   height: 100%;
+  min-height: 100vh;
   /* Set a sensible base font size for scaling */
-    font-size: 14px;
+  font-size: 16px;
 }
 
 body {
@@ -86,11 +36,11 @@ body {
   #root {
   display: flex;
   flex-direction: column;
+  height: 100%;
   /* Use 100vh to ensure the app takes up the full screen height */
-  min-height: 100vh;
+  min-height: 100%;
   /* Allow the entire application to scroll if content exceeds viewport */
-  overflow-y: auto;
-    overflow-x: hidden;
+  overflow: auto;
 }
 
 /* Reduce Motion for accessibility */
@@ -100,7 +50,7 @@ body {
     transition: none !important;
     animation: none !important;
   }
-}
+} 
 
 /* Accessible Focus Styles (Using Accent Color) */
 :focus {
@@ -121,9 +71,7 @@ textarea:focus-visible,
   border-radius: var(--radius);
 }
 
-/* =========================================
-   3. HEADER / MAIN / FOOTER / SCROLLBARS
-   ========================================= */
+/* HEADER / MAIN / FOOTER / SCROLLBARS */
 
 /* Header (Top Bar) */
 header {
@@ -142,7 +90,7 @@ header {
   justify-content: space-between;
   gap: 1rem;
   font-weight: 600;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-soft);
     /* Subtle bottom shadow for lift */
 }
 
@@ -161,9 +109,6 @@ main {
 
 /* Footer (Bottom Bar) */
 footer {
-  position: sticky;
-  bottom: 0;
-  z-index: 40;
   height: 40px;
   background-color: var(--bg-tertiary);
   /* Slightly lighter than primary for distinction */
@@ -178,8 +123,8 @@ footer {
 
 /* Scrollbar Styles (Essential for dark themes - Using new, detailed styling) */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -198,14 +143,13 @@ footer {
   background: var(--text-muted);
 }
 
-/* =========================================
-   4. TABLES
-   ========================================= */
+
+/* TABLES */
 
 /* Table container & table base */
 .table-container {
   /* Blended background for a subtle lift off the main canvas */
-  background: linear-gradient(180deg, var(--card-bg), rgba(22, 26, 29, 0.6));
+  background: linear-gradient(180deg, var(--card-bg), var(--bg-primary));
   border-radius: var(--radius);
   box-shadow: var(--shadow-soft);
   overflow: auto;
@@ -222,7 +166,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   table-layout: auto;
-  min-width: 600px;
     /* Ensure table remains readable */
 }
 
@@ -230,7 +173,7 @@ thead {
   background: var(--bg-tertiary);
   /* Use a defined var */
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: 800;
   text-align: left;
 }
 
@@ -265,14 +208,19 @@ th {
 }
 
 td {
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+  border-bottom: 1px dashed var(--border-color);
   /* Slightly darker dash for better visibility */
 }
 
+
+
+
+
+
 /* Action buttons inside cells */
 td button {
-  min-width: 36px;
-  min-height: 36px;
+  min-width: 30px;
+  min-height: 30px;
   padding: 0.35rem 0.45rem;
   border-radius: 6px;
   display: inline-flex;
@@ -286,18 +234,22 @@ td button {
 }
 
 td .btn-edit {
-  color: var(--accent);
+  width: 100%;
+  font-weight: 600;
+  color: var(--success-500);
   border-color: transparent;
 }
 
-td .btn-delete {
-  color: var(--error-text);
-  /* Use semantic text color */
+td .btn-edit:hover {
+  background: rgba(87, 255, 93, 0.1);
+  /* Subtle blue hover tint */
 }
 
-td .btn-edit:hover {
-  background: rgba(87, 157, 255, 0.1);
-  /* Subtle blue hover tint */
+td .btn-delete {
+  width: 100%;
+  font-weight: 600;
+  color: var(--error-text);
+  /* Use semantic text color */
 }
 
 td .btn-delete:hover {
@@ -305,15 +257,24 @@ td .btn-delete:hover {
   /* Subtle red hover tint */
 }
 
-/* Mobile: stack table as cards */
-@media (max-width:480px) {
+/* =======================================================
+           MEDIA QUERIES FOR RESPONSIVENESS (BREAKPOINTS)
+           ======================================================= */
 
-  /* FIX: Ensure the table element itself respects the mobile viewport width 
-                                         by overriding the desktop min-width. */
-  table {
-      min-width: 100%;
-      width: 100%;
-    }
+        /* Tablet View (from 600px up) */
+        @media (min-width: 600px) {
+            
+        }
+
+        /* Desktop View (from 1024px up) */
+        @media (min-width: 1024px) {
+            
+        }
+
+
+
+/* Mobile: stack table as cards */
+/* @media (max-width:480px) {
 
   table,
   thead,
@@ -336,7 +297,6 @@ td .btn-delete:hover {
     padding: 0.8rem;
     border: 1px solid var(--border-light);
     width: 100%;
-      /* Ensure the card element does not cause overflow */
   }
 
   td {
@@ -359,7 +319,7 @@ td .btn-delete:hover {
   td {
     font-size: 0.86rem;
   }
-}
+} */
 
 /* =========================================
    5. FORM & INPUT ELEMENTS
@@ -2020,3 +1980,49 @@ th {
     flex: 1 1 0;
   }
 }
+
+/* Theme toggle button */
+.theme-toggle-btn {
+  /* Fixed position relative to the viewport */
+  position: fixed;
+  /* Adjust these values to place it in the bottom right corner */
+  bottom: 20px;
+  right: 20px;
+  /* Ensure it stays above other content */
+  z-index: 1000;
+  /* Custom Styles (see next section) */
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  /* Makes it a circle */
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  /* Subtle shadow */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  /* Define a fixed size */
+  height: 50px;
+  font-size: 20px;
+  /* Size for the icon */
+}
+
+/* Hover state for user feedback */
+.theme-toggle-btn:hover {
+  background-color: var(--accent);
+  transform: scale(1.05);
+  /* Slightly enlarge on hover */
+}
+
+/* Focus state for accessibility */
+.theme-toggle-btn:focus {
+  outline: 2px solid var(---success-500);
+  /* Green outline */
+  outline-offset: 2px;
+}
+
+

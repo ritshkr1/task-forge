@@ -10,8 +10,8 @@ You cannot skip these unless you enjoy chaos.
 
 ### **1. Project Setup**
 
-* [ ] Create React project
-* [ ] Add global CSS variables and theme tokens
+* [*] Create React project
+* [*] Add global CSS variables and theme tokens
 
 ### **2. Task Data Foundations**
 
@@ -19,7 +19,7 @@ You cannot skip these unless you enjoy chaos.
 
 ### **3. Storage Layer (local-first)**
 
-* [ ] Implement LocalStorage version
+* [*] Implement LocalStorage version
 * [ ] Persist tasks with debounce
 * [ ] Add fallback empty state UI
 

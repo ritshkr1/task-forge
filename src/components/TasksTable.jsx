@@ -105,8 +105,8 @@ function TableBody({ tasks, editTask, deleteTask }) {
                 <td style={{ opacity: task.status === "Done" ? "0.45" : "1" }}>{task.deadline}</td>
                 <td>
                     <div class="edit-actions">
-                        <button type="submit" style={{ width: '100px', fontWeight: '600' }} onClick={() => editTask(task.id)}>Edit</button>
-                        <button type="button" style={{ width: '100px', fontWeight: '600' }} class="btn-secondary" onClick={() => deleteTask(task.id)} >Delete</button>
+                        <button type="submit" className="btn-edit" onClick={() => editTask(task.id)}>Edit</button>
+                        <button type="button" className="btn-delete" onClick={() => deleteTask(task.id)} >Delete</button>
                     </div>
                 </td>
             </tr>
