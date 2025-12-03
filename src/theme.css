@@ -1,0 +1,59 @@
+body{
+    /* // --- Core Backgrounds --- */
+ --bg-primary: #1d2125;
+ --bg-secondary: #161a1d;
+ --bg-tertiary: #22272b;
+ --neutral-100: #293038;
+ --neutral-200: #1d2125;
+ --neutral-300: #39424a;
+
+    /* // --- Surfaces / Cards --- */
+ --card-bg: #22272b;
+ --card-bg-hover: #2c333a;
+
+    /* // --- Borders --- */
+ --border-color: #39424a;
+ --border-light: #454f59;
+
+    /* // --- Text --- */
+     --text-primary: #dcdfe4;
+     --text-secondary: #8c9bab;
+     --text-muted: #626f86;
+
+    /* // --- Accents --- */
+     --accent: #579dff;
+     --accent-light: #8c9bab;
+     --accent-dark: #0c66e4;
+     --accent-focus-ring: rgba(87, 157, 255, 0.4);
+
+    /* // --- Semantic / Status Colors --- */
+     --success-500: #4bce97;
+     --error-500: #ff7452;
+     --warning-500: #ffc400;
+
+     --success-bg: #1c3329;
+     --success-text: #4bce97;
+     --error-bg: #3f1515;
+     --error-text: #f87171;
+     --warning-bg: #33240e;
+     --warning-text: #f5cd47;
+     --info-bg: #102445;
+     --info-text: #579dff;
+     --todo-bg: #2c333a;
+     --todo-text: #9fadbc;
+
+    /* // --- Derived/Dependent Variables --- */
+    /* // Note: Since JS objects cannot reference other keys directly like CSS,
+    // we manually set the values here. */
+     --content: #dcdfe4;      /* var --text-primary) */
+     --content-light: #8c9bab; /* var --text-secondary) */
+     --shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* var --shadow-soft) */
+
+    /* // --- Dimensions (Non-color values) --- */
+     --header-height: 56px;
+     --radius: 3px;
+     --radius-sm: 4px;
+     --radius-lg: 8px;
+     --shadow-soft: 0 2px 4px rgba(0, 0, 0, 0.2);
+     --shadow-deep: 0 8px 16px rgba(0, 0, 0, 0.4);
+};
