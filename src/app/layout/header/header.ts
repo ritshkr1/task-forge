@@ -23,7 +23,14 @@ export class Header {
   }
   setTabName(tabName: string) {
     this.activeTabName = tabName;
-    const navigateTo = tabName === 'Table' ? '/tasks' : '/'
+    let navigateTo = '/'
+    if(tabName === 'Table'){
+      navigateTo = '/tasks'
+    }else if(tabName === 'Board'){
+      navigateTo = '/kanban'
+    }else{
+      navigateTo = '/'
+    }
     this.route.navigate([navigateTo])
   }
 

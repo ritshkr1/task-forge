@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { TASKS_DATA } from './tasksData';
+import { DataFetch } from '../../data-sharing/data-fetch';
+import { Task } from '../../interface/task.model';
 
 @Component({
   selector: 'app-tasks-list',
@@ -15,8 +16,12 @@ export class TasksList {
     { key: 'Priority', direction: '' },
     { key: 'Deadline', direction: '' }
   ];
-
-  tasksInitialData = [...TASKS_DATA];
+   tasksInitialData :Task[]= []
+  constructor(private dataFetch : DataFetch){
+    this.dataFetch.getData().subscribe(data => {
+      this.tasksInitialData = data
+    })
+  }
 
   editTask(id: number) {
     console.log(id);

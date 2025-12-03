@@ -1,0 +1,36 @@
+<div class="kanban-container">
+  @for(tabName of tabNames; track tabName){
+  <!-- <KanbanColumn key={tabName} tabTitle={tabName} handleDropData={handleDropData} dropZone={dropZone} setDropZone={setDropZone}>
+
+                    {tasks.filter((task) => task.status === tabName).map((task) => <KanbanCard priority={task.priority} key={task.id} id={task.id} updateId={handleUpdateTaskId} description={task.description} editTask={editTask}>{task.title}</KanbanCard>)}
+                    {createNewTask === tabName && <AddKanbanTask key={`${tabName} newtask`} tabName={tabName} addNewTask={kanbanStyleNewTask} />}
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <button style={{ maxWidth: '50px', background: '#1f2937' }} onClick={e => setCreateNewTask((c) => tabName)}><AweFontIcons iconName={"plus"} /></button>
+                    </div>
+                </KanbanColumn> -->
+  <div class="kanban-column inprogress">
+    <!-- onDragEnter={handleDragEnter}
+        onDragLeave={e => { console.log('onDragLeave'); }}
+        onDragOver={e => { e.preventDefault(); console.log('onDragOver', classStyleName); }}
+        onDrop={handleDropEvent}> -->
+    <h3>
+      {{ tabName }}
+      <div class="kanban-column-count">{{ tasksInitialData[tabName].length }}</div>
+    </h3>
+    <!-- {children} -->
+    <!-- draggable="{true}"
+      onDragStart="{handleDragStart}"
+      onClick="{UpdateTask}" -->
+    @for(task of tasksInitialData[tabName]; track task.id){
+
+    <div class="kanban-card" draggable="true">
+      <div [style.display]="'flex'">
+        <p [style.width]="'85%'">{{ task.title }}</p>
+        <!-- <PriorityLabel priority={priority} /> -->
+      </div>
+      <p className="kanban-card-description">{{ task.description }}</p>
+    </div>
+    }
+  </div>
+  }
+</div>
