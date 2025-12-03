@@ -8,7 +8,7 @@
                         <button style={{ maxWidth: '50px', background: '#1f2937' }} onClick={e => setCreateNewTask((c) => tabName)}><AweFontIcons iconName={"plus"} /></button>
                     </div>
                 </KanbanColumn> -->
-  <div class="kanban-column inprogress">
+  <div class="kanban-column inprogress" appDropzone (itemDropped)="callDropped($event,tabName)">
     <!-- onDragEnter={handleDragEnter}
         onDragLeave={e => { console.log('onDragLeave'); }}
         onDragOver={e => { e.preventDefault(); console.log('onDragOver', classStyleName); }}
@@ -23,7 +23,7 @@
       onClick="{UpdateTask}" -->
     @for(task of tasksInitialData[tabName]; track task.id){
 
-    <div class="kanban-card" draggable="true">
+    <div class="kanban-card" draggable="true" appDragable [appDraggable]="task">
       <div [style.display]="'flex'">
         <p [style.width]="'85%'">{{ task.title }}</p>
         <!-- <PriorityLabel priority={priority} /> -->
@@ -34,3 +34,5 @@
   </div>
   }
 </div>
+
+
