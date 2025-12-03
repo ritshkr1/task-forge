@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './header.css',
 })
 export class Header {
-  activeTabName = "Dashboard"
+
+  activeTabName = "Dashboard";
+
+  constructor(private route: Router) { }
   activeDashBoardTab() {
     return this.activeTabName === 'Dashboard' ? 'tab-button-active' : 'tab-button'
   }
@@ -19,6 +23,8 @@ export class Header {
   }
   setTabName(tabName: string) {
     this.activeTabName = tabName;
+    const navigateTo = tabName === 'Table' ? '/tasks' : '/'
+    this.route.navigate([navigateTo])
   }
 
   setModalOpen() {

@@ -1,0 +1,52 @@
+<div class="table-container">
+    <table>
+        <!-- <TableHead>
+                {tableHeadItems.map((sort) => <th>
+                    {(sort.key === 'Title' || sort.key === 'Description' || sort.key === 'Deadline') && <FilterInput onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())}>
+                        <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleTableSort(sort.direction, sort.key)} />
+                    </FilterInput>}
+
+                    {(sort.key === 'Status' || sort.key === 'Priority') && <FilterSelect onInputFilter={(v) => handleFilterTask(v, sort.key.toLowerCase())} optionArr={sort.key === 'Priority' ? optionPriority : optionStatus} setFilterShow={() => handleShowFilter(sort.key.toLowerCase())} show={showFilter === sort.key.toLowerCase()}>
+                        <SortButton key={sort.key} title={sort.key} direction={sort.direction} onSort={() => handleTableSort(sort.direction, sort.key)} />
+                    </FilterSelect>}
+                </th>
+                )}
+
+
+                
+            </TableHead> -->
+        <thead>
+            <tr>
+                @for (head of tableHead; track head.key) {
+                <th>{{head.key}}</th>
+                }
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(task of tasksInitialData; track task.id){
+            <tr>
+                <td [style.opacity]='getOpacity(task.status)'>{{task.title}}</td>
+                <td [style.opacity]='getOpacity(task.status)'>{{task.description}}</td>
+                <td>
+                    <span [style.opacity]='getOpacity(task.status)'>
+                        <!-- <StatusLabel status= /> -->
+                        {{task.status}}
+                    </span>
+                </td>
+                <td [style.opacity]='getOpacity(task.status)'>
+                    <!-- <PriorityLabel priority= /> -->
+                    {{task.priority}}
+                </td>
+                <td [style.opacity]='getOpacity(task.status)'>{{task.deadline}}</td>
+                <td>
+                    <div class="edit-actions">
+                        <button type="submit" class="btn-edit" (click)="editTask(task.id)">Edit</button>
+                        <button type="button" class="btn-delete" (click)="deleteTask(task.id)">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
