@@ -1,15 +1,12 @@
 # Getting Started with Task Forge
 
-Task Forge = mini-Jira, built right: feature-based React app, Redux Toolkit (RTK) for state, React Router, DnD engine, clear storage adapter (local first, backend-friendly), full accessibility, testing, CI/CD, deployable to Vercel. Build *reusable primitives* and you’ll reuse them forever.
+Task Forge = mini-Jira, built right: feature-based Angular app, NgRx for state, clear storage adapter (local first, backend-friendly), full accessibility, testing, CI/CD, deployable to Vercel. Build *reusable primitives* and you’ll reuse them forever.
 
----
-
-This project was bootstrapped with [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
 
 <!-- # Project Struture
 
 --- -->
-
 
 ## Features**
 

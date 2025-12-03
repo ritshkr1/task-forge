@@ -1,0 +1,15 @@
+<header>
+    <span>
+        Task Forge
+        <button [class]="activeDashBoardTab()" (click)="setTabName('Dashboard')">
+            Dashboard
+        </button>
+        <button [class]="activeBoardTab()" (click)="setTabName('Board')">
+            Board
+        </button>
+        <button [class]='activeTableTab()' (click)='setTabName("Table")'>
+            Table
+        </button>
+    </span>
+    <button (click)='setModalOpen()'>Add Task</button>
+</header>
