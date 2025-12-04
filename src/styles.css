@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "tailwindcss";
+@import 'tailwindcss';
 @import './theme.css';
 
 /* Reset Margins and Padding */
@@ -9,10 +9,8 @@
   margin: 0;
   padding: 0;
   /* Applying transition globally for smooth theme changes and hover effects */
-    transition: background 0.18s ease-in-out,
-      color 0.18s ease-in-out,
-      border-color 0.18s ease-in-out,
-      box-shadow 0.18s ease;
+  transition: background 0.18s ease-in-out, color 0.18s ease-in-out, border-color 0.18s ease-in-out,
+    box-shadow 0.18s ease;
 }
 
 /* Base HTML and Body Styles */
@@ -30,7 +28,8 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   /* Use Inter as the preferred font, falling back to system fonts */
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
@@ -41,7 +40,7 @@ body {
   min-height: 100%;
   /* Allow the entire application to scroll if content exceeds viewport */
   overflow: auto;
-  }
+}
 
 /* Reduce Motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
@@ -50,7 +49,7 @@ body {
     transition: none !important;
     animation: none !important;
   }
-} 
+}
 
 /* Accessible Focus Styles (Using Accent Color) */
 :focus {
@@ -63,7 +62,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
-[role="button"]:focus-visible,
+[role='button']:focus-visible,
 .focusable:focus-visible {
   /* Use a strong, consistent focus ring from the accent color */
   outline: 3px solid var(--accent-focus-ring);
@@ -79,19 +78,19 @@ header {
   top: 0;
   z-index: 50;
   /* Ensures it sits above main content */
-    height: var(--header-height);
-    /* Using 56px from :root */
-    background-color: var(--bg-primary);
-    /* Deepest background */
-    border-bottom: 1px solid var(--border-color);
-    padding: 0 1.5rem;
+  height: var(--header-height);
+  /* Using 56px from :root */
+  background-color: var(--bg-primary);
+  /* Deepest background */
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   font-weight: 600;
   box-shadow: var(--shadow-soft);
-    /* Subtle bottom shadow for lift */
+  /* Subtle bottom shadow for lift */
 }
 
 /* Main Content Area (Scroll Region) */
@@ -103,8 +102,8 @@ main {
   overflow-x: hidden;
   padding: 1rem;
   /* Slightly reduced padding from 1.5rem */
-    /* For better performance on mobile touch devices */
-    -webkit-overflow-scrolling: touch;
+  /* For better performance on mobile touch devices */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Footer (Bottom Bar) */
@@ -143,7 +142,6 @@ footer {
   background: var(--text-muted);
 }
 
-
 /* TABLES */
 
 /* Table container & table base */
@@ -166,7 +164,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   table-layout: auto;
-    /* Ensure table remains readable */
+  /* Ensure table remains readable */
 }
 
 thead {
@@ -212,11 +210,6 @@ td {
   /* Slightly darker dash for better visibility */
 }
 
-
-
-
-
-
 /* Action buttons inside cells */
 td button {
   min-width: 30px;
@@ -230,7 +223,7 @@ td button {
   background: transparent;
   color: var(--accent);
   /* Use primary accent for generic button */
-    cursor: pointer;
+  cursor: pointer;
 }
 
 td .btn-edit {
@@ -261,17 +254,13 @@ td .btn-delete:hover {
            MEDIA QUERIES FOR RESPONSIVENESS (BREAKPOINTS)
            ======================================================= */
 
-        /* Tablet View (from 600px up) */
-        @media (min-width: 600px) {
-            
-        }
+/* Tablet View (from 600px up) */
+@media (min-width: 600px) {
+}
 
-        /* Desktop View (from 1024px up) */
-        @media (min-width: 1024px) {
-            
-        }
-
-
+/* Desktop View (from 1024px up) */
+@media (min-width: 1024px) {
+}
 
 /* Mobile: stack table as cards */
 /* @media (max-width:480px) {
@@ -346,12 +335,12 @@ label {
   font-weight: 500;
   color: var(--text-secondary);
   display: block;
-    /* Ensure label takes full width */
+  /* Ensure label takes full width */
 }
 
 /* Input Fields (Text, Date, Select, Textarea) */
-input[type="text"],
-input[type="date"],
+input[type='text'],
+input[type='date'],
 select,
 textarea {
   padding: 0.6rem 0.8rem;
@@ -364,9 +353,9 @@ textarea {
   transition: border-color 0.14s, box-shadow 0.12s;
   -webkit-appearance: none;
   /* Remove default browser styling */
-    width: 100%;
-    min-height: 40px;
-    /* Minimum height for better touch targets */
+  width: 100%;
+  min-height: 40px;
+  /* Minimum height for better touch targets */
 }
 
 /* Input Focus States (using Jira Blue accent) */
@@ -376,13 +365,13 @@ textarea:focus {
   border-color: var(--accent);
   /* Lighter blue background tint on focus */
   background: rgba(87, 157, 255, 0.05);
-    /* Subtle blue shadow glow on focus */
-    box-shadow: 0 0 0 4px var(--accent-focus-ring);
+  /* Subtle blue shadow glow on focus */
+  box-shadow: 0 0 0 4px var(--accent-focus-ring);
   outline: none;
 }
 
 /* Specific styling for date input color scheme */
-input[type="date"] {
+input[type='date'] {
   color-scheme: dark;
 }
 
@@ -411,13 +400,13 @@ button {
 button:not(:disabled):hover {
   transform: translateY(-2px);
   /* Lift button on hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
 button:active {
   transform: translateY(0);
   /* Press down effect */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
 }
 
 button:disabled {
@@ -425,8 +414,8 @@ button:disabled {
   cursor: not-allowed;
   box-shadow: none;
   background: var(--border-color);
-    /* Muted background for disabled */
-    color: var(--text-muted);
+  /* Muted background for disabled */
+  color: var(--text-muted);
 }
 
 /* Secondary button (Subtle, Ghost-like) */
@@ -440,10 +429,10 @@ button:disabled {
 .btn-secondary:not(:disabled):hover {
   background: var(--card-bg-hover);
   /* Darker hover background */
-    border-color: var(--border-light);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-soft);
-  }
+  border-color: var(--border-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
 
 .btn-secondary:active {
   transform: translateY(0);
@@ -506,12 +495,12 @@ select option {
 /* Filters & sort */
 .table-head-wrapper {
   align-items: center;
-  display: inline-block
+  display: inline-block;
 }
 
 .filter-icon {
   cursor: pointer;
-  margin-top: 2px
+  margin-top: 2px;
 }
 
 .table-head-filter {
@@ -529,7 +518,7 @@ select option {
 
 .table-head-filter:focus {
   border-color: var(--accent);
-  outline: none
+  outline: none;
 }
 
 .sort-button {
@@ -544,45 +533,45 @@ select option {
   gap: 6px;
   /* Resetting generic button transformations */
   transform: none;
-    padding: 0;
-    transition: none;
-  }
-  
-  .sort-button:hover,
-  .sort-button:active {
-    transform: none;
-    box-shadow: none;
+  padding: 0;
+  transition: none;
+}
+
+.sort-button:hover,
+.sort-button:active {
+  transform: none;
+  box-shadow: none;
 }
 
 .sort-button .sort-arrow {
   font-size: 12px;
-  transition: transform 0.16s
+  transition: transform 0.16s;
 }
 
 .sort-button.asc .sort-arrow {
   transform: rotate(0deg);
-  color: var(--accent)
+  color: var(--accent);
 }
 
 .sort-button.desc .sort-arrow {
   transform: rotate(180deg);
-  color: var(--accent)
+  color: var(--accent);
 }
 
 /* Priority & status visuals */
 .priority-high {
   color: var(--error-500);
-  font-weight: 700
+  font-weight: 700;
 }
 
 .priority-medium {
   color: var(--warning-500);
-  font-weight: 600
+  font-weight: 600;
 }
 
 .priority-low {
   color: var(--success-500);
-  font-weight: 600
+  font-weight: 600;
 }
 
 /* status pills - adapted to dark bg */
@@ -594,7 +583,7 @@ select option {
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 600;
-  border: 1px solid rgba(87, 157, 255, 0.1)
+  border: 1px solid rgba(87, 157, 255, 0.1);
 }
 
 .status-inprogress {
@@ -605,7 +594,7 @@ select option {
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 600;
-  border: 1px solid rgba(245, 158, 11, 0.1)
+  border: 1px solid rgba(245, 158, 11, 0.1);
 }
 
 .status-done {
@@ -616,7 +605,7 @@ select option {
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 600;
-  border: 1px solid rgba(16, 185, 129, 0.04)
+  border: 1px solid rgba(16, 185, 129, 0.04);
 }
 
 /* priority badges for kanban/cards */
@@ -624,22 +613,22 @@ select option {
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
   font-size: 0.75rem;
-  font-weight: 700
+  font-weight: 700;
 }
 
 .priority-high {
   background: rgba(239, 68, 68, 0.06);
-  color: var(--error-text)
+  color: var(--error-text);
 }
 
 .priority-medium {
   background: rgba(245, 158, 11, 0.06);
-  color: var(--warning-text)
+  color: var(--warning-text);
 }
 
 .priority-low {
   background: rgba(16, 185, 129, 0.06);
-  color: var(--success-text)
+  color: var(--success-text);
 }
 
 /* =========================================
@@ -741,13 +730,13 @@ select option {
 .btn-primary {
   /* Using existing button style properties from section 5 */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-    transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .btn-secondary {
   /* Using existing button style properties from section 5 */
   box-shadow: none;
-    transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .modal-field {
@@ -927,9 +916,16 @@ select option {
   /* Reduced gap between tasks */
   border: 1px solid #101214;
   /* Border color matches background */
-  height: fit-content;
+  height: 500px;
   /* Ensure column only takes up necessary height */
   max-height: calc(100vh - 120px);
+}
+
+.cdk-drop-list.cdk-drop-list-dragging {
+  border: 2px dashed var(--accent);
+  background: rgba(87, 157, 255, 0.08);
+  border-radius: 10px;
+  transition: background 0.18s ease, border-color 0.18s ease;
 }
 
 .kanban-column h3 {
@@ -943,12 +939,12 @@ select option {
   text-transform: uppercase;
 }
 
-.kanban-column-dropzone {
+/* .kanban-column-dropzone {
   border: 2px dashed var(--accent);
   background: rgba(87, 157, 255, 0.08);
   border-radius: 10px;
   transition: background 0.18s ease, border-color 0.18s ease;
-}
+} */
 
 .kanban-column-count {
   display: inline-flex;
@@ -980,7 +976,6 @@ select option {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   cursor: grab;
   transition: all 0.16s ease;
-
 }
 
 .kanban-card-header {
@@ -998,7 +993,7 @@ select option {
 
 .kanban-card-title {
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-primary);
   /* Truncate long titles */
   white-space: nowrap;
@@ -1071,19 +1066,6 @@ select option {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Column specific styles (resetting default colors on cards/titles) */
-.todo h3 {
-  color: var(--text-secondary);
-}
-
-.inprogress h3 {
-  color: var(--text-secondary);
-}
-
-.done h3 {
-  color: var(--text-secondary);
-}
-
 .done .kanban-card {
   opacity: 0.65;
   border-left: 4px solid var(--success-500);
@@ -1098,44 +1080,43 @@ select option {
 
 /* Utilities & small helpers */
 .hidden-mobile {
-  display: none
+  display: none;
 }
 
-@media (min-width:481px) {
+@media (min-width: 481px) {
   .hidden-mobile {
-    display: initial
+    display: initial;
   }
 }
 
 tbody tr {
   position: relative;
-  z-index: 1
+  z-index: 1;
 }
 
 /* Responsive: Tablet 481px - 1024px */
-@media (min-width:481px) and (max-width:1024px) {
-
+@media (min-width: 481px) and (max-width: 1024px) {
   th,
   td {
     padding: 0.8rem;
-    font-size: 0.95rem
+    font-size: 0.95rem;
   }
 
   header,
   footer {
-    padding: 0.8rem 1.2rem
+    padding: 0.8rem 1.2rem;
   }
 
   .task-form {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 
   .table-head-filter {
-    width: 70%
+    width: 70%;
   }
 
   .table-container {
-    max-height: calc(100vh - 180px)
+    max-height: calc(100vh - 180px);
   }
 
   /* Kanban board uses horizontal scroll, but columns are wider */
@@ -1146,97 +1127,96 @@ tbody tr {
   }
 
   .kanban-column {
-    min-width: 300px
+    min-width: 300px;
   }
 }
 
 /* Desktop / Laptop: 1025px+ */
-@media (min-width:1025px) {
-
+@media (min-width: 1025px) {
   th,
   td {
     padding: 1rem 1.2rem;
-    font-size: 1rem
+    font-size: 1rem;
   }
 
   header,
   footer {
-    padding: 1rem 2rem
+    padding: 1rem 2rem;
   }
 
   main {
-    padding: 2rem
+    padding: 2rem;
   }
 
   .task-form {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    padding: 1rem 1.5rem
+    padding: 1rem 1.5rem;
   }
 
   /* Resetting mobile display properties for table */
   table {
-    display: table
+    display: table;
   }
 
   thead {
-    display: table-header-group
+    display: table-header-group;
   }
 
   tbody {
-    display: table-row-group
+    display: table-row-group;
   }
 
   tr {
-    display: table-row
+    display: table-row;
   }
 
   th,
   td {
-    display: table-cell
+    display: table-cell;
   }
 
   .table-container {
     max-width: 1150px;
     margin: 0 auto;
-    max-height: calc(100vh - 220px)
+    max-height: calc(100vh - 220px);
   }
 
   .kanban-container {
     display: flex;
     gap: 1.25rem;
-    padding-bottom: 1rem
+    padding-bottom: 1rem;
   }
 
   .kanban-column {
-    min-width: 400px
+    min-width: 400px;
   }
 }
 
 /* XL polish: 1440px+ */
-@media (min-width:1440px) {
+@media (min-width: 1440px) {
   body {
-    font-size: 1.02rem
+    font-size: 1.02rem;
   }
 
   .table-container {
-    max-width: 1400px
+    max-width: 1400px;
   }
 
   .task-form {
     max-width: 1200px;
-    margin: 0 auto 1.5rem
+    margin: 0 auto 1.5rem;
   }
 }
 
 /* Tiny tweaks to ensure contrast and legibility */
 /* stronger labels and subtle caps */
 label {
-  letter-spacing: 0.2px
+  letter-spacing: 0.2px;
 }
 
 th {
   letter-spacing: 0.3px;
-  text-transform: none
+  text-transform: none;
 }
 
 /* ensure visually-hidden for screen reader helpers (if used) */
@@ -1246,7 +1226,7 @@ th {
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 /* end of dark stylesheet */
@@ -1324,13 +1304,12 @@ th {
   height: 250px;
   border-radius: 50%;
   /* Simplified Conic-Gradient based on your status colors */
-  background-image: conic-gradient(var(--warning-500) 0% 66.6%,
-      /* In Progress: 4/6 */
-      var(--accent) 66.6% 83.3%,
-      /* To Do: 1/6 (Using Accent Blue as To Do placeholder) */
-      var(--success-500) 83.3% 100%
+  background-image: conic-gradient(
+    var(--warning-500) 0% 66.6%,
+    /* In Progress: 4/6 */ var(--accent) 66.6% 83.3%,
+    /* To Do: 1/6 (Using Accent Blue as To Do placeholder) */ var(--success-500) 83.3% 100%
       /* Done: 1/6 */
-    );
+  );
 }
 
 .donut-chart {
@@ -1360,7 +1339,6 @@ th {
   font-size: 0.7rem;
   color: var(--text-muted);
 }
-
 
 .status-legend ul {
   display: flex;
@@ -1507,7 +1485,6 @@ th {
   color: var(--warning-text);
 }
 
-
 /* =========================================
    3. Priority Breakdown Card
    ========================================= */
@@ -1612,7 +1589,6 @@ th {
   border-radius: 3px;
 }
 
-
 /* =========================================
    5. Team Workload Card
    ========================================= */
@@ -1642,7 +1618,6 @@ th {
   font-size: 0.9rem;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
 }
-
 
 .unassigned-icon {
   display: inline-block;
@@ -1756,14 +1731,12 @@ th {
   background-color: var(--success-500);
 }
 
-
 /* =========================================
    RESPONSIVE BREAKPOINTS (Based on Global)
    ========================================= */
 
 /* Tablet/Small Desktop (481px - 1024px) */
 @media (min-width: 481px) {
-
   /* Status Overview: Restore horizontal content layout */
   .status-content {
     flex-direction: row;
@@ -1800,10 +1773,8 @@ th {
   }
 }
 
-
 /* Desktop / Laptop (1025px+) */
 @media (min-width: 1025px) {
-
   /* Dashboard Grid: Enable the two-column layout */
   .dashboard-grid {
     grid-template-columns: 1fr 1fr;
@@ -1947,7 +1918,6 @@ th {
   color: var(--error-500);
 }
 
-
 .metric-details {
   display: flex;
   flex-direction: column;
@@ -1964,7 +1934,6 @@ th {
   font-size: 0.75rem;
   color: var(--text-secondary);
 }
-
 
 /* =========================================
    DESKTOP ENHANCEMENTS for Metrics Bar
@@ -2024,5 +1993,3 @@ th {
   /* Green outline */
   outline-offset: 2px;
 }
-
-
