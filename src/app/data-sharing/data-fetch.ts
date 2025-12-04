@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { TASKS_DATA } from '../pages/tasks-list/tasksData';
-import { Task,KanbanColumns } from '../interface/task.model';
+import { Task,KanbanColumns,TabNameType } from '../interface/task.model';
 
 
 
@@ -10,7 +10,9 @@ import { Task,KanbanColumns } from '../interface/task.model';
 })
 export class DataFetch {
   getData():Observable<any>{
-    return of([...TASKS_DATA])
+    const localData = localStorage.getItem('tasks');
+    const parsedData: Task[] = localData ? JSON.parse(localData) : [...TASKS_DATA];
+    return of([...parsedData])
   }
 
   groupTasks(Tasks: Task[]): KanbanColumns {
@@ -37,4 +39,20 @@ export class DataFetch {
 
   return groupedTasks;
 }
+
+
+updateTasksLocal(tasks:KanbanColumns){
+  const updatedFlatTasks= Object.entries(tasks)
+  .flatMap(([statusKey, taskArray]) => {
+    const updatedTasks = taskArray.map((task:Task) => ({
+      ...task, // Keep all existing properties
+      status: statusKey // 💥 Update the status property with the column key
+    }));
+    
+    return updatedTasks; 
+  });
+  const stringifyTask = JSON.stringify(updatedFlatTasks)
+  localStorage.setItem('tasks',stringifyTask)
+}
+
 }

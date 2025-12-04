@@ -18,3 +18,5 @@ interface User {
   userId: number;
   name: string;
 }
+
+export type TabNameType = 'To-Do' | 'In-Progress' | 'Done';

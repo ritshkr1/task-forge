@@ -6,6 +6,7 @@ import { Task } from '../interface/task.model';
 })
 export class Dropzone {
   itemDropped = output<Task>();
+  dragedColumn = output<string>();
   constructor() { }
   // Prevents default behavior to allow dropping
 @HostListener('dragover', ['$event'])
@@ -24,6 +25,13 @@ onDrop(event: DragEvent) {
   if (data) {
     this.itemDropped.emit(JSON.parse(data));
   }
+}
+
+@HostListener('dragenter', ['$event'])
+onDragEnter(event: DragEvent) {
+  event.preventDefault(); 
+  console.log('drag enter', event);
+  this.dragedColumn.emit('enter')
 }
 
 }

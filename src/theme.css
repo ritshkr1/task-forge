@@ -1,4 +1,19 @@
-body{
+:root{
+    /* // --- Dimensions (Non-color values) --- */
+     --header-height: 56px;
+     --radius: 3px;
+     --radius-sm: 4px;
+     --radius-lg: 8px;
+
+   /* // --- Accents --- */
+     --accent: #579dff;
+     --accent-light: #8c9bab;
+     --accent-dark: #0c66e4;
+     --accent-focus-ring: rgba(87, 157, 255, 0.4);
+
+}
+
+.dark{
     /* // --- Core Backgrounds --- */
  --bg-primary: #1d2125;
  --bg-secondary: #161a1d;
@@ -20,11 +35,7 @@ body{
      --text-secondary: #8c9bab;
      --text-muted: #626f86;
 
-    /* // --- Accents --- */
-     --accent: #579dff;
-     --accent-light: #8c9bab;
-     --accent-dark: #0c66e4;
-     --accent-focus-ring: rgba(87, 157, 255, 0.4);
+    
 
     /* // --- Semantic / Status Colors --- */
      --success-500: #4bce97;
@@ -43,17 +54,61 @@ body{
      --todo-text: #9fadbc;
 
     /* // --- Derived/Dependent Variables --- */
-    /* // Note: Since JS objects cannot reference other keys directly like CSS,
-    // we manually set the values here. */
      --content: #dcdfe4;      /* var --text-primary) */
      --content-light: #8c9bab; /* var --text-secondary) */
      --shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* var --shadow-soft) */
 
     /* // --- Dimensions (Non-color values) --- */
-     --header-height: 56px;
-     --radius: 3px;
-     --radius-sm: 4px;
-     --radius-lg: 8px;
+  
      --shadow-soft: 0 2px 4px rgba(0, 0, 0, 0.2);
      --shadow-deep: 0 8px 16px rgba(0, 0, 0, 0.4);
-};
+}
+
+.light{
+    /* // --- Core Backgrounds (Dark inverse) --- */
+    --bg-primary: #f0f2f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #ffffff;
+    --neutral-100: #ebecf0;
+    --neutral-200: #f7f8f9;
+    --neutral-300: #c1c7d0;
+
+    /* // --- Surfaces / Cards (Dark inverse) --- */
+    --card-bg: #ffffff;
+    --card-bg-hover: #f0f2f5;
+
+    /* // --- Borders (Dark inverse) --- */
+    --border-color: #e5e5e5;
+    --border-light: #dfe1e6;
+
+    /* // --- Text (Dark inverse) --- */
+    --text-primary: #172b4d;
+    --text-secondary: #5e6c84;
+    --text-muted: #8993a4;
+
+    /* // --- Semantic / Status Colors (Adjusted for contrast on light background) --- */
+    --success-500: #00875a;
+    --error-500: #de3500;
+    --warning-500: #ff991f;
+
+    /* // --- Status Backgrounds/Text (Dark inverse) --- */
+    --success-bg: #e3fcef;
+    --success-text: #006644;
+    --error-bg: #ffebe6;
+    --error-text: #bf2600;
+    --warning-bg: #fffae6;
+    --warning-text: #b35c00;
+    --info-bg: #e6f4ff;
+    --info-text: #0052cc;
+    --todo-bg: #ebecf0;
+    --todo-text: #42526e;
+
+    /* // --- Derived/Dependent Variables (Manually set) --- */
+    --content: #172b4d;      /* var(--text-primary) */
+    --content-light: #5e6c84; /* var(--text-secondary) */
+    --shadow: 0 1px 2px rgba(9, 30, 66, 0.15); /* var(--shadow-soft) */
+
+    /* // --- Dimensions (Non-color values - remain the same) --- */
+    --shadow-soft: 0 1px 2px rgba(9, 30, 66, 0.15);
+    --shadow-deep: 0 4px 8px rgba(9, 30, 66, 0.25);
+}
