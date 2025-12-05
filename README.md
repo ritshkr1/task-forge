@@ -53,7 +53,7 @@ This project was bootstrapped with [@vitejs/plugin-react-swc](https://github.com
 
 ✅ **Outcome:** By the end, Task Forge will have a **mini Jira clone** with:
 
-* Kanban-style boards
+* Kanban-style boards.
 * CRUD tasks with filters & sorting
 * Drag-and-drop & undo functionality
 * Analytics & dark mode
