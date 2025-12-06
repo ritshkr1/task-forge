@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit ,output} from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,11 +7,17 @@ import { Router } from '@angular/router';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {
+export class Header implements OnInit{
 
-  activeTabName = "Dashboard";
-
-  constructor(private route: Router) { }
+  activeTabName = "";
+  openModal = output();
+  constructor(private route: Router) { 
+   
+  }
+  ngOnInit(){
+     const activeTab = localStorage.getItem('headerTabName');
+    this.activeTabName = activeTab ? activeTab : 'Dashboard';
+  }
   activeDashBoardTab() {
     return this.activeTabName === 'Dashboard' ? 'tab-button-active' : 'tab-button'
   }
@@ -31,10 +37,11 @@ export class Header {
     }else{
       navigateTo = '/'
     }
+    localStorage.setItem('headerTabName',tabName)
     this.route.navigate([navigateTo])
   }
 
   setModalOpen() {
-    return 'open'
+    this.openModal.emit()
   }
 }

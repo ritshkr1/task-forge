@@ -31,19 +31,19 @@ This is where Task Forge becomes functional.
 
 ### **4. Kanban Board**
 
-- [ ] Build board layout (3 columns)
-- [ ] Create `Column` component
-- [ ] Create `TaskCard` component
-- [ ] Show tasks by column
-- [ ] Add Quick Add input in each column
-- [ ] Add basic styling + counts
+- [*] Build board layout (3 columns)
+- [*] Create `Column` component
+- [*] Create `TaskCard` component
+- [*] Show tasks by column
+- [*] Add Quick Add input in each column
+- [*] Add basic styling + counts
 
 ### **5. Drag & Drop**
 
-- [ ] Add draggable task cards
-- [ ] Add droppable columns
-- [ ] Support reorder within the same column
-- [ ] Smooth animation + placeholder ghost
+- [*] Add draggable task cards
+- [*] Add droppable columns
+- [*] Support reorder within the same column
+- [*] Smooth animation + placeholder ghost
 
 ---
 

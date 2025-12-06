@@ -19,7 +19,7 @@ body {
   height: 100%;
   min-height: 100vh;
   /* Set a sensible base font size for scaling */
-  font-size: 14px;
+  font-size: 12px;
 }
 
 body {
@@ -33,13 +33,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  /* Use 100vh to ensure the app takes up the full screen height */
-  min-height: 100%;
-  /* Allow the entire application to scroll if content exceeds viewport */
-  overflow: auto;
+  
 }
 
 /* Reduce Motion for accessibility */
@@ -77,11 +71,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 50;
-  /* Ensures it sits above main content */
   height: var(--header-height);
-  /* Using 56px from :root */
   background-color: var(--bg-primary);
-  /* Deepest background */
   border-bottom: 1px solid var(--border-color);
   padding: 0 1.5rem;
   display: flex;
@@ -90,14 +81,14 @@ header {
   gap: 1rem;
   font-weight: 600;
   box-shadow: var(--shadow-soft);
-  /* Subtle bottom shadow for lift */
 }
 
 /* Main Content Area (Scroll Region) */
 main {
   background-color: var(--bg-secondary);
   /* flex: 1 1 auto ensures it grows to fill space and shrinks if needed */
-  flex: 1 1 auto;
+  flex: 1;
+  height: calc(100vh - 86px);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1rem;
@@ -108,7 +99,11 @@ main {
 
 /* Footer (Bottom Bar) */
 footer {
-  height: 40px;
+  position: fixed;
+  bottom: 0;
+  z-index: 50;
+  height: var(--footer-height);
+  width: 100%;
   background-color: var(--bg-tertiary);
   /* Slightly lighter than primary for distinction */
   border-top: 1px solid var(--border-color);
@@ -122,8 +117,8 @@ footer {
 
 /* Scrollbar Styles (Essential for dark themes - Using new, detailed styling) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 5px;
+  width: 5px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -152,7 +147,7 @@ footer {
   box-shadow: var(--shadow-soft);
   overflow: auto;
   margin-top: 1rem;
-  max-height: calc(100vh - 220px);
+  max-height: calc(100vh - 150px);
   display: block;
   border: 1px solid var(--border-color);
   -webkit-overflow-scrolling: touch;
@@ -342,7 +337,7 @@ label {
 input[type='text'],
 input[type='date'],
 select,
-textarea {
+textarea{
   padding: 0.6rem 0.8rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
@@ -370,13 +365,14 @@ textarea:focus {
   outline: none;
 }
 
-/* Specific styling for date input color scheme */
-input[type='date'] {
-  color-scheme: dark;
+.deadline-datapicker-class{
+  width: 100%;
 }
 
 /* Buttons (Primary Style - using Jira Blue gradient) */
-button {
+button,
+.p-datepicker-today-button,
+.p-datepicker-clear-button {
   /* Gradient for 3D/lift effect common on Jira primary buttons */
   background: linear-gradient(180deg, var(--accent), var(--accent-dark));
   color: var(--bg-primary);
@@ -904,26 +900,28 @@ select option {
   min-width: 320px;
   /* Wider columns for content */
   /* Darker background than card for recessed effect */
-  background: #101214;
+  background: var(--bg-secondary);
   border-radius: var(--radius-lg);
   padding: 0.8rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-soft);
   /* Stronger column shadow */
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding-top:0;
   /* Reduced gap between tasks */
   border: 1px solid #101214;
   /* Border color matches background */
   height: 500px;
+  overflow-y:auto;
   /* Ensure column only takes up necessary height */
   max-height: calc(100vh - 120px);
 }
 
 .cdk-drop-list.cdk-drop-list-dragging {
   border: 2px dashed var(--accent);
-  background: rgba(87, 157, 255, 0.08);
+  background: var(--bg-secondary);
   border-radius: 10px;
   transition: background 0.18s ease, border-color 0.18s ease;
 }
@@ -932,10 +930,14 @@ select option {
   font-weight: 600;
   font-size: 1.1rem;
   margin-bottom: 0.2rem;
+  background: var(--bg-secondary);
   color: var(--text-secondary);
   /* Column titles are secondary/muted in Jira */
   display: flex;
   align-items: center;
+  position: sticky;
+  top:0;
+  z-index: 50;
   text-transform: uppercase;
 }
 
@@ -950,14 +952,16 @@ select option {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height:45px;
   margin-left: 10px;
-  padding: 0;
+  padding: 5px;
+  background-color: var(--bg-secondary);
   /* Removed padding */
   font-size: 14px;
   font-weight: 500;
-  background: transparent;
   /* Made transparent */
   border: none;
+  border-radius: var(--radius-sm);
   color: var(--text-muted);
   backdrop-filter: blur(4px);
 }
@@ -1016,11 +1020,23 @@ select option {
   /* Move title up slightly */
 }
 
-.kanban-card-footer {
+.kanban-column-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 4px;
+  /* position: sticky;
+  bottom: 0;
+  z-index: 50; */
+}
+.kanban-column-footer button{
+  max-width: 40px;
+  background: var(--card-bg);
+  color: var(--text-secondary);
+}
+.kanban-column::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar component itself */
+  width: 0; /* Or width: 0px; for an alternative approach */
 }
 
 /* Jira Style Badges/Metadata */
@@ -1993,3 +2009,6 @@ th {
   /* Green outline */
   outline-offset: 2px;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

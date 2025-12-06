@@ -1,6 +1,6 @@
 <div class="kanban-container" cdkDropListGroup>
   @for(tabName of tabNames; track tabName){
-  <div [class]="kanbanColumnClass" cdkDropList [cdkDropListData]="tasksInitialData[tabName]" (cdkDropListDropped)="handleDragAndDrop($event)">
+  <div class="kanban-column" cdkDropList [cdkDropListData]="tasksInitialData[tabName]" (cdkDropListDropped)="handleDragAndDrop($event)">
     <!-- kanban-column-dropzone -->
     <h3>
       {{ tabName }}
@@ -14,8 +14,19 @@
         <!-- <PriorityLabel priority={priority} /> -->
       </div>
       <p className="kanban-card-description">{{ task.description }}</p>
+      
     </div>
-    }
+  }
+  @if(isNewTaskTitleOpen[tabName]){<div class="kanban-card" >
+    <div [style.display]="'flex'">
+      <input type="text" [(ngModel)]="newTaskTitle[tabName]" [style.width]="'100%'" class="kanban-card-title" (keyup.enter)="handleQuickTask(tabName)"
+    (blur)="handleQuickTask(tabName)"/>
+      <!-- <PriorityLabel priority={priority} /> -->
+    </div>
+  </div>}
+    <div class="kanban-column-footer">
+                        <button (click)="handleOpenQuick(tabName)"><fa-icon [icon]="faPlus"></fa-icon></button>
+                    </div>
   </div>
   }
 </div>

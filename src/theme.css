@@ -1,6 +1,7 @@
 :root{
     /* // --- Dimensions (Non-color values) --- */
      --header-height: 56px;
+     --footer-height: 30px;
      --radius: 3px;
      --radius-sm: 4px;
      --radius-lg: 8px;
@@ -106,9 +107,9 @@
     /* // --- Derived/Dependent Variables (Manually set) --- */
     --content: #172b4d;      /* var(--text-primary) */
     --content-light: #5e6c84; /* var(--text-secondary) */
-    --shadow: 0 1px 2px rgba(9, 30, 66, 0.15); /* var(--shadow-soft) */
+    --shadow: 0 1px 2px rgba(78, 78, 78, 0.15); /* var(--shadow-soft) */
 
     /* // --- Dimensions (Non-color values - remain the same) --- */
-    --shadow-soft: 0 1px 2px rgba(9, 30, 66, 0.15);
-    --shadow-deep: 0 4px 8px rgba(9, 30, 66, 0.25);
+    --shadow-soft: 0 1px 2px rgba(48, 48, 48, 0.15);
+    --shadow-deep: 0 4px 8px rgba(60, 60, 60, 0.25);
 }
