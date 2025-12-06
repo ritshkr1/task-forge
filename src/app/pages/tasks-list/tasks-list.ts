@@ -23,10 +23,10 @@ export class TasksList {
     })
   }
 
-  editTask(id: number) {
+  editTask(id: number | string) {
     console.log(id);
   }
-  deleteTask(id: number) {
+  deleteTask(id: number | string) {
     console.log(id)
   }
 

@@ -1,0 +1,29 @@
+<div
+  class="modal-overlay"
+  (click)="closeModal($event)"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+>
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <p id="modal-title">{{ title }}</p>
+      <button type="button" class="modal-close-btn" (click)="closeModal($event)">×</button>
+    </div>
+    <form class="modal-form" (ngSubmit)="submitModal()">
+      <div class="modal-body">
+        <ng-content />
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn-primary">
+          {{ primaryText }}
+        </button>
+
+        <button type="button" class="btn-secondary" (click)="closeModal($event)">
+          {{ secondaryText }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

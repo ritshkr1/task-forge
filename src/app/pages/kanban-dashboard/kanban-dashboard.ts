@@ -1,20 +1,33 @@
 import { Component } from '@angular/core';
 import { DataFetch } from '../../data-sharing/data-fetch';
-import { Task,KanbanColumns } from '../../interface/task.model';
+import { Task } from '../../interface/task.model';
 import { TabNameType } from '../../interface/task.model';
 import {CdkDrag, CdkDragDrop, CdkDropList,CdkDropListGroup, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import {FormsModule} from '@angular/forms'
 
 
 @Component({
   selector: 'app-kanban-dashboard',
-  imports: [CdkDrag,CdkDropList,CdkDropListGroup],
+  imports: [CdkDrag,CdkDropList,CdkDropListGroup,FontAwesomeModule,FormsModule],
   templateUrl: './kanban-dashboard.html',
   styleUrl: './kanban-dashboard.css',
 })
 export class KanbanDashboard {
+  faPlus = faPlus;
   tabNames: TabNameType[] = ["To-Do", "In-Progress", "Done"];
-  kanbanColumnClass = 'kanban-column kanban-column-dropzone'
-  masterTasksList : Task[] = []
+  masterTasksList : Task[] = [];
+  isNewTaskTitleOpen = {
+  'To-Do':false,
+  'In-Progress':false,
+  'Done':false,
+}
+  newTaskTitle = {
+  'To-Do':'',
+  'In-Progress':'',
+  'Done':'',
+}
   tasksInitialData:any = {
   'To-Do': [],
   'In-Progress':[],
@@ -30,6 +43,23 @@ export class KanbanDashboard {
         this.masterTasksList = [...data];
         this.tasksInitialData = this.dataFetch.groupTasks(data);
       })
+  }
+  handleQuickTask(tabName: TabNameType){
+    if(this.newTaskTitle[tabName]){
+      const newDate = new Date().toLocaleDateString('en-GB');
+      const newTask = {title: this.newTaskTitle[tabName],
+        status: tabName,
+        description: "Quick Description",
+        priority: 'Low',
+        id: crypto.randomUUID(),
+        deadline: newDate,}
+      this.tasksInitialData[tabName] = [...this.tasksInitialData[tabName],newTask];
+    }
+    this.newTaskTitle[tabName] = ''; 
+      this.isNewTaskTitleOpen[tabName] = false;
+  }
+  handleOpenQuick(tabName:TabNameType){
+    this.isNewTaskTitleOpen[tabName] = true
   }
   
 
