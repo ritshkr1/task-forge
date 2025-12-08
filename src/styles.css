@@ -2012,3 +2012,13 @@ th {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.p-datepicker .p-datepicker-panel{
+    background: var(--bg-primary) !important;
+    min-width: unset !important;
+    width: 250px;
+}
+
+.prime-ng-tf-datepicker{
+  width: 100%;
+}
