@@ -18,7 +18,9 @@
         <thead>
             <tr>
                 @for (head of tableHead; track head.key) {
-                <th>{{head.key}}</th>
+                <th>
+                    <tf-sort-button [title]="head.key" [direction]="head.direction" (onSort)="handleTableSort(head)"/>
+                    </th>
                 }
                 <th>Action</th>
             </tr>
@@ -49,6 +51,13 @@
             </tr>
             }
         </tbody>
+        <tfoot>
+    <tr>
+      <td colspan="6">
+        <p style="width: 100%;"> Total Count: {{dataFetch.localTasks().length}}</p>
+      </td>
+    </tr>
+  </tfoot>
     </table>
 </div>
 

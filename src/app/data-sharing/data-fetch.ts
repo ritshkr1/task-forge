@@ -2,8 +2,7 @@ import { Injectable,signal,WritableSignal,computed} from '@angular/core';
 // import { Observable, of } from 'rxjs';
 import { TASKS_DATA } from '../pages/tasks-list/tasksData';
 import { Task,KanbanColumns,TabNameType } from '../interface/task.model';
-
-
+type TaskSortKey = keyof Task;
 
 @Injectable({
   providedIn: 'root',
@@ -94,5 +93,23 @@ deleteTask(id:number | string){
 
   this.localTasks.set(alteredTasks);
   this.setTasksLocal(alteredTasks)
+}
+
+handleSort( key:keyof Task,direction:string){
+  if (key) {
+    const sortedTasks = [...this.localTasks()].sort((a, b) => {
+        // Extract and assert the types for comparison
+        const aValue = a[key] as any; // Asserting to 'any' tells TS to allow the comparison
+        const bValue = b[key] as any;
+        
+        // You can now safely compare
+        if (aValue < bValue) return direction === "asc" ? -1 : 1;
+        if (aValue > bValue) return direction === "asc" ? 1 : -1;
+        
+        return 0;
+    });
+    console.log(sortedTasks)
+    // sortedTasks
+  }
 }
 }

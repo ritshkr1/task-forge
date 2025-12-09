@@ -2,10 +2,11 @@ import { Component,output,WritableSignal,signal} from '@angular/core';
 import { DataFetch } from '../../data-sharing/data-fetch';
 import { Task } from '../../interface/task.model';
 import { AddModal } from '../../modal/add-modal/add-modal';
+import { SortButton } from '../../components/sort-button';
 
 @Component({
   selector: 'app-tasks-list',
-  imports: [AddModal],
+  imports: [AddModal,SortButton],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.css',
 })
@@ -46,4 +47,19 @@ export class TasksList{
   getOpacity(status: string) {
     return status === "Done" ? "0.45" : "1"
   }
+
+  handleTableSort(head:any) {
+        const sortNextDirection = head.direction === 'asc' ? 'desc' : 'asc';
+        const activeSort:{key:keyof Task; direction:string} = { key: head.key.toLowerCase(), direction: sortNextDirection };
+        const updatedTableHeadItems = this.tableHead.map((config) => {
+            if (config.key === head.key) {
+                return { key : head.key, direction: sortNextDirection }
+            } else {
+                return { key: config.key, direction: '' }
+            }
+        });
+
+        this.tableHead = updatedTableHeadItems;
+        this.dataFetch.handleSort(activeSort.key,activeSort.direction);
+    };
 }
