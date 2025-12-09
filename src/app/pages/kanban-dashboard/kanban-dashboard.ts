@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,WritableSignal,signal} from '@angular/core';
 import { DataFetch } from '../../data-sharing/data-fetch';
 import { Task } from '../../interface/task.model';
 import { TabNameType } from '../../interface/task.model';
@@ -17,7 +17,6 @@ import {FormsModule} from '@angular/forms'
 export class KanbanDashboard {
   faPlus = faPlus;
   tabNames: TabNameType[] = ["To-Do", "In-Progress", "Done"];
-  masterTasksList : Task[] = [];
   isNewTaskTitleOpen = {
   'To-Do':false,
   'In-Progress':false,
@@ -28,21 +27,20 @@ export class KanbanDashboard {
   'In-Progress':'',
   'Done':'',
 }
-  tasksInitialData:any = {
+  tasksInitialData:WritableSignal<any> = signal({
   'To-Do': [],
   'In-Progress':[],
   'Done':[],
-}
+})
   constructor(private dataFetch : DataFetch){
     this.getTasksData();
     }
 
 
   getTasksData(){
-    this.dataFetch.getData().subscribe(data => {
-        this.masterTasksList = [...data];
-        this.tasksInitialData = this.dataFetch.groupTasks(data);
-      })
+    const groupedTasks = this.dataFetch.groupTasks(this.dataFetch.localTasks())
+    this.tasksInitialData.set(groupedTasks)
+    
   }
   handleQuickTask(tabName: TabNameType){
     if(this.newTaskTitle[tabName]){
@@ -53,7 +51,7 @@ export class KanbanDashboard {
         priority: 'Low',
         id: crypto.randomUUID(),
         deadline: newDate,}
-      this.tasksInitialData[tabName] = [...this.tasksInitialData[tabName],newTask];
+      this.tasksInitialData()[tabName] = [...this.tasksInitialData()[tabName],newTask];
     }
     this.newTaskTitle[tabName] = ''; 
       this.isNewTaskTitleOpen[tabName] = false;
@@ -75,6 +73,6 @@ export class KanbanDashboard {
         event.currentIndex,
       );
     }
-    this.dataFetch.updateTasksLocal(this.tasksInitialData);
+    this.dataFetch.updateTasksLocal(this.tasksInitialData());
   }
 }

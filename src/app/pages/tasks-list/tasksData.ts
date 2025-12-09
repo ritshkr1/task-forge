@@ -1,4 +1,6 @@
-export const TASKS_DATA = [
+import { Task } from "../../interface/task.model";
+
+export const TASKS_DATA :Task[] = [
     { id: 1, title: "Design homepage", description: "Create responsive layout and hero section", status: "To-Do", priority: "High", deadline: "2025-11-08" },
     { id: 2, title: "Setup local storage", description: "Implement persistence for task data", status: "In-Progress", priority: "Medium", deadline: "2025-11-10" },
     { id: 3, title: "Polish UI", description: "Add hover states and spacing improvements", status: "Done", priority: "Low", deadline: "2025-11-12" },

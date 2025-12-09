@@ -34,8 +34,10 @@
     <label>Deadline</label>
     <p-datepicker
       [(ngModel)]="newTask.deadline"
-      [showIcon]="true"
+      [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" 
       [showButtonBar]="true"
+      [dataType]="'string'"
+      dateFormat="yy-mm-dd" 
       class="prime-ng-tf-datepicker"
     />
   </div>

@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @for(task of tasksInitialData; track task.id){
+            @for(task of dataFetch.localTasks(); track task.id){
             <tr>
                 <td [style.opacity]='getOpacity(task.status)'>{{task.title}}</td>
                 <td [style.opacity]='getOpacity(task.status)'>{{task.description}}</td>
@@ -41,8 +41,9 @@
                 <td [style.opacity]='getOpacity(task.status)'>{{task.deadline}}</td>
                 <td>
                     <div class="edit-actions">
-                        <button type="submit" class="btn-edit" (click)="editTask(task.id)">Edit</button>
+                        <button type="submit" class="btn-edit" (click)="editTask(task)">Edit</button>
                         <button type="button" class="btn-delete" (click)="deleteTask(task.id)">Delete</button>
+                        
                     </div>
                 </td>
             </tr>
@@ -50,3 +51,7 @@
         </tbody>
     </table>
 </div>
+
+@if(isEditModal()){
+    <app-add-modal (closeModalOutput)="handleModal()" (onSubmitForm)="saveNewTask($event)" [selectedTask]="selectedTask()"/>
+}

@@ -1,12 +1,12 @@
 <div class="kanban-container" cdkDropListGroup>
   @for(tabName of tabNames; track tabName){
-  <div class="kanban-column" cdkDropList [cdkDropListData]="tasksInitialData[tabName]" (cdkDropListDropped)="handleDragAndDrop($event)">
+  <div class="kanban-column" cdkDropList [cdkDropListData]="tasksInitialData()[tabName]" (cdkDropListDropped)="handleDragAndDrop($event)">
     <!-- kanban-column-dropzone -->
     <h3>
       {{ tabName }}
-      <div class="kanban-column-count">{{ tasksInitialData[tabName].length }}</div>
+      <div class="kanban-column-count">{{ tasksInitialData()[tabName].length }}</div>
     </h3>
-    @for(task of tasksInitialData[tabName]; track task.id){
+    @for(task of tasksInitialData()[tabName]; track task.id){
 
     <div class="kanban-card" draggable="true" cdkDrag>
       <div [style.display]="'flex'">
