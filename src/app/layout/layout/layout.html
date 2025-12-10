@@ -2,6 +2,6 @@
 <app-main-body />
 <app-footer />
 <button class="theme-toggle-btn" (click)="toggleTheme()"><fa-icon [icon]="solidEye"></fa-icon></button>
-@if(isModalOpen){
-    <app-add-modal (closeModalOutput)="handleModal()" (onSubmitForm)="saveNewTask($event)"/>
+@if(modalState.modalConfig().mode !== "CLOSED"){
+    <app-common-modal/>
 }

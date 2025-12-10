@@ -1,1 +1,42 @@
-<p>view-modal works!</p>
+<div class="view-modal">
+                <div class="view-modal-content">
+
+                    <!-- LEFT COLUMN -->
+                    <div class="vm-left">
+                        <h2 class="vm-title">{{task()?.title}}</h2>
+
+                        <div class="vm-section">
+                            <h3>Description</h3>
+                            <p class="vm-text">{{task()?.description}}</p>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT SIDEBAR  -->
+                    <div class="vm-right">
+
+                        <div class="vm-card">
+                            <div class="vm-detail-row">
+                                <span class="vm-label">Status</span>
+                                <span class="vm-value">
+                                    {{task()?.status}}
+                                    <!-- <StatusLabel status= /> -->
+                                    </span> 
+                            </div>
+
+                            <div class="vm-detail-row">
+                                <span class="vm-label">Priority</span>
+                                <span class="vm-value">
+                                    {{task()?.priority}}
+                                    <!-- <PriorityLabel priority={task.priority} /> -->
+                                </span>
+                            </div>
+
+                            <div class="vm-detail-row">
+                                <span class="vm-label">Due Date</span>
+                                <span class="vm-value vm-highlight">{{task()?.deadline}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>

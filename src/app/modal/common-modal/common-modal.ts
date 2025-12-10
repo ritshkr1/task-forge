@@ -1,25 +1,22 @@
-import { Component,output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { ModalStateService } from '../modal.service';
+import { ViewModal } from '../view-modal/view-modal';
+import { AddModal } from '../add-modal/add-modal';
 
 @Component({
   selector: 'app-common-modal',
-  imports: [FormsModule],
+  imports: [FormsModule, ViewModal, AddModal],
   templateUrl: './common-modal.html',
   styleUrl: './common-modal.css',
 })
 export class CommonModal {
-  title ='Modal';
-  primaryText = 'Submit';
-  secondaryText = "Close";
-  closeModalOutput = output();
-  onSubmitModal = output();
-  closeModal(event:Event){
+  modalService = inject(ModalStateService);
+  closeModal(event: Event) {
     event.stopPropagation();
-    this.closeModalOutput.emit();
+    this.modalService.closeModal();
   }
-  submitModal(){
-    console.log('submit function called');
-    this.onSubmitModal.emit();
+  submitModal() {
+    this.modalService.saveModalData();
   }
 }
