@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { Task } from '../../interface/task.model';
 
 @Component({
   selector: 'app-view-modal',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './view-modal.css',
 })
 export class ViewModal {
-
+  task = input.required<Task | null>();
 }

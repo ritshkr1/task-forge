@@ -162,17 +162,24 @@ table {
   /* Ensure table remains readable */
 }
 
-thead {
+thead, tfoot{
   background: var(--bg-tertiary);
   /* Use a defined var */
   color: var(--text-primary);
   font-weight: 800;
   text-align: left;
+  width: 100%;
 }
 
 table thead {
   position: sticky;
   top: 0;
+  z-index: 10;
+}
+table tfoot {
+  position: sticky;
+
+  bottom: 0;
   z-index: 10;
 }
 
@@ -523,6 +530,7 @@ select option {
   box-shadow: none;
   cursor: pointer;
   font-weight: 700;
+  font-size: 13px;
   color: var(--text-primary);
   display: inline-flex;
   align-items: center;

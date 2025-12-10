@@ -1,66 +1,76 @@
-import { Component ,WritableSignal,signal} from '@angular/core';
-import { DataFetch } from '../../data-sharing/data-fetch';
+import { Component, WritableSignal, signal, inject } from '@angular/core';
+import { TaskService } from '../../data-sharing/task.service';
 import { Task } from '../../interface/task.model';
 import { TabNameType } from '../../interface/task.model';
-import {CdkDrag, CdkDragDrop, CdkDropList,CdkDropListGroup, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import {FormsModule} from '@angular/forms'
-
+import { FormsModule } from '@angular/forms';
+import { ModalStateService } from '../../modal/modal.service';
 
 @Component({
   selector: 'app-kanban-dashboard',
-  imports: [CdkDrag,CdkDropList,CdkDropListGroup,FontAwesomeModule,FormsModule],
+  imports: [CdkDrag, CdkDropList, CdkDropListGroup, FontAwesomeModule, FormsModule],
   templateUrl: './kanban-dashboard.html',
   styleUrl: './kanban-dashboard.css',
 })
 export class KanbanDashboard {
+  private modalState = inject(ModalStateService);
   faPlus = faPlus;
-  tabNames: TabNameType[] = ["To-Do", "In-Progress", "Done"];
+  tabNames: TabNameType[] = ['To-Do', 'In-Progress', 'Done'];
   isNewTaskTitleOpen = {
-  'To-Do':false,
-  'In-Progress':false,
-  'Done':false,
-}
+    'To-Do': false,
+    'In-Progress': false,
+    Done: false,
+  };
   newTaskTitle = {
-  'To-Do':'',
-  'In-Progress':'',
-  'Done':'',
-}
-  tasksInitialData:WritableSignal<any> = signal({
-  'To-Do': [],
-  'In-Progress':[],
-  'Done':[],
-})
-  constructor(private dataFetch : DataFetch){
+    'To-Do': '',
+    'In-Progress': '',
+    Done: '',
+  };
+  tasksInitialData: WritableSignal<any> = signal({
+    'To-Do': [],
+    'In-Progress': [],
+    Done: [],
+  });
+  constructor(private taskService: TaskService) {
     this.getTasksData();
-    }
-
-
-  getTasksData(){
-    const groupedTasks = this.dataFetch.groupTasks(this.dataFetch.localTasks())
-    this.tasksInitialData.set(groupedTasks)
-    
   }
-  handleQuickTask(tabName: TabNameType){
-    if(this.newTaskTitle[tabName]){
+
+  getTasksData() {
+    const groupedTasks = this.taskService.groupTasks(this.taskService.localTasks());
+    this.tasksInitialData.set(groupedTasks);
+  }
+  handleQuickTask(tabName: TabNameType) {
+    if (this.newTaskTitle[tabName]) {
       const newDate = new Date().toLocaleDateString('en-GB');
-      const newTask = {title: this.newTaskTitle[tabName],
+      const newTask = {
+        title: this.newTaskTitle[tabName],
         status: tabName,
-        description: "Quick Description",
+        description: 'Quick Description',
         priority: 'Low',
         id: crypto.randomUUID(),
-        deadline: newDate,}
-      this.tasksInitialData()[tabName] = [...this.tasksInitialData()[tabName],newTask];
+        deadline: newDate,
+      };
+      this.tasksInitialData()[tabName] = [...this.tasksInitialData()[tabName], newTask];
     }
-    this.newTaskTitle[tabName] = ''; 
-      this.isNewTaskTitleOpen[tabName] = false;
+    this.newTaskTitle[tabName] = '';
+    this.isNewTaskTitleOpen[tabName] = false;
   }
-  handleOpenQuick(tabName:TabNameType){
-    this.isNewTaskTitleOpen[tabName] = true
+  handleOpenQuick(tabName: TabNameType) {
+    this.isNewTaskTitleOpen[tabName] = true;
   }
-  
 
+  handleClickEvent(task: Task) {
+    this.modalState.openViewModal(task);
+  }
 
   handleDragAndDrop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -70,9 +80,9 @@ export class KanbanDashboard {
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
-    this.dataFetch.updateTasksLocal(this.tasksInitialData());
+    this.taskService.updateTasksLocal(this.tasksInitialData());
   }
 }

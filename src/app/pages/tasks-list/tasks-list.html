@@ -18,13 +18,15 @@
         <thead>
             <tr>
                 @for (head of tableHead; track head.key) {
-                <th>{{head.key}}</th>
+                <th>
+                    <tf-sort-button [title]="head.key" [direction]="head.direction" (onSort)="handleTableSort(head)"/>
+                    </th>
                 }
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @for(task of dataFetch.localTasks(); track task.id){
+            @for(task of taskService.localTasks(); track task.id){
             <tr>
                 <td [style.opacity]='getOpacity(task.status)'>{{task.title}}</td>
                 <td [style.opacity]='getOpacity(task.status)'>{{task.description}}</td>
@@ -49,9 +51,12 @@
             </tr>
             }
         </tbody>
+        <tfoot>
+    <tr>
+      <td colspan="6">
+        <p style="width: 100%;"> Total Count: {{taskService.localTasks().length}}</p>
+      </td>
+    </tr>
+  </tfoot>
     </table>
 </div>
-
-@if(isEditModal()){
-    <app-add-modal (closeModalOutput)="handleModal()" (onSubmitForm)="saveNewTask($event)" [selectedTask]="selectedTask()"/>
-}

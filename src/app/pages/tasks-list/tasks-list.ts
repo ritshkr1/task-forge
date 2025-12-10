@@ -1,49 +1,62 @@
-import { Component,output,WritableSignal,signal} from '@angular/core';
-import { DataFetch } from '../../data-sharing/data-fetch';
+import { Component, output, WritableSignal, signal, inject } from '@angular/core';
+import { TaskService } from '../../data-sharing/task.service';
 import { Task } from '../../interface/task.model';
-import { AddModal } from '../../modal/add-modal/add-modal';
+import { SortButton } from '../../components/sort-button';
+import { ModalStateService } from '../../modal/modal.service';
 
 @Component({
   selector: 'app-tasks-list',
-  imports: [AddModal],
+  imports: [SortButton],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.css',
 })
-export class TasksList{
-  isEditModal = signal(false)
-  selectedTask = signal<Task | null>(null)
+export class TasksList {
+  private modalState = inject(ModalStateService);
   tableHead = [
     { key: 'Title', direction: '' },
     { key: 'Description', direction: '' },
     { key: 'Status', direction: '' },
     { key: 'Priority', direction: '' },
-    { key: 'Deadline', direction: '' }
+    { key: 'Deadline', direction: '' },
   ];
   callEditTask = output<number | string>();
   callDeleteTask = output<number | string>();
-   tasksInitialData :WritableSignal<Task[]> = signal([])
-  constructor(public dataFetch : DataFetch){
+  tasksInitialData: WritableSignal<Task[]> = signal([]);
+  constructor(public taskService: TaskService) {
     // this.dataFetch.getData().subscribe(data => {
     //   this.tasksInitialData = data
     // })
-    
   }
-  handleModal(){
-    this.isEditModal.update( curr => !curr);
+  handleModal() {}
+  saveNewTask(event: Task) {
+    this.taskService.updateTask(event);
   }
-  saveNewTask(event:Task){
-    this.isEditModal.update( curr => !curr);
-    this.dataFetch.updateTask(event)
-  }
-  editTask(Task:Task) {
-    this.selectedTask.set(Task)
-    this.isEditModal.update( curr => !curr);
+  editTask(Task: Task) {
+    this.modalState.openEditModal(Task);
   }
   deleteTask(id: number | string) {
-    this.dataFetch.deleteTask(id)
+    this.taskService.deleteTask(id);
   }
 
   getOpacity(status: string) {
-    return status === "Done" ? "0.45" : "1"
+    return status === 'Done' ? '0.45' : '1';
+  }
+
+  handleTableSort(head: any) {
+    const sortNextDirection = head.direction === 'asc' ? 'desc' : 'asc';
+    const activeSort: { key: keyof Task; direction: string } = {
+      key: head.key.toLowerCase(),
+      direction: sortNextDirection,
+    };
+    const updatedTableHeadItems = this.tableHead.map((config) => {
+      if (config.key === head.key) {
+        return { key: head.key, direction: sortNextDirection };
+      } else {
+        return { key: config.key, direction: '' };
+      }
+    });
+
+    this.tableHead = updatedTableHeadItems;
+    this.taskService.handleSort(activeSort.key, activeSort.direction);
   }
 }

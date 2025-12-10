@@ -1,21 +1,21 @@
-<app-common-modal (closeModalOutput)="handleOnCloseAddModal()" (onSubmitModal)="handleOnSubmit()">
+
   <div class="modal-field">
     <label>Title</label>
-    <input type="text" [(ngModel)]="newTask.title" name="title" placeholder="Title ..." />
+    <input type="text" [(ngModel)]="task().title" name="title" placeholder="Title ..." />
   </div>
 
   <div class="modal-field">
     <label>Description</label>
     <input
       type="text"
-      [(ngModel)]="newTask.description"
+      [(ngModel)]="task().description"
       name="description"
       placeholder="Description ..."
     />
   </div>
   <div class="modal-field">
     <label>Status</label>
-    <select [(ngModel)]="newTask.status">
+    <select [(ngModel)]="task().status">
       @for(item of ['To-Do' ,'In-Progress' , 'Done'];track item){
       <option [value]="item">{{ item }}</option>
       }
@@ -23,7 +23,7 @@
   </div>
   <div class="modal-field">
     <label>Priority</label>
-    <select [(ngModel)]="newTask.priority">
+    <select [(ngModel)]="task().priority">
       @for(item of [ 'High', 'Medium' , 'Low'];track item){
       <option [value]="item">{{ item }}</option>
       }
@@ -33,7 +33,7 @@
   <div class="modal-field">
     <label>Deadline</label>
     <p-datepicker
-      [(ngModel)]="newTask.deadline"
+      [(ngModel)]="task().deadline"
       [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" 
       [showButtonBar]="true"
       [dataType]="'string'"
@@ -41,4 +41,3 @@
       class="prime-ng-tf-datepicker"
     />
   </div>
-</app-common-modal>
