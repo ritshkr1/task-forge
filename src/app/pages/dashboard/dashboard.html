@@ -1,117 +1,113 @@
 <div class="dashboard-container">
-    <section class="dashboard-metrics-bar">
-        <div class="metrics-container">
-            <div class="metric-box">
-
-                <i class="metric-icon completed-icon">
-                    <!-- <AweFontIcons iconName={'square-check'} /> -->
-                </i>
-                <div class="metric-details">
-                    <span class="metric-value">0</span>
-                    <span class="metric-label">completed in the last 7 days</span>
-                </div>
-            </div>
-            <div class="metric-box">
-                <i class="metric-icon updated-icon">
-                    <!-- <AweFontIcons iconName={'wrench'} /> -->
-                </i>
-                <div class="metric-details">
-                    <span class="metric-value">6</span>
-                    <span class="metric-label">updated in the last 7 days</span>
-                </div>
-            </div>
-            <div class="metric-box">
-                <i class="fas fa-plus-square metric-icon created-icon">
-                    <!-- <AweFontIcons iconName={'square-plus'} /> -->
-                </i>
-                <div class="metric-details">
-                    <span class="metric-value">6</span>
-                    <span class="metric-label">created in the last 7 days</span>
-                </div>
-            </div>
-            <div class="metric-box">
-                <i class="fas fa-calendar-alt metric-icon duesoon-icon">
-                    <!-- <AweFontIcons iconName={'calendar-alt'} /> -->
-                </i>
-                <div class="metric-details">
-                    <span class="metric-value">0</span>
-                    <span class="metric-label">due soon in the next 7 days</span>
-                </div>
-            </div>
+  <section class="dashboard-metrics-bar">
+    <div class="metrics-container">
+      <div class="metric-box">
+        <i class="metric-icon completed-icon">
+          <!-- <AweFontIcons iconName={'square-check'} /> -->
+        </i>
+        <div class="metric-details">
+          <span class="metric-value">0</span>
+          <span class="metric-label">completed in the last 7 days</span>
         </div>
-    </section>
-    <main class="dashboard-grid">
-        <section class="card status-overview">
-            <h2>Status overview</h2>
-            <p>Get a snapshot of the status of your work items. <a href="#">View all work items</a></p>
-            <div class="status-content">
-                <div class="donut-chart-container">
-                    <div class="donut-chart">
+      </div>
+      <div class="metric-box">
+        <i class="metric-icon updated-icon">
+          <!-- <AweFontIcons iconName={'wrench'} /> -->
+        </i>
+        <div class="metric-details">
+          <span class="metric-value">6</span>
+          <span class="metric-label">updated in the last 7 days</span>
+        </div>
+      </div>
+      <div class="metric-box">
+        <i class="fas fa-plus-square metric-icon created-icon">
+          <!-- <AweFontIcons iconName={'square-plus'} /> -->
+        </i>
+        <div class="metric-details">
+          <span class="metric-value">6</span>
+          <span class="metric-label">created in the last 7 days</span>
+        </div>
+      </div>
+      <div class="metric-box">
+        <i class="fas fa-calendar-alt metric-icon duesoon-icon">
+          <!-- <AweFontIcons iconName={'calendar-alt'} /> -->
+        </i>
+        <div class="metric-details">
+          <span class="metric-value">0</span>
+          <span class="metric-label">due soon in the next 7 days</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <main class="dashboard-grid">
+    <section class="card status-overview">
+      <h2>Status overview</h2>
+      <p>Get a snapshot of the status of your work items. <a [routerLink]="'/tasks'">View all work items</a></p>
+      <div class="status-content">
+        <div class="donut-chart-container">
+          <!-- <div class="donut-chart">
                         <span class="total-count">6</span>
                         <span class="chart-label">Total work item...</span>
-                    </div>
-                </div>
-                <div class="status-legend">
-                    <ul>
-                        <li><span class="color-box in-progress"></span> In Progress: 4</li>
-                        <li><span class="color-box to-do"></span> To Do: 1</li>
-                        <li><span class="color-box done"></span> Done: 1</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="status-summary-boxes">
-                <div class="summary-box">
-                    <strong>0</strong>
-                    <span>completed in the last 7 days</span>
-                </div>
-                <div class="summary-box">
-                    <strong>6</strong>
-                    <span>updated in the last 7 days</span>
-                </div>
-                <div class="summary-box">
-                    <strong>6</strong>
-                    <span>created in the last 7 days</span>
-                </div>
-                <div class="summary-box">
-                    <strong>0</strong>
-                    <span>due soon in the next 7 days</span>
-                </div>
-            </div>
-        </section>
+                    </div> -->
+          <canvas
+            baseChart
+            [data]="doughnutChartData"
+            [options]="doughnutChartOptions"
+            [type]="doughnutChartType"
+          >
+          </canvas>
+        </div>
+      </div>
+    </section>
 
-        <section class="card recent-activity">
-            <h2>Recent activity</h2>
-            <p>Stay up to date with what's happening across the space.</p>
-            <div class="activity-list">
-                <div class="activity-item">
-                    <span class="date">Today</span>
-                </div>
-                <div class="activity-item">
-                    <span class="user-icon">R</span>
-                    <p>Ritesh Kumar updated field "status" on <a href="#">CCS-6: (Sample) Develop Frontend Interface</a>
-                        <span class="tag to-do-tag">TO DO</span></p>
-                    <span class="time">5 minutes ago</span>
-                </div>
-                <div class="activity-item">
-                    <span class="user-icon">R</span>
-                    <p>Ritesh Kumar updated field "status" on <a href="#">CCS-5: (Sample) Implement NLP Engine</a> <span
-                            class="tag in-progress-tag">IN PROGRESS</span></p>
-                    <span class="time">5 minutes ago</span>
-                </div>
-                <div class="activity-item">
-                    <span class="user-icon">R</span>
-                    <p>Ritesh Kumar updated field "status" on <a href="#">CCS-4: (Sample) Design Chatbot Personality</a>
-                        <span class="tag in-progress-tag">IN PROGRESS</span></p>
-                    <span class="time">5 minutes ago</span>
-                </div>
-            </div>
-        </section>
+    <section class="card recent-activity">
+      <h2>Recent activity</h2>
+      <p>Stay up to date with what's happening across the space.</p>
+      <div class="activity-list">
+        <div class="activity-item">
+          <span class="date">Today</span>
+        </div>
+        <div class="activity-item">
+          <span class="user-icon">R</span>
+          <p>
+            Ritesh Kumar updated field "status" on
+            <a href="#">CCS-6: (Sample) Develop Frontend Interface</a>
+            <span class="tag to-do-tag">TO DO</span>
+          </p>
+          <span class="time">5 minutes ago</span>
+        </div>
+        <div class="activity-item">
+          <span class="user-icon">R</span>
+          <p>
+            Ritesh Kumar updated field "status" on
+            <a href="#">CCS-5: (Sample) Implement NLP Engine</a>
+            <span class="tag in-progress-tag">IN PROGRESS</span>
+          </p>
+          <span class="time">5 minutes ago</span>
+        </div>
+        <div class="activity-item">
+          <span class="user-icon">R</span>
+          <p>
+            Ritesh Kumar updated field "status" on
+            <a href="#">CCS-4: (Sample) Design Chatbot Personality</a>
+            <span class="tag in-progress-tag">IN PROGRESS</span>
+          </p>
+          <span class="time">5 minutes ago</span>
+        </div>
+      </div>
+    </section>
 
-        <section class="card priority-breakdown">
-            <h2>Priority breakdown</h2>
-            <p>Get a holistic view of how work is being prioritized. <a href="#">How to manage priorities for spaces</a>
-            </p>
-            <div class="chart-placeholder">
+    <section class="card priority-breakdown">
+      <h2>Priority breakdown</h2>
+      <p>
+        Get a holistic view of how work is being prioritized.
+        <a href="#">How to manage priorities for spaces</a>
+      </p>
+      <div class="chart-placeholder">
+        <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="barChartType">
+        </canvas>
+      </div>
+      <!-- <div class="chart-placeholder">
                 <div class="y-axis">
                     <span>6</span>
                     <span>4</span>
@@ -134,96 +130,99 @@
                     <span>Lowest</span>
                     <span>None</span>
                 </div>
-            </div>
-        </section>
+            </div> -->
+    </section>
 
-        <section class="card types-of-work">
-            <h2>Types of work</h2>
-            <p>Get a breakdown of work items by their types. <a href="#">View all items</a></p>
-            <div class="work-type-list">
-                <div class="work-type-item">
-                    <span class="type">Epic</span>
-                    <span class="distribution">33%</span>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 33%"></div>
-                    </div>
-                </div>
-                <div class="work-type-item">
-                    <span class="type"><i class="fas fa-check-square"></i> Task</span>
-                    <span class="distribution">33%</span>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 33%"></div>
-                    </div>
-                </div>
-                <div class="work-type-item">
-                    <span class="type">Story</span>
-                    <span class="distribution">33%</span>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 33%"></div>
-                    </div>
-                </div>
-                <div class="work-type-item">
-                    <span class="type">Subtask</span>
-                    <span class="distribution">0%</span>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 0%"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="card types-of-work">
+      <h2>Types of work</h2>
+      <p>Get a breakdown of work items by their types. <a href="#">View all items</a></p>
+      <div class="work-type-list">
+        <div class="work-type-item">
+          <span class="type">Epic</span>
+          <span class="distribution">33%</span>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width: 33%"></div>
+          </div>
+        </div>
+        <div class="work-type-item">
+          <span class="type"><i class="fas fa-check-square"></i> Task</span>
+          <span class="distribution">33%</span>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width: 33%"></div>
+          </div>
+        </div>
+        <div class="work-type-item">
+          <span class="type">Story</span>
+          <span class="distribution">33%</span>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width: 33%"></div>
+          </div>
+        </div>
+        <div class="work-type-item">
+          <span class="type">Subtask</span>
+          <span class="distribution">0%</span>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section class="card team-workload">
-            <h2>Team workload</h2>
-            <p>Monitor the capacity of your team. <a href="#">Reassign work items to get the right balance</a></p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Assignee</th>
-                        <th>Work distribution</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span class="user-icon unassigned-icon">?</span>
-                            Unassigned
-                        </td>
-                        <td>
-                            100%
-                            <div class="progress-bar-container thin-bar">
-                                <div class="progress-bar" style="width: 100%"></div>
-                            </div>
-                            <span class="work-item-count">100% (6/6 work items)</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+    <section class="card team-workload">
+      <h2>Team workload</h2>
+      <p>
+        Monitor the capacity of your team.
+        <a href="#">Reassign work items to get the right balance</a>
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Assignee</th>
+            <th>Work distribution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="user-icon unassigned-icon">?</span>
+              Unassigned
+            </td>
+            <td>
+              100%
+              <div class="progress-bar-container thin-bar">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+              <span class="work-item-count">100% (6/6 work items)</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-        <section class="card epic-progress">
-            <h2>Epic progress</h2>
-            <p>See how your epics are progressing at a glance. <a href="#">View all epics</a></p>
-            <div class="epic-item">
-                <span class="epic-title">CCS-2 (Sample) Chatbot Development</span>
-                <div class="progress-legend">
-                    <span class="done">Done</span>
-                    <span class="in-progress">In progress</span>
-                    <span class="to-do">To do</span>
-                </div>
-                <div class="multi-progress-bar">
-                    <div class="segment in-progress-segment" style="width: 50%">50%</div>
-                    <div class="segment to-do-segment" style="width: 50%">50%</div>
-                </div>
-            </div>
-            <div class="epic-item">
-                <span class="epic-title">CCS-1 (Sample) User Interaction Design</span>
-                <div class="progress-legend">
-                    <span class="done">Done</span>
-                </div>
-                <div class="multi-progress-bar">
-                    <div class="segment done-segment" style="width:100%">100%</div>
-                </div>
-            </div>
-        </section>
-    </main>
+    <section class="card epic-progress">
+      <h2>Epic progress</h2>
+      <p>See how your epics are progressing at a glance. <a href="#">View all epics</a></p>
+      <div class="epic-item">
+        <span class="epic-title">CCS-2 (Sample) Chatbot Development</span>
+        <div class="progress-legend">
+          <span class="done">Done</span>
+          <span class="in-progress">In progress</span>
+          <span class="to-do">To do</span>
+        </div>
+        <div class="multi-progress-bar">
+          <div class="segment in-progress-segment" style="width: 50%">50%</div>
+          <div class="segment to-do-segment" style="width: 50%">50%</div>
+        </div>
+      </div>
+      <div class="epic-item">
+        <span class="epic-title">CCS-1 (Sample) User Interaction Design</span>
+        <div class="progress-legend">
+          <span class="done">Done</span>
+        </div>
+        <div class="multi-progress-bar">
+          <div class="segment done-segment" style="width: 100%">100%</div>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>
