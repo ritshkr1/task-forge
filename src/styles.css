@@ -33,7 +33,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  
 }
 
 /* Reduce Motion for accessibility */
@@ -162,7 +161,8 @@ table {
   /* Ensure table remains readable */
 }
 
-thead, tfoot{
+thead,
+tfoot {
   background: var(--bg-tertiary);
   /* Use a defined var */
   color: var(--text-primary);
@@ -344,7 +344,7 @@ label {
 input[type='text'],
 input[type='date'],
 select,
-textarea{
+textarea {
   padding: 0.6rem 0.8rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
@@ -372,7 +372,7 @@ textarea:focus {
   outline: none;
 }
 
-.deadline-datapicker-class{
+.deadline-datapicker-class {
   width: 100%;
 }
 
@@ -917,12 +917,12 @@ select option {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding-top:0;
+  padding-top: 0;
   /* Reduced gap between tasks */
   border: 1px solid #101214;
   /* Border color matches background */
   height: 500px;
-  overflow-y:auto;
+  overflow-y: auto;
   /* Ensure column only takes up necessary height */
   max-height: calc(100vh - 120px);
 }
@@ -944,7 +944,7 @@ select option {
   display: flex;
   align-items: center;
   position: sticky;
-  top:0;
+  top: 0;
   z-index: 50;
   text-transform: uppercase;
 }
@@ -960,7 +960,7 @@ select option {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height:45px;
+  height: 45px;
   margin-left: 10px;
   padding: 5px;
   background-color: var(--bg-secondary);
@@ -1037,7 +1037,7 @@ select option {
   bottom: 0;
   z-index: 50; */
 }
-.kanban-column-footer button{
+.kanban-column-footer button {
   max-width: 40px;
   background: var(--card-bg);
   color: var(--text-secondary);
@@ -1316,24 +1316,17 @@ th {
 .status-content {
   /* Mobile Default: Stack donut chart and legend vertically */
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 15px;
   margin-bottom: 1rem;
 }
 
 .donut-chart-container {
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: 450px;
+  height: 450px;
   border-radius: 50%;
-  /* Simplified Conic-Gradient based on your status colors */
-  background-image: conic-gradient(
-    var(--warning-500) 0% 66.6%,
-    /* In Progress: 4/6 */ var(--accent) 66.6% 83.3%,
-    /* To Do: 1/6 (Using Accent Blue as To Do placeholder) */ var(--success-500) 83.3% 100%
-      /* Done: 1/6 */
-  );
 }
 
 .donut-chart {
@@ -1514,7 +1507,7 @@ th {
    ========================================= */
 
 .chart-placeholder {
-  height: 180px;
+  height: 400px;
   /* Reduced height for mobile */
   display: flex;
   align-items: flex-end;
@@ -1762,12 +1755,7 @@ th {
 /* Tablet/Small Desktop (481px - 1024px) */
 @media (min-width: 481px) {
   /* Status Overview: Restore horizontal content layout */
-  .status-content {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 30px;
-  }
-
+  
   /* Status Overview: Boxes can display in a single row */
   .status-summary-boxes {
     flex-wrap: nowrap;
@@ -2018,15 +2006,21 @@ th {
   outline-offset: 2px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.p-datepicker .p-datepicker-panel{
-    background: var(--bg-primary) !important;
-    min-width: unset !important;
-    width: 250px;
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.prime-ng-tf-datepicker{
+.p-datepicker .p-datepicker-panel {
+  background: var(--bg-primary) !important;
+  min-width: unset !important;
+  width: 250px;
+}
+
+.prime-ng-tf-datepicker {
   width: 100%;
 }
