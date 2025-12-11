@@ -42,10 +42,6 @@ export class Dashboard {
         grid: {
           display: false, // No grid lines on the Priority axis
         },
-        title: {
-          display: true,
-          text: 'Priority Level',
-        },
       },
       y: {
         grid: {
@@ -56,10 +52,6 @@ export class Dashboard {
         ticks: {
           stepSize: 10, // Ensure the Y-axis steps are clean (e.g., 0, 10, 20...)
         },
-        title: {
-          display: false,
-          text: 'Total Item Count',
-        },
       },
     },
 
@@ -68,26 +60,6 @@ export class Dashboard {
       legend: {
         display: false, // Hiding the legend since we only have one dataset
       },
-      title: {
-        display: true,
-        text: 'Priority Breakdown',
-        position: 'top', // Explicitly keep it at the top
-        align: 'start',
-
-        font: {
-          size: 14, // Make the main title larger
-        },
-      },
-
-      // Adding data labels on top of the bars for quick reading
-      // Note: This requires installing and configuring the chartjs-plugin-datalabels
-      /*
-    datalabels: {
-        anchor: 'end',
-        align: 'top',
-        formatter: (value) => value,
-    }
-    */
     },
   };
 
