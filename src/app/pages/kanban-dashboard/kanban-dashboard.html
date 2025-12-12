@@ -2,10 +2,17 @@
   @for(tabName of tabNames; track tabName){
   <div class="kanban-column" cdkDropList [cdkDropListData]="tasksInitialData()[tabName]" (cdkDropListDropped)="handleDragAndDrop($event)">
     <!-- kanban-column-dropzone -->
-    <h3>
+    <h3 style="padding-top:15px ;">
       {{ tabName }}
-      <div class="kanban-column-count">{{ tasksInitialData()[tabName].length }}</div>
+      @if(!isLoading){
+
+        <div class="kanban-column-count">{{ tasksInitialData()[tabName].length }}</div>
+      }
     </h3>
+    @if(isLoading){
+      @for(task of [].constructor(5); track task){
+        <p-skeleton height="7rem" />}
+      }@else{
     @for(task of tasksInitialData()[tabName]; track task.id){
 
     <div class="kanban-card" draggable="true" cdkDrag (click)="handleClickEvent(task)">
@@ -26,7 +33,7 @@
   </div>}
     <div class="kanban-column-footer">
                         <button (click)="handleOpenQuick(tabName)"><fa-icon [icon]="faPlus"></fa-icon></button>
-                    </div>
+                    </div>}
   </div>
   }
 </div>

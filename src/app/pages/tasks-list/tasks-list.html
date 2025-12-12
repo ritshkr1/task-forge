@@ -26,6 +26,18 @@
             </tr>
         </thead>
         <tbody>
+            @if(isLoading){
+                @for(task of [].constructor(5); track task){
+                <tr>
+                    <td> <p-skeleton height="4rem"/></td>
+                    <td> <p-skeleton height="4rem"/></td>
+                    <td> <p-skeleton height="4rem"/></td>
+                    <td> <p-skeleton height="4rem"/></td>
+                    <td> <p-skeleton height="4rem"/></td>
+                    <td> <p-skeleton height="4rem"/></td>
+                </tr>}
+       
+      }@else{
             @for(task of taskService.localTasks(); track task.id){
             <tr>
                 <td [style.opacity]='getOpacity(task.status)'>{{task.title}}</td>
@@ -49,14 +61,15 @@
                     </div>
                 </td>
             </tr>
-            }
+            }}
         </tbody>
+        @if(!isLoading){
         <tfoot>
     <tr>
       <td colspan="6">
         <p style="width: 100%;"> Total Count: {{taskService.localTasks().length}}</p>
       </td>
     </tr>
-  </tfoot>
+  </tfoot>}
     </table>
 </div>

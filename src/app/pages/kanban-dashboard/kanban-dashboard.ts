@@ -2,6 +2,7 @@ import { Component, WritableSignal, signal, inject } from '@angular/core';
 import { TaskService } from '../../data-sharing/task.service';
 import { Task } from '../../interface/task.model';
 import { TabNameType } from '../../interface/task.model';
+import { SkeletonModule } from 'primeng/skeleton';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -17,11 +18,12 @@ import { ModalStateService } from '../../modal/modal.service';
 
 @Component({
   selector: 'app-kanban-dashboard',
-  imports: [CdkDrag, CdkDropList, CdkDropListGroup, FontAwesomeModule, FormsModule],
+  imports: [CdkDrag, CdkDropList, CdkDropListGroup, FontAwesomeModule, FormsModule, SkeletonModule],
   templateUrl: './kanban-dashboard.html',
   styleUrl: './kanban-dashboard.css',
 })
 export class KanbanDashboard {
+  isLoading = true;
   private modalState = inject(ModalStateService);
   faPlus = faPlus;
   tabNames: TabNameType[] = ['To-Do', 'In-Progress', 'Done'];

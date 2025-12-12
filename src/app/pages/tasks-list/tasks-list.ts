@@ -3,14 +3,16 @@ import { TaskService } from '../../data-sharing/task.service';
 import { Task } from '../../interface/task.model';
 import { SortButton } from '../../components/sort-button';
 import { ModalStateService } from '../../modal/modal.service';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-tasks-list',
-  imports: [SortButton],
+  imports: [SortButton, SkeletonModule],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.css',
 })
 export class TasksList {
+  isLoading = true;
   private modalState = inject(ModalStateService);
   tableHead = [
     { key: 'Title', direction: '' },

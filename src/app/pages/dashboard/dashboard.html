@@ -2,46 +2,58 @@
   <section class="dashboard-metrics-bar">
     <div class="metrics-container">
       <div class="metric-box">
+        @if(isLoading){<p-skeleton height="4rem" />}
+        @else{
         <i class="metric-icon completed-icon">
           <!-- <AweFontIcons iconName={'square-check'} /> -->
         </i>
         <div class="metric-details">
           <span class="metric-value">0</span>
           <span class="metric-label">completed in the last 7 days</span>
-        </div>
+        </div>}
       </div>
       <div class="metric-box">
+        @if(isLoading){<p-skeleton height="4rem" />}
+        @else{
         <i class="metric-icon updated-icon">
           <!-- <AweFontIcons iconName={'wrench'} /> -->
         </i>
         <div class="metric-details">
           <span class="metric-value">6</span>
           <span class="metric-label">updated in the last 7 days</span>
-        </div>
+        </div>}
       </div>
       <div class="metric-box">
+        @if(isLoading){<p-skeleton height="4rem" />}
+        @else{
         <i class="fas fa-plus-square metric-icon created-icon">
           <!-- <AweFontIcons iconName={'square-plus'} /> -->
         </i>
         <div class="metric-details">
           <span class="metric-value">6</span>
           <span class="metric-label">created in the last 7 days</span>
-        </div>
+        </div>}
       </div>
       <div class="metric-box">
+        @if(isLoading){<p-skeleton height="4rem" />}
+        @else{
         <i class="fas fa-calendar-alt metric-icon duesoon-icon">
           <!-- <AweFontIcons iconName={'calendar-alt'} /> -->
         </i>
         <div class="metric-details">
           <span class="metric-value">0</span>
           <span class="metric-label">due soon in the next 7 days</span>
-        </div>
+        </div>}
       </div>
     </div>
   </section>
   <main class="dashboard-grid">
     <section class="card status-overview">
-      <h2>Status overview</h2>
+      
+      @if(isLoading){
+        <p-skeleton height="35rem" />
+      }@else{
+        <h2>Status overview</h2>
       <p>Get a snapshot of the status of your work items. <a [routerLink]="'/tasks'">View all work items</a></p>
       <div class="status-content">
         <div class="donut-chart-container">
@@ -57,10 +69,13 @@
           >
           </canvas>
         </div>
-      </div>
+      </div>}
     </section>
 
     <section class="card recent-activity">
+      @if(isLoading){
+        <p-skeleton height="35rem" />
+      }@else{
       <h2>Recent activity</h2>
       <p>Stay up to date with what's happening across the space.</p>
       <div class="activity-list">
@@ -94,10 +109,13 @@
           </p>
           <span class="time">5 minutes ago</span>
         </div>
-      </div>
+      </div>}
     </section>
 
     <section class="card priority-breakdown">
+      @if(isLoading){
+        <p-skeleton height="35rem" />
+      }@else{
       <h2>Priority breakdown</h2>
       <p>
         Get a holistic view of how work is being prioritized.
@@ -106,34 +124,13 @@
       <div class="chart-placeholder">
         <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="barChartType">
         </canvas>
-      </div>
-      <!-- <div class="chart-placeholder">
-                <div class="y-axis">
-                    <span>6</span>
-                    <span>4</span>
-                    <span>2</span>
-                    <span>0</span>
-                </div>
-                <div class="bars">
-                    <div class="bar highest" style="height: 0%"></div>
-                    <div class="bar high" style="height: 0%"></div>
-                    <div class="bar medium" style="height: 0%"></div>
-                    <div class="bar low" style="height: 0%"></div>
-                    <div class="bar lowest" style="height: 0%"></div>
-                    <div class="bar none" style="height: 80%"></div>
-                </div>
-                <div class="x-axis">
-                    <span>Highest</span>
-                    <span>High</span>
-                    <span>Medium</span>
-                    <span>Low</span>
-                    <span>Lowest</span>
-                    <span>None</span>
-                </div>
-            </div> -->
+      </div>}
     </section>
 
     <section class="card types-of-work">
+      @if(isLoading){
+        <p-skeleton height="35rem" />
+      }@else{
       <h2>Types of work</h2>
       <p>Get a breakdown of work items by their types. <a href="#">View all items</a></p>
       <div class="work-type-list">
@@ -165,10 +162,13 @@
             <div class="progress-bar" style="width: 0%"></div>
           </div>
         </div>
-      </div>
+      </div>}
     </section>
 
     <section class="card team-workload">
+      @if(isLoading){
+        <p-skeleton height="20rem" />
+      }@else{
       <h2>Team workload</h2>
       <p>
         Monitor the capacity of your team.
@@ -196,10 +196,13 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table>}
     </section>
 
     <section class="card epic-progress">
+      @if(isLoading){
+        <p-skeleton height="20rem" />
+      }@else{
       <h2>Epic progress</h2>
       <p>See how your epics are progressing at a glance. <a href="#">View all epics</a></p>
       <div class="epic-item">
@@ -222,7 +225,7 @@
         <div class="multi-progress-bar">
           <div class="segment done-segment" style="width: 100%">100%</div>
         </div>
-      </div>
+      </div>}
     </section>
   </main>
 </div>

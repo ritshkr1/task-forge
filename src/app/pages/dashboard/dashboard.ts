@@ -2,14 +2,25 @@ import { Component } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { RouterLink } from '@angular/router';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [BaseChartDirective, RouterLink],
+  imports: [BaseChartDirective, RouterLink, SkeletonModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
+  isLoading = true;
+
+  constructor(private cdf: ChangeDetectorRef) {
+    // setTimeout(() => {
+    //   this.isLoading = false;
+    //   this.cdf.detectChanges();
+    //   console.log(this.isLoading);
+    // }, 5000);
+  }
   public barChartData: ChartData<'bar'> = {
     labels: ['Highest', 'High', 'Medium', 'Low', 'Lowest', 'None'],
 
