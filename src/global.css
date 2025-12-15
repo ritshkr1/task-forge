@@ -169,25 +169,17 @@ table {
     /* Ensure table remains readable */
 }
 
-thead,
-tfoot {
+thead {
   background: var(--bg-tertiary);
   /* Use a defined var */
   color: var(--text-primary);
   font-weight: 800;
   text-align: left;
-  width: 100%;
 }
 
 table thead {
   position: sticky;
   top: 0;
-  z-index: 10;
-}
-table tfoot {
-  position: sticky;
-
-  bottom: 0;
   z-index: 10;
 }
 
@@ -361,7 +353,6 @@ label {
 input[type="text"],
 input[type="date"],
 select,
-textarea {
 textarea {
   padding: 0.6rem 0.8rem;
   border: 1px solid var(--border-color);
@@ -547,7 +538,6 @@ select option {
   box-shadow: none;
   cursor: pointer;
   font-weight: 700;
-  font-size: 13px;
   color: var(--text-primary);
   display: inline-flex;
   align-items: center;
@@ -1322,16 +1312,16 @@ th {
 .status-content {
   /* Mobile Default: Stack donut chart and legend vertically */
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 15px;
   margin-bottom: 1rem;
 }
 
 .donut-chart-container {
   position: relative;
-  width: 450px;
-  height: 450px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   /* Simplified Conic-Gradient based on your status colors */
   background-image: conic-gradient(var(--warning-500) 0% 66.6%,
@@ -1523,7 +1513,7 @@ th {
    ========================================= */
 
 .chart-placeholder {
-  height: 400px;
+  height: 180px;
   /* Reduced height for mobile */
   display: flex;
   align-items: flex-end;
@@ -1775,7 +1765,12 @@ th {
 @media (min-width: 481px) {
 
   /* Status Overview: Restore horizontal content layout */
-  
+  .status-content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
   /* Status Overview: Boxes can display in a single row */
   .status-summary-boxes {
     flex-wrap: nowrap;
@@ -2029,5 +2024,4 @@ th {
   /* Green outline */
   outline-offset: 2px;
 }
-
 
