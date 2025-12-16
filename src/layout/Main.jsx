@@ -1,5 +1,3 @@
 export default function Main({ children }) {
-    return <main>
-        {children}
-    </main>
+    return <main className="layout-body">{children}</main>;
 }

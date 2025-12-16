@@ -1,8 +1,8 @@
 import Layout from './layout/Layout'
-import { TASKS_DATA } from './data'
+// import { TASKS_DATA } from './data'
 function App() {
 
-  return <Layout initialTasks={TASKS_DATA} />
+  return <Layout />;
 }
 
 export default App

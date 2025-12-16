@@ -7,9 +7,9 @@ export default function Header({ tabName, setTabName, setModalOpen }) {
         marginLeft: '5px',
     }
     return (
-      <header>
+      <header className="layout-header">
         <span>
-          <span class="text-xl font-bold">Task Forge</span>
+          {/* <span class="text-xl font-bold">Task Forge</span> */}
 
           <button
             className={

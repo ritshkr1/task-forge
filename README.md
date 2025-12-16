@@ -91,8 +91,8 @@ The project is segmented into four phases, ensuring a stable foundation before t
 
 ### **Phase 1: Foundation and Static UI (Routes: /dashboard, /kanban, /list)**
 
-1. Set up React project and configure Tailwind CSS.  
-2. Implement static AppLayout, Sidebar, and Header.  
+1. Set up React project and configure Tailwind CSS.[Done]
+2. Implement static AppLayout, Sidebar, and Header. 
 3. Define and implement React Router for the three primary project views.
 
 ### **Phase 2: Data Integration and Simulation**
