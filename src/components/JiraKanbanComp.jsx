@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   Search, Plus, MoreHorizontal, ChevronDown, 
   BarChart2, List, SlidersHorizontal, User 
