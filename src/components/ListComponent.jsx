@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   Search, SlidersHorizontal, ChevronDown, BarChart2, List, 
   MoreHorizontal, Plus, Zap, CheckSquare, MessageSquare, 
@@ -6,13 +5,15 @@ import {
   AlignJustify, ChevronsUp
 } from 'lucide-react';
 import { ListData } from './ListData';
+import Skeleton from '@mui/material/Skeleton';
+import { useEffect, useState } from 'react';
+import { useCustomGlobalModal } from '../modal/ModalContext';
 
-// --- MOCK DATA (Combining image_4.png & image_5.png) ---
-const listData = [...ListData]
+
 
 // --- Shared Grid Layout ---
 // Defines the width of each column in the grid
-const gridLayoutClass = "grid grid-cols-[100px_1fr_130px_150px_150px_160px_100px_150px_150px_150px_100px_150px] items-center";
+const gridLayoutClass = "grid grid-cols-[100px_200px_130px_150px_150px_130px_100px_150px_130px_130px_100px_150px] items-center";
 
 const ListTableHeader = () => (
   <div className={`
@@ -40,7 +41,7 @@ const ListTableHeader = () => (
   </div>
 );
 
-const ListTableRow = ({ item }) => {
+const ListTableRow = ({ item,onDelete,onEdit }) => {
     const getPriorityIcon = (priority) => {
         switch(priority) {
             case 'medium': 
@@ -138,14 +139,14 @@ const ListTableRow = ({ item }) => {
             <div className="px-2 h-full flex items-center gap-2">
     <button 
         type="button" 
-        onClick={() => editTask(item.id)}
+        onClick={() => onEdit(item.id)}
         className="bg-green-400 hover:bg-green-500 text-white text-xs font-medium px-3 py-1.5 rounded-[3px] transition-colors"
     >
         Edit
     </button>
     <button 
         type="button" 
-        onClick={() => deleteTask(item.id)} 
+        onClick={() => onDelete(item.id)} 
         className="bg-red-400 hover:bg-red-500 text-white text-xs font-medium px-3 py-1.5 rounded-[3px] transition-colors"
     >
         Delete
@@ -157,6 +158,37 @@ const ListTableRow = ({ item }) => {
 
 // --- MAIN COMPONENT ---
 const ListPage = () => {
+    const [loader, setLoader] = useState(true);
+    const [listData, setListData] = useState([...ListData]);
+    const [selectedTask, setSelectedTask] = useState(null);
+    const {openModal} = useCustomGlobalModal();
+
+    
+    useEffect(() => {
+
+    const timer = setTimeout(() => {
+        setLoader(false);
+    }, 5000);
+    return () => {
+        console.log("Cleanup: clearing timer");
+        clearTimeout(timer);
+    };
+}, []);
+
+function handleDeleteTask(id) {
+    const updatedData = listData.filter((task) =>  task.id !== id);
+
+    setListData((tasks) =>  tasks = [...updatedData]);
+}
+function handleEditTask(id){
+    const selectedTask = listData.filter((listTask) => listTask.id === id); 
+    // setSelectedTask((task) => {
+    //     task = listData.filter((listTask) => listTask.id === id);
+
+    //     return task
+    // });
+    openModal(selectedTask);
+}
   return (
     <>
     <div className="h-[calc(100vh-150px)] flex flex-col bg-bg-secondary overflow-hidden text-text-primary">
@@ -212,8 +244,18 @@ const ListPage = () => {
             <ListTableHeader />
             
             <div>
-                {listData.map((item) => (
-                    <ListTableRow key={item.id} item={item} />
+                {loader && <div className='p-2'>
+
+                    <Skeleton height={60}/>
+                    <Skeleton height={60}/>
+                    <Skeleton height={60}/>
+                    <Skeleton height={60}/>
+                    <Skeleton height={60}/>
+                </div>
+                }
+                {!loader && 
+                listData.map((item) => (
+                    <ListTableRow key={item.id} item={item} onEdit={handleEditTask}  onDelete={handleDeleteTask}/>
                 ))}
                 
                 {/* Create Button Row */}

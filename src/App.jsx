@@ -2,6 +2,8 @@ import JiraLayout from './layout/JiraLayout';
 import SummaryDashboard from './components/Dashboard';
 import KanbanJiraBoard from './components/JiraKanbanComp';
 import ListPage from './components/ListComponent';
+import { CustomModalProvider } from './modal/ModalContext';
+import { CommonTaskModal } from './modal/TaskModal';
 
 // 1. Import Outlet
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
@@ -10,9 +12,12 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 // This tells React Router: "Render JiraLayout, and put the current page inside it"
 const LayoutWrapper = () => {
   return (
+    <CustomModalProvider>
     <JiraLayout>
       <Outlet />
+    <CommonTaskModal />
     </JiraLayout>
+    </CustomModalProvider>
   );
 };
 
