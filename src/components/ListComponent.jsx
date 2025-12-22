@@ -187,7 +187,7 @@ function handleEditTask(id){
 
     //     return task
     // });
-    openModal(selectedTask);
+    openModal(selectedTask[0]);
 }
   return (
     <>

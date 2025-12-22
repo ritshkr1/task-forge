@@ -17,9 +17,11 @@ import {
   X, // Import X for closing sidebar
 } from "lucide-react";
 import { useNavigate } from "react-router";
+import { useCustomGlobalModal } from '../modal/ModalContext';
 
 // 1. TOP NAVIGATION
 const TopNavbar = ({ onMenuClick }) => {
+  const {openModal} = useCustomGlobalModal();
   return (
     <nav className="h-14 border-b border-border-main bg-bg-tertiary px-4 flex items-center justify-between shrink-0 z-20 relative transition-colors duration-200">
       <div className="flex items-center gap-4">
@@ -56,7 +58,7 @@ const TopNavbar = ({ onMenuClick }) => {
         </div>
 
         {/* Create Button - Icon only on mobile, Text on Desktop */}
-        <button className="ml-2 bg-accent text-text-primary text-sm font-medium px-2 md:px-3 py-1.5 rounded-[3px] transition-all flex items-center gap-1">
+        <button onClick={() => openModal(null)} className="ml-2 bg-accent text-text-primary text-sm font-medium px-2 md:px-3 py-1.5 rounded-[3px] transition-all flex items-center gap-1">
           <Plus size={19} />
           <span className="hidden md:inline">Create</span>
         </button>
