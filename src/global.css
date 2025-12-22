@@ -51,3 +51,23 @@ body {
   /* Tailwind transition classes */
   @apply transition-colors duration-200 ease-in-out; 
 }
+
+ /* Custom Scrollbar for Dark Theme */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--bg-secondary); /* match your bg-secondary */
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--bg-primary);;
+            border: 3px solid var(--bg-secondary); /* creates padding effect */
+            border-radius: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+        .custom-scrollbar::-webkit-scrollbar-corner {
+            background: var(--bg-secondary);
+        }

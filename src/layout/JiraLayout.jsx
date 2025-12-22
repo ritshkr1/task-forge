@@ -1,4 +1,4 @@
-import { useState } from "react"; // Import useState
+import { useState,useEffect } from "react"; // Import useState
 import { NavLink } from "react-router"; // Ensure using react-router-dom
 import {
   Search,
@@ -16,6 +16,7 @@ import {
   Menu,
   X, // Import X for closing sidebar
 } from "lucide-react";
+import { useNavigate } from "react-router";
 
 // 1. TOP NAVIGATION
 const TopNavbar = ({ onMenuClick }) => {
@@ -137,7 +138,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           {/* Navigation Links */}
           <div className="px-2 py-2 space-y-1">
             {[
-              { icon: Layout, label: "Summary", active: true, disabled: false, navLink: '/' },
+              { icon: Layout, label: "Summary",  disabled: false, navLink: '/' },
               { icon: List, label: "List", disabled: false , navLink: '/list'},
               { icon: Trello, label: "Board", disabled: false , navLink: '/board'},
               { icon: Code, label: "Code", disabled: true },
@@ -222,6 +223,13 @@ const Sidebar = ({ isOpen, onClose }) => {
 const JiraLayout = ({ children }) => {
   // State to control mobile sidebar visibility
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  let navigate = useNavigate();
+ 
+
+  useEffect(() => {
+    navigate("/list");
+  },[]);
 
   return (
     <div className="h-screen w-screen flex flex-col overflow-hidden font-sans">
