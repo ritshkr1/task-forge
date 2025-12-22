@@ -1,38 +1,53 @@
 @import "tailwindcss";
 
-/* 1. MAP COLORS IN THE THEME BLOCK */
 @theme {
-  /* This tells Tailwind: "bg-background" = var(--bg-background) */
-  --color-background: var(--bg-background);
-  --color-surface: var(--bg-surface);
-  --color-primary: var(--text-primary);
-  --color-secondary: var(--text-secondary);
-  --color-border: var(--border-color);
-  --color-brand: var(--brand-color);
+  /* --- BACKGROUNDS --- */
+  --color-bg-primary: var(--bg-primary);     /* Sidebar/App bg */
+  --color-bg-secondary: var(--bg-secondary); /* Main Canvas */
+  --color-bg-tertiary: var(--bg-tertiary);   /* Headers/Nav */
+  
+  --color-neutral-100: var(--neutral-100);   /* Kanban Columns */
+  --color-neutral-200: var(--neutral-200);   /* Inputs */
+  --color-neutral-300: var(--neutral-300);   /* Input Borders */
+
+  /* --- SURFACES / CARDS --- */
+  --color-card-bg: var(--card-bg);
+  --color-card-bg-hover: var(--card-bg-hover);
+
+  /* --- BORDERS --- */
+  --color-border-main: var(--border-color);
+  --color-border-light: var(--border-light);
+
+  /* --- TEXT --- */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  /* --- ACCENTS --- */
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
+
+  /* --- STATUS --- */
+  /* Backgrounds */
+  --color-success-bg: var(--success-bg);
+  --color-error-bg: var(--error-bg);
+  --color-warning-bg: var(--warning-bg);
+  --color-info-bg: var(--info-bg);
+  --color-todo-bg: var(--todo-bg);
+  
+  /* Text Colors */
+  --color-success-text: var(--success-text);
+  --color-error-text: var(--error-text);
+  --color-warning-text: var(--warning-text);
+  --color-info-text: var(--info-text);
+  --color-todo-text: var(--todo-text);
 }
 
-/* 2. DEFINE THE CSS VARIABLES */
-:root {
-  /* Light Mode */
-  --bg-background: #ffffff;
-  --bg-surface: #f4f5f7;
-  --text-primary: #172b4d;
-  --text-secondary: #5e6c84;
-  --border-color: #dfe1e6;
-  --brand-color: #0052cc;
-}
-
-.dark {
-  /* Dark Mode */
-  --bg-background: #1d2125;
-  --bg-surface: #22272b;
-  --text-primary: #dcd6e1;
-  --text-secondary: #8c9bab;
-  --border-color: #444c56;
-  --brand-color: #579dff;
-}
-
-/* 3. NOW @APPLY WILL WORK */
+/* Base styles using your variables */
 body {
-  @apply bg-background text-primary transition-colors duration-300;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  /* Tailwind transition classes */
+  @apply transition-colors duration-200 ease-in-out; 
 }

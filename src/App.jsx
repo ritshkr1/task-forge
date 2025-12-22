@@ -1,25 +1,37 @@
 import JiraLayout from './layout/JiraLayout';
-import Layout from './layout/Layout'
-// import { TASKS_DATA } from './data'
-function App() {
+import SummaryDashboard from './components/Dashboard';
+import KanbanJiraBoard from './components/JiraKanbanComp';
+import ListPage from './components/ListComponent';
 
-  // return <Layout />;
-  return <JiraLayout>
-       {/* This is where your specific page content (Dashboard, Board, etc.) goes */}
-       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Example placeholder content matching your screenshot */}
-          <div className="bg-white border rounded-lg p-6 shadow-sm">
-             <h3 className="font-semibold text-gray-700 mb-4">Status Overview</h3>
-             <div className="h-48 flex items-center justify-center bg-gray-50 rounded">
-                Chart Placeholder
-             </div>
-          </div>
-          <div className="bg-white border rounded-lg p-6 shadow-sm">
-             <h3 className="font-semibold text-gray-700 mb-4">Recent Activity</h3>
-             <p className="text-gray-500 text-sm">No activity yet.</p>
-          </div>
-       </div>
+// 1. Import Outlet
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
+
+// 2. Create a specific component to bridge Layout and Outlet
+// This tells React Router: "Render JiraLayout, and put the current page inside it"
+const LayoutWrapper = () => {
+  return (
+    <JiraLayout>
+      <Outlet />
     </JiraLayout>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    // 3. Set the LayoutWrapper as the parent element
+    element: <LayoutWrapper />,
+    children: [
+      // 4. Move your pages inside the children array
+      { path: "/", Component: SummaryDashboard },
+      { path: "list", Component: ListPage },
+      { path: "board", Component: KanbanJiraBoard },
+    ]
+  }
+]);
+
+function App() {
+  // 5. App only returns the Provider. The Layout is now handled internally.
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

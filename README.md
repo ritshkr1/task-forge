@@ -1,7 +1,3 @@
-Here is the structured README for **Task Forge**.
-
-# ---
-
 **🚀 Task Forge: A Jira-Inspired Frontend Task Management Application**
 
 ## **🌟 Project Overview**
@@ -23,7 +19,7 @@ The primary goal of this project is to demonstrate proficiency in:
 * **Framework:** React (Functional Components and Hooks)  
 * **Styling:** Tailwind CSS  
 * **State Management:** React Context API (with useReducer for potential future scale)  
-* **Routing:** React Router DOM  
+* **Routing:** React Router 
 * **Data Visualization:** *TBD (e.g., Recharts or Chart.js)*  
 * **Core Feature Library:** *TBD (e.g., react-beautiful-dnd for Kanban)*
 
@@ -92,8 +88,8 @@ The project is segmented into four phases, ensuring a stable foundation before t
 ### **Phase 1: Foundation and Static UI (Routes: /dashboard, /kanban, /list)**
 
 1. Set up React project and configure Tailwind CSS.[Done]
-2. Implement static AppLayout, Sidebar, and Header. 
-3. Define and implement React Router for the three primary project views.
+2. Implement static AppLayout, Sidebar, and Header. [Done]
+3. Define and implement React Router for the three primary project views.[Done]
 
 ### **Phase 2: Data Integration and Simulation**
 
