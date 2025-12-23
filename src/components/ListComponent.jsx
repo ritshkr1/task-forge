@@ -8,6 +8,7 @@ import { ListData } from './ListData';
 import Skeleton from '@mui/material/Skeleton';
 import { useEffect, useState } from 'react';
 import { useCustomGlobalModal } from '../modal/ModalContext';
+import { ToastrMessage } from './common/ToastrFunction';
 
 
 
@@ -165,13 +166,16 @@ const ListPage = () => {
 
     
     useEffect(() => {
-
+        const toastId = ToastrMessage.loading(`Data Loading`);
     const timer = setTimeout(() => {
         setLoader(false);
+        ToastrMessage.dismiss(toastId);
+        ToastrMessage.success("Finished loading!");
     }, 5000);
     return () => {
         console.log("Cleanup: clearing timer");
         clearTimeout(timer);
+        ToastrMessage.dismiss(toastId);
     };
 }, []);
 
@@ -179,6 +183,7 @@ function handleDeleteTask(id) {
     const updatedData = listData.filter((task) =>  task.id !== id);
 
     setListData((tasks) =>  tasks = [...updatedData]);
+    ToastrMessage.error(`Delete task with id: ${id}`);
 }
 function handleEditTask(id){
     const selectedTask = listData.filter((listTask) => listTask.id === id); 
@@ -266,6 +271,10 @@ function handleEditTask(id){
                     <span className="text-sm group-hover:text-text-primary font-medium">Create</span>
                 </div>
             </div>
+            <div className="sticky bottom-0 z-20 bg-bg-secondary p-4 flex items-center text-text-secondary cursor-pointer group h-[35px]">
+                    
+                    <span className="text-sm group-hover:text-text-primary font-medium">Total: {listData.length}</span>
+                </div>
             
         </div>
       </div>

@@ -4,6 +4,7 @@ import KanbanJiraBoard from './components/JiraKanbanComp';
 import ListPage from './components/ListComponent';
 import { CustomModalProvider } from './modal/ModalContext';
 import { CommonTaskModal } from './modal/TaskModal';
+import { Toaster } from 'react-hot-toast';
 
 // 1. Import Outlet
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
@@ -15,6 +16,7 @@ const LayoutWrapper = () => {
     <CustomModalProvider>
     <JiraLayout>
       <Outlet />
+      <Toaster position="top-right"/>
     <CommonTaskModal />
     </JiraLayout>
     </CustomModalProvider>
