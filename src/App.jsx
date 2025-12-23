@@ -5,6 +5,7 @@ import ListPage from './components/ListComponent';
 import { CustomModalProvider } from './modal/ModalContext';
 import { CommonTaskModal } from './modal/TaskModal';
 import { Toaster } from 'react-hot-toast';
+import { TaskProvider } from './components/TaskListContext';
 
 // 1. Import Outlet
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
@@ -13,13 +14,16 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 // This tells React Router: "Render JiraLayout, and put the current page inside it"
 const LayoutWrapper = () => {
   return (
-    <CustomModalProvider>
+    <TaskProvider>
+      <CustomModalProvider>
     <JiraLayout>
       <Outlet />
       <Toaster position="top-right"/>
     <CommonTaskModal />
     </JiraLayout>
     </CustomModalProvider>
+    </TaskProvider>
+    
   );
 };
 
