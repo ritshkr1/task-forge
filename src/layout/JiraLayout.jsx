@@ -257,7 +257,6 @@ const JiraLayout = ({ children }) => {
               </span>
             </div>
           </div>
-
           {children}
         </main>
       </div>
