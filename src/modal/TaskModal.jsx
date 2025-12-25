@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCustomGlobalModal } from "./ModalContext";
+import { useTasks } from "../components/TaskListContext";
 import {
   X,
   Calendar,
@@ -18,9 +19,10 @@ export const CommonTaskModal = () => {
   const { isOpen, modalData, closeModal } = useCustomGlobalModal();
   const [isStatusOpen, setIsStatusOpen] = useState(false); // Add this
   const statusOptions = ["TODO", "IN PROGRESS", "DONE"];
-
+  const {saveTask} = useTasks();
   const [isAddingLabel, setIsAddingLabel] = useState(false);
 const [newLabelText, setNewLabelText] = useState("");
+const [newComment, setNewComment] = useState("")
 
 const handleAddLabel = () => {
     const trimmedLabel = newLabelText.trim();
@@ -74,9 +76,10 @@ const handleRemoveLabel = (labelToRemove) => {
   };
   // Populate state when modal opens
   useEffect(() => {
-    console.log(modalData);
     if (isOpen && modalData) {
+      console.log(modalData)
       setFormData({
+        id:modalData.id,
         title: modalData.title || "",
         description: modalData.description || "",
         status: modalData.status || "TODO",
@@ -84,6 +87,7 @@ const handleRemoveLabel = (labelToRemove) => {
         assignee: modalData.assignee || null,
         labels: modalData.labels || [],
         dueDate: modalData.dueDate || "",
+        comments: modalData.comments || 0,
         // Ensure we fallback to empty array if no list exists
         commentsList: modalData.commentsList || [],
       });
@@ -97,10 +101,12 @@ const handleRemoveLabel = (labelToRemove) => {
         assignee: null,
         labels: [],
         dueDate: "",
+        comments:0,
         commentsList: [],
       });
     }
   }, [isOpen, modalData]);
+
 
   if (!isOpen) return null;
 
@@ -114,6 +120,24 @@ const handleRemoveLabel = (labelToRemove) => {
         return "bg-todo-bg text-todo-text";
     }
   };
+  function handleAddComments(){
+    setFormData((curr) => {
+      console.log({...curr, comments: curr.comments +1, commentsList:[...curr.commentsList, newComment]});
+      const comment = {
+        id: `c-${Date.now()}`,
+        author: { "name": "Ritesh Kumar", "avatar": "RK" },
+        text: newComment,
+        created: new Date().toLocaleDateString(),
+      }
+      return curr = {...curr, comments: curr.comments +1, commentsList:[...curr.commentsList, comment]}});
+    setNewComment((currComment) => currComment = '');
+  }
+
+  function handleSubmit(){
+   saveTask(formData);
+   closeModal();
+
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -220,19 +244,21 @@ const handleRemoveLabel = (labelToRemove) => {
                   {/* 2. Add New Comment Input */}
                   <div className="flex gap-4 pt-2">
                     <div className="w-8 h-8 rounded-full bg-accent flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">
-                      ME
+                      RK
                     </div>
                     <div className="flex-1">
                       <div className="border border-border-light rounded-md bg-white dark:bg-bg-secondary overflow-hidden focus-within:ring-2 focus-within:ring-accent focus-within:border-transparent transition-all shadow-sm">
                         <textarea
                           className="w-full p-3 bg-transparent border-none focus:ring-0 text-sm text-text-primary min-h-[60px] resize-none placeholder:text-text-muted"
                           placeholder="Add a comment..."
+                          value={newComment}
+                          onChange={(e) => setNewComment(e.target.value)}
                         />
                         <div className="bg-bg-tertiary px-3 py-2 flex justify-between items-center border-t border-border-light">
                           <div className="text-xs text-text-muted font-medium">
-                            Pro tip: press M to comment
+                            Pro tip: press enter to comment.
                           </div>
-                          <button className="px-3 py-1.5 text-xs font-medium text-white bg-accent hover:bg-accent-dark rounded transition-colors">
+                          <button onClick={handleAddComments} className="px-3 py-1.5 text-xs font-medium text-white bg-accent hover:bg-accent-dark rounded transition-colors">
                             Save
                           </button>
                         </div>
@@ -500,7 +526,7 @@ const handleRemoveLabel = (labelToRemove) => {
           >
             Cancel
           </button>
-          <button className="px-4 py-2 text-sm font-medium text-white bg-accent hover:bg-accent-dark rounded shadow-sm transition-colors">
+          <button onClick={handleSubmit} className="px-4 py-2 text-sm font-medium text-white bg-accent hover:bg-accent-dark rounded shadow-sm transition-colors">
             {modalData ? "Save Changes" : "Create Task"}
           </button>
         </div>

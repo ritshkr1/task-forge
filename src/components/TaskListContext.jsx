@@ -9,6 +9,7 @@ export const TaskProvider = ({ children }) => {
 
   // 2. The Logic to Add OR Update
   const saveTask = (taskData) => {
+    let returnResponse = false
     setTasks((prevTasks) => {
       // Check if we are editing an existing task (it has an ID)
       const isExisting = prevTasks.some((t) => t.id === taskData.id);
@@ -16,15 +17,19 @@ export const TaskProvider = ({ children }) => {
       if (isExisting) {
         // --- UPDATE ---
         ToastrMessage.success("Task updated successfully.");
+        returnResponse = true
         return prevTasks.map((t) => (t.id === taskData.id ? { ...t, ...taskData } : t));
       } else {
         // --- CREATE ---
         // Generate a new ID (using Date.now() for simplicity)
-        const newTask = { ...taskData, id: Date.now(), created: new Date().toLocaleDateString() };
+        const newTask = { ...taskData, id: Date.now(), created: new Date().toLocaleDateString(), reporter: { "name": "Ritesh Kumar", "avatar": "RK" } };
         ToastrMessage.success("New task created successfully.");
+        returnResponse = true
         return [...prevTasks, newTask];
       }
     });
+
+    return returnResponse;
   };
 
   // 3. Helper to delete (optional but useful)
