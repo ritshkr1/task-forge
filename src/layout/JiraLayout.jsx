@@ -18,10 +18,12 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useCustomGlobalModal } from '../modal/ModalContext';
+import { useTasks } from "../components/TaskListContext";
 
 // 1. TOP NAVIGATION
 const TopNavbar = ({ onMenuClick }) => {
   const {openModal} = useCustomGlobalModal();
+  const {searchTask} = useTasks();
   return (
     <nav className="h-14 border-b border-border-main bg-bg-tertiary px-4 flex items-center justify-between shrink-0 z-20 relative transition-colors duration-200">
       <div className="flex items-center gap-4">
@@ -52,6 +54,7 @@ const TopNavbar = ({ onMenuClick }) => {
           />
           <input
             type="text"
+            onChange={(e) => searchTask(e.target.value)}
             placeholder="Search"
             className="pl-8 pr-4 py-1.5 bg-neutral-200 border border-border-light rounded-[3px] text-sm w-48 md:w-64 focus:w-72 md:focus:w-96 text-text-primary placeholder:text-text-secondary transition-all focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
           />

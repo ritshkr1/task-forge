@@ -1,11 +1,13 @@
 import { createContext, useContext, useState } from "react";
 import { ToastrMessage } from "./common/ToastrFunction"; // Assuming you have this from previous steps
 import { TASKS_DATA } from "../data";
+import { debounce } from "lodash";
 const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
   // 1. Holds the list of all tasks
-  const [tasks, setTasks] = useState([...TASKS_DATA]);
+  const [masterTasks, setMasterTasks] = useState([...TASKS_DATA])
+  const [tasks, setTasks] = useState([...masterTasks]);
 
   // 2. The Logic to Add OR Update
   const saveTask = (taskData) => {
@@ -38,8 +40,16 @@ export const TaskProvider = ({ children }) => {
     ToastrMessage.error("Task deleted successfully.");
   };
 
+  // 4. Search Over Tasks 
+  const searchTask = debounce((searchText) => {
+    setTasks((curr) => {
+      const filtered = masterTasks.filter((task) => task?.title.toLowerCase().includes(searchText))
+      return curr = [...filtered]
+    })
+  },500);
+
   return (
-    <TaskContext.Provider value={{ tasks, saveTask, deleteTask }}>
+    <TaskContext.Provider value={{ tasks, saveTask, deleteTask,searchTask }}>
       {children}
     </TaskContext.Provider>
   );

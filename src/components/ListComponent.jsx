@@ -160,7 +160,8 @@ const ListTableRow = ({ item,onDelete,onEdit }) => {
 // --- MAIN COMPONENT ---
 const ListPage = () => {
     const [loader, setLoader] = useState(true);
-    const {tasks,deleteTask} = useTasks();
+    const {tasks,deleteTask,searchTask} = useTasks();
+    const [searchText, setSearchText] = useState('')
     // const [listData, setListData] = useState([...ListData]);
     // const [selectedTask, setSelectedTask] = useState(null);
     const {openModal} = useCustomGlobalModal();
@@ -191,6 +192,11 @@ function handleEditTask(id){
     // });
     openModal(selectedTask[0]);
 }
+
+function handleSearch(searchText){
+    setSearchText(searchText);
+    searchTask(searchText);
+}
   return (
     <>
     <div className="h-[calc(100vh-150px)] flex flex-col bg-bg-secondary overflow-hidden text-text-primary">
@@ -202,7 +208,9 @@ function handleEditTask(id){
             <div className="relative group">
                 <input 
                     type="text" 
-                    placeholder="Search list" 
+                    value={searchText}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    placeholder="Search task titles" 
                     className="bg-bg-tertiary border border-border-main text-text-primary text-sm rounded-[3px] py-1.5 pl-8 pr-3 w-40 focus:w-64 transition-all focus:outline-none focus:border-blue-500 placeholder:text-text-secondary"
                 />
                 <Search size={16} className="absolute left-2 top-2 text-text-secondary group-focus-within:text-blue-500" />
