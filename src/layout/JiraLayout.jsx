@@ -54,7 +54,7 @@ const TopNavbar = ({ onMenuClick }) => {
           />
           <input
             type="text"
-            onChange={(e) => searchTask(e.target.value)}
+            onChange={(e) => searchTask(e.target.value.toLowerCase())}
             placeholder="Search"
             className="pl-8 pr-4 py-1.5 bg-neutral-200 border border-border-light rounded-[3px] text-sm w-48 md:w-64 focus:w-72 md:focus:w-96 text-text-primary placeholder:text-text-secondary transition-all focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
           />
@@ -229,12 +229,12 @@ const JiraLayout = ({ children }) => {
   // State to control mobile sidebar visibility
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
  
 
-  useEffect(() => {
-    navigate("/list");
-  },[]);
+  // useEffect(() => {
+  //   navigate("/list");
+  // },[]);
 
   return (
     <div className="h-screen w-screen flex flex-col overflow-hidden font-sans">

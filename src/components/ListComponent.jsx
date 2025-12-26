@@ -195,7 +195,7 @@ function handleEditTask(id){
 
 function handleSearch(searchText){
     setSearchText(searchText);
-    searchTask(searchText);
+    searchTask(searchText.toLowerCase());
 }
   return (
     <>
