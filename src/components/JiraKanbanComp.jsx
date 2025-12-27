@@ -299,7 +299,7 @@ const KanbanJiraBoard = () => {
       <DragOverlay>
         {activeItem ? (
            // Render a "clean" version of the card (rotate it slightly for effect if you want)
-           <div className="cursor-grabbing opacity-60 w-[280px]"> 
+           <div className=" cursor-grabbing opacity-60 w-[280px]"> 
               <KanbanCard item={activeItem} />
            </div>
         ) : null}
