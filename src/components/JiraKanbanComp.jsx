@@ -10,11 +10,14 @@ import {
 } from "lucide-react";
 import { useTasks } from "./TaskListContext";
 import { useEffect, useState } from "react";
+import { DndContext,DragOverlay } from "@dnd-kit/core";
+import { Droppable } from "./common/Droppable";
+import { Draggable } from "./common/Draggable";
 
 // 1. Kanban Card
 const KanbanCard = ({ item }) => {
   return (
-    <div className="bg-card-bg border border-border-main p-3 rounded-[3px] shadow-sm mb-2 hover:bg-card-bg-hover cursor-pointer group transition-colors">
+    <div className="bg-card-bg border border-border-main p-3 rounded-[3px] shadow-sm mb-2 hover:bg-card-bg-hover cursor-pointer group transition-colors select-none">
       {/* Title */}
       <p className="text-[14px] text-text-primary font-medium leading-snug mb-3">
         {item.title}
@@ -67,10 +70,12 @@ const KanbanCard = ({ item }) => {
 // --- MAIN COMPONENT ---
 
 const KanbanJiraBoard = () => {
-  const { tasks,searchTask } = useTasks();
+  const { tasks,searchTask,saveTask } = useTasks();
   const epicColor = "text-purple-300 bg-purple-900/50 border-purple-800";
   const epic = "TASK FORGE DEVELOPMENT";
-  const [searchText,setSearchText] = useState('')
+  const [searchText,setSearchText] = useState('');
+  const [parent, setParent] = useState(null);
+  const [activeId, setActiveId] = useState(null);
   const [boardTask, setBoardTask] = useState([
     {
       id: "todo",
@@ -101,10 +106,14 @@ const KanbanJiraBoard = () => {
     
     
   ]);
+  const activeItem = activeId 
+  ? boardTask.flatMap(column => column.items).find(item => item.id === activeId)
+  : null;
   function handleSearchBoard(searchTextParams){
     setSearchText(searchTextParams);
     searchTask(searchTextParams.toLowerCase());
   }
+  
   useEffect(() => {
     const boardTasksData = boardTask.map((board) => {
       const columnData = tasks.reduce((acc, task) => {
@@ -126,6 +135,29 @@ const KanbanJiraBoard = () => {
     });
     setBoardTask((curr) => curr = boardTasksData);
   }, [tasks]);
+
+  function handleDragEnd(event) {
+    setActiveId(null);
+    const {over,active} = event;
+    let status = '';
+    if(over.id === 'todo'){
+      status = 'TODO';
+    }else if(over.id === 'inprogress'){
+      status = 'IN PROGRESS'
+    }else if(over.id === 'review'){
+      status = 'IN REVIEW'
+    }else if(over.id === 'done'){
+      status = 'DONE'
+    }
+    const task = {id:active.id,status }
+    saveTask(task)
+    // If the item is dropped over a container, set it as the parent
+    // otherwise reset the parent to `null`
+    setParent(over ? over.id : null);
+  }
+  function handleDragStart(event) {
+  setActiveId(event.active.id);
+}
 
   return (
     <div className="h-full flex flex-col bg-bg-secondary">
@@ -184,9 +216,12 @@ const KanbanJiraBoard = () => {
       </div>
 
       {/* 2. KANBAN COLUMNS AREA */}
+      <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
       <div className="flex-1 overflow-x-auto overflow-y-hidden px-5 pb-4">
+        
         <div className="flex h-full gap-4 min-w-max">
           {boardTask.map((column) => (
+            
             <div
               key={column.id}
               className="w-[280px] flex flex-col h-full bg-bg-primary rounded-[3px] border border-transparent"
@@ -228,12 +263,23 @@ const KanbanJiraBoard = () => {
               </div>
 
               {/* Column Body (Scrollable Cards) */}
-              <div className="flex-1 overflow-y-auto px-2 min-h-0 custom-scrollbar">
-                {column.items.map((item) => (
-                  <KanbanCard key={item.id} item={item} />
-                ))}
-              </div>
-
+              <Droppable 
+    key={column.id} 
+    id={column.id} 
+    className="overflow-y-auto px-2 min-h-0 custom-scrollbar pb-2" // Scroll classes go here
+>
+    {column.items.map((item) => (
+        <Draggable key={item.id} id={item.id}>
+            <KanbanCard item={item} />
+        </Draggable>
+    ))}
+    {/* Optional: Add a static 'Empty' placeholder if no items */}
+    {column.items.length === 0 && (
+        <div className="h-20 border-dashed border-2 border-gray-200 rounded flex items-center justify-center text-gray-400 text-xs">
+            Drop here
+        </div>
+    )}
+</Droppable>
               {/* Column Footer (Create) */}
               {!column.isDoneColumn && (
                 <div className="p-2 shrink-0">
@@ -246,9 +292,19 @@ const KanbanJiraBoard = () => {
                 </div>
               )}
             </div>
+           
           ))}
         </div>
       </div>
+      <DragOverlay>
+        {activeItem ? (
+           // Render a "clean" version of the card (rotate it slightly for effect if you want)
+           <div className="cursor-grabbing opacity-60 w-[280px]"> 
+              <KanbanCard item={activeItem} />
+           </div>
+        ) : null}
+    </DragOverlay>
+      </DndContext>
     </div>
   );
 };
